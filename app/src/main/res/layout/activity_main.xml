@@ -7,10 +7,18 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/Btn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/Btn1"
-        android:text="Button"/>
+        android:onClick="clicked"
+        android:text="Button"
+        android:background="@color/black"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="textView"
+        android:background="@color/purple_200"
+        />
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
