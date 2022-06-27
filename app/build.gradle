@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+
+    //이거 있어야지 id바로 가져오기 가능
+    id 'kotlin-android-extensions'
 }
 
 android {
