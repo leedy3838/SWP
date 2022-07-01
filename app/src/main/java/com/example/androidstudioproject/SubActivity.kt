@@ -9,10 +9,5 @@ class SubActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_sub)
-        var name = intent.getStringExtra("이름")
-
-        textView.text = name+"님 사용자 확인되셨습니다."
     }
 }
-
-

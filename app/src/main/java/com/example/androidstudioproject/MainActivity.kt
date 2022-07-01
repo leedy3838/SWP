@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "사용자 확인되었습니다.", Toast.LENGTH_SHORT).show();
 
             var intent = Intent(this, SubActivity::class.java)
-            intent.putExtra("이름", "LDY");
-            intent.putExtra("나이", 23);
+            intent.putExtra("이름", "LDY")
+            intent.putExtra("나이", 23)
 
             startActivity(intent)
         }
@@ -41,4 +41,3 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "로그인 하지 못했습니다.", Toast.LENGTH_SHORT).show();
     }
 }
-
