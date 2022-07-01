@@ -27,9 +27,9 @@ class MainActivity : AppCompatActivity() {
         var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(v.windowToken, 0)
 
-        if(et_email.text.toString() == "ldy@naver.com" && et_password.text.toString() == "1234"
-            && et_name.text.toString() == "LDY" && et_age.text.toString() == "23"){
-            Toast.makeText(this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
+        if(et_name.text.toString() == "LDY" && et_age.text.toString() == "23"){
+            Toast.makeText(this, "사용자 확인되었습니다.", Toast.LENGTH_SHORT).show();
+            setContentView(R.layout.activity_sub);
         }
         else
             Toast.makeText(this, "로그인 하지 못했습니다.", Toast.LENGTH_SHORT).show();

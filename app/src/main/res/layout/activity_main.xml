@@ -8,19 +8,6 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/et_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="이메일"
-        />
-    <EditText
-        android:id="@+id/et_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="비밀번호"
-        android:inputType="textPassword" />
-    <EditText
         android:id="@+id/et_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,7 +25,7 @@
         android:id="@+id/Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="login"
         android:layout_gravity="center"
         android:onClick="login"
         />
