@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             setContentView(R.layout.activity_sub);
         }
         else
-            Toast.makeText(this, "로그인 하지 못했습니다", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "로그인 하지 못했습니다.", Toast.LENGTH_SHORT).show();
     }
 }
 
