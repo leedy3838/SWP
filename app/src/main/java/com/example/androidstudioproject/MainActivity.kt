@@ -1,6 +1,7 @@
 package com.example.androidstudioproject
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -29,7 +30,12 @@ class MainActivity : AppCompatActivity() {
 
         if(et_name.text.toString() == "LDY" && et_age.text.toString() == "23"){
             Toast.makeText(this, "사용자 확인되었습니다.", Toast.LENGTH_SHORT).show();
-            setContentView(R.layout.activity_sub);
+
+            var intent = Intent(this, SubActivity::class.java)
+            intent.putExtra("이름", "LDY");
+            intent.putExtra("나이", 23);
+
+            startActivity(intent)
         }
         else
             Toast.makeText(this, "로그인 하지 못했습니다.", Toast.LENGTH_SHORT).show();
