@@ -4,16 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout1"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        app:layout_constraintBottom_toTopOf="@id/layout2"
+        android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -58,36 +56,36 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout2"
         android:layout_width="match_parent"
-        android:layout_height="448dp"
+        android:layout_height="300dp"
         android:layout_marginTop="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/layout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout1">
 
         <Button
-            android:id="@+id/button2"
-            android:layout_width="300dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="56dp"
+            android:id="@+id/problem_solve_display"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
             android:text="문제 풀이 화면"
+            app:layout_constraintBottom_toTopOf="@+id/retry"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button3"
-            android:layout_width="300dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="40dp"
-            android:text="Button"
+            android:id="@+id/retry"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:text="다시 풀어 보고 싶은 문제"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button2"
+            app:layout_constraintTop_toBottomOf="@+id/problem_solve_display"
             app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -96,12 +94,11 @@
         android:id="@+id/layout3"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout2"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toBottomOf="@+id/layout2">
 
         <Button
             android:id="@+id/today_solve_problem"
