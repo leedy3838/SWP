@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.example.view.*
+import kotlinx.android.synthetic.main.listlayout.view.*
 
 class Data(val profile:Int, val name:String)
 
@@ -15,7 +15,7 @@ class CustomViewHolder(v: View) : RecyclerView.ViewHolder(v) {
 
 class CustomAdapter(val DataList:ArrayList<Data>) : RecyclerView.Adapter<CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
-        val cellForRow = LayoutInflater.from(parent.context).inflate(R.layout.example, parent, false)
+        val cellForRow = LayoutInflater.from(parent.context).inflate(R.layout.listlayout, parent, false)
         return CustomViewHolder(cellForRow)
     }
 
