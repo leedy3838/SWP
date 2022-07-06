@@ -1,18 +1,32 @@
 package com.example.androidstudioproject
 
-import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.recyclerviewpractice.*
 
 class MainActivity : AppCompatActivity() {
+
+    val DataList = arrayListOf(
+        Data(R.drawable.selector_practice, "0번"),
+        Data(R.drawable.selector_practice, "1번"),
+        Data(R.drawable.selector_practice, "2번"),
+        Data(R.drawable.selector_practice, "3번"),
+        Data(R.drawable.selector_practice, "4번"),
+        Data(R.drawable.selector_practice, "5번"),
+        Data(R.drawable.selector_practice, "6번"),
+        Data(R.drawable.selector_practice, "7번"),
+        Data(R.drawable.selector_practice, "8번"),
+        Data(R.drawable.selector_practice, "9번"),
+        Data(R.drawable.selector_practice, "10번")
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.recyclerviewpractice)
+
+
+        recyclerview.layoutManager = LinearLayoutManager(this)
+        recyclerview.adapter = CustomAdapter(DataList);
     }
 }
