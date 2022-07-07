@@ -33,7 +33,7 @@ class HelpScreen :AppCompatActivity(){
         setContentView(R.layout.help_screen)
 
         helpList.layoutManager = LinearLayoutManager(this)
-        helpList.adapter = CustomAdapter(DataList)
+        helpList.adapter = HelpViewAdapter(DataList)
     }
 
     fun home(v : View){

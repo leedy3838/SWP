@@ -22,15 +22,29 @@ class WrongProblemScreen : AppCompatActivity() {
         Data(R.drawable.text_background, "10번")
     )
 
+    val customAdapter = CustomAdapter(DataList)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.wrong_problem)
 
         wrongProblemList.layoutManager = LinearLayoutManager(this)
-        wrongProblemList.adapter = CustomAdapter(DataList)
+        wrongProblemList.adapter = customAdapter
+
+        //RecyclerView에 onClickListener 붙이기
+        customAdapter.setItemClickListener(object: CustomAdapter.OnItemClickListener{
+            override fun onClick(v: View, position: Int) {
+                // 클릭 시 이벤트 작성
+                toWrongProblemNext(v)
+            }
+        })
     }
 
     fun home(v : View){
         startActivity(Intent(this, BasicScreen::class.java))
+    }
+
+    fun toWrongProblemNext(v : View){
+        startActivity(Intent(this, WrongProblemNextScreen::class.java))
     }
 }

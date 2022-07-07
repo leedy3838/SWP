@@ -14,6 +14,7 @@
         android:theme="@style/Theme.AndroidStudioProject"
         tools:targetApi="31">
         <activity android:name=".RetryProblemScreen"/>
+        <activity android:name=".RetryProblemSelectScreen"/>
         <activity android:name=".SettingScreen"/>
         <activity android:name=".HelpScreen"/>
         <activity android:name=".ProblemSolveScreen"/>
@@ -21,7 +22,7 @@
         <activity android:name=".TodaySolveScreen"/>
         <activity android:name=".TodaySolvedNextScreen"/>
         <activity android:name=".WrongProblemScreen"/>
-        <activity android:name=".RetryProblemSelectScreen"/>
+        <activity android:name=".WrongProblemNextScreen"/>
         <activity
             android:name=".BasicScreen"
             android:exported="true">
