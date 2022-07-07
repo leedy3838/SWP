@@ -71,6 +71,7 @@
             android:layout_height="100dp"
             android:layout_marginTop="16dp"
             android:text="문제 풀이 화면"
+            android:onClick="problemSolveClicked"
             app:layout_constraintBottom_toTopOf="@+id/retry"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"

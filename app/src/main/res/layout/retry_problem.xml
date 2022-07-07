@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/backInSetting"
+            android:id="@+id/backToBasic"
             android:layout_width="50dp"
             android:layout_height="58dp"
             android:layout_marginStart="4dp"

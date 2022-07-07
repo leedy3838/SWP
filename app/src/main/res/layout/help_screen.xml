@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/backToSetting"
+            android:id="@+id/backToBasic"
             android:layout_width="50dp"
             android:layout_height="58dp"
             android:layout_marginStart="4dp"
@@ -29,13 +29,14 @@
 
         <TextView
             android:id="@+id/helpHead"
-            android:layout_width="243dp"
-            android:layout_height="39dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="300dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/text_background"
             android:gravity="center"
             android:text="도움말"
-            android:background="@drawable/text_background"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.72"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

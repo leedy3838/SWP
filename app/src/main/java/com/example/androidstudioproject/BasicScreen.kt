@@ -23,4 +23,8 @@ class BasicScreen : AppCompatActivity() {
     fun helpClicked(v : View){
         startActivity(Intent(this, HelpScreen::class.java))
     }
+
+    fun problemSolveClicked(v : View){
+        startActivity(Intent(this, ProblemSolveScreen::class.java))
+    }
 }
