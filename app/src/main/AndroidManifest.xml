@@ -13,10 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidStudioProject"
         tools:targetApi="31">
-        <activity android:name=".RetryProblem"/>
-        <activity android:name=".SettingActivity"/>
+        <activity android:name=".RetryProblemScreen"/>
+        <activity android:name=".SettingScreen"/>
+        <activity android:name=".HelpScreen"/>
         <activity
-            android:name=".BasicScreenActivity"
+            android:name=".BasicScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

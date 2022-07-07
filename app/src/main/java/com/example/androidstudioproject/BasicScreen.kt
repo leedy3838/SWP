@@ -2,11 +2,10 @@ package com.example.androidstudioproject
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 
-class BasicScreenActivity : AppCompatActivity() {
+class BasicScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,10 +13,14 @@ class BasicScreenActivity : AppCompatActivity() {
     }
 
     fun retryProblemClicked(v : View){
-        startActivity(Intent(this, RetryProblem::class.java))
+        startActivity(Intent(this, RetryProblemScreen::class.java))
     }
 
     fun settingClicked(v : View){
-        startActivity(Intent(this, SettingActivity::class.java))
+        startActivity(Intent(this, SettingScreen::class.java))
+    }
+
+    fun helpClicked(v : View){
+        startActivity(Intent(this, HelpScreen::class.java))
     }
 }

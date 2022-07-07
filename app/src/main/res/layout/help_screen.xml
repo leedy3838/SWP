@@ -8,27 +8,15 @@
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/retryProblemLayout1"
+        android:id="@+id/helpLayout1"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="75dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/sortStandard"
-            android:layout_width="341dp"
-            android:layout_height="68dp"
-            android:layout_marginTop="64dp"
-            android:background="@drawable/text_background"
-            android:gravity="center"
-            android:text="정렬 기준(추후 선택 가능하게 수정)"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <Button
-            android:id="@+id/backInSetting"
+            android:id="@+id/backToSetting"
             android:layout_width="50dp"
             android:layout_height="58dp"
             android:layout_marginStart="4dp"
@@ -40,12 +28,13 @@
             app:layout_constraintVertical_bias="0" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/helpHead"
             android:layout_width="243dp"
             android:layout_height="39dp"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="다시 풀어 보고 싶은 문제"
+            android:text="도움말"
+            android:background="@drawable/text_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -53,17 +42,17 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/retryProblemLayout2"
+        android:id="@+id/helpLayout2"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="525dp"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/retryProblemLayout1">
+        app:layout_constraintTop_toBottomOf="@id/helpLayout1">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/retryProblemList"
+            android:id="@+id/helpList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -5,14 +5,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 
-class SettingActivity : AppCompatActivity() {
+class SettingScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.setting)
+        setContentView(R.layout.setting_screen)
     }
 
     fun home(v : View){
-        startActivity(Intent(this, BasicScreenActivity::class.java))
+        startActivity(Intent(this, BasicScreen::class.java))
     }
 }
