@@ -20,6 +20,7 @@
         <activity android:name=".ProblemSolveNextScreen"/>
         <activity android:name=".TodaySolveScreen"/>
         <activity android:name=".WrongProblemScreen"/>
+        <activity android:name=".RetryProblemSelectScreen"/>
         <activity
             android:name=".BasicScreen"
             android:exported="true">

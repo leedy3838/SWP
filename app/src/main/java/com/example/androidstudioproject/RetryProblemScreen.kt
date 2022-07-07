@@ -23,17 +23,31 @@ class RetryProblemScreen : AppCompatActivity() {
         Data(R.drawable.text_background, "10번")
     )
 
+    val customAdapter = CustomAdapter(DataList)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.retry_problem)
 
 
         retryProblemList.layoutManager = LinearLayoutManager(this)
-        retryProblemList.adapter = CustomAdapter(DataList)
+        retryProblemList.adapter = customAdapter
+
+        //RecyclerView에 onClickListener 붙이기
+        customAdapter.setItemClickListener(object: CustomAdapter.OnItemClickListener{
+            override fun onClick(v: View, position: Int) {
+                // 클릭 시 이벤트 작성
+                retryProblemSelectClicked(v)
+            }
+        })
     }
 
 
     fun home(v : View){
         startActivity(Intent(this, BasicScreen::class.java))
+    }
+
+    fun retryProblemSelectClicked(v : View){
+        startActivity(Intent(this, RetryProblemSelectScreen::class.java))
     }
 }
