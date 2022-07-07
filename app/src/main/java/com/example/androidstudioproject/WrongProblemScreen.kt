@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.today_solve.*
+import kotlinx.android.synthetic.main.wrong_problem.*
 
-class TodaySolveScreen : AppCompatActivity() {
+class WrongProblemScreen : AppCompatActivity() {
 
     val DataList = arrayListOf(
         Data(R.drawable.text_background, "1번"),
@@ -24,10 +24,10 @@ class TodaySolveScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.today_solve)
+        setContentView(R.layout.wrong_problem)
 
-        todaySolveList.layoutManager = LinearLayoutManager(this)
-        todaySolveList.adapter = CustomAdapter(DataList)
+        wrongProblemList.layoutManager = LinearLayoutManager(this)
+        wrongProblemList.adapter = CustomAdapter(DataList)
     }
 
     fun home(v : View){

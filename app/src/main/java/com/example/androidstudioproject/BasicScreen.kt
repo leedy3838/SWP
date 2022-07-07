@@ -31,4 +31,8 @@ class BasicScreen : AppCompatActivity() {
     fun todaySolveClicked(v : View){
         startActivity(Intent(this, TodaySolveScreen::class.java))
     }
+
+    fun wrongProblemClicked(v : View){
+        startActivity(Intent(this, WrongProblemScreen::class.java))
+    }
 }
