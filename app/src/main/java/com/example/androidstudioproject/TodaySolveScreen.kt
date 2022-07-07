@@ -1,16 +1,17 @@
 package com.example.androidstudioproject
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.retry_problem.*
+import kotlinx.android.synthetic.main.today_solve.*
 
-class RetryProblemScreen : AppCompatActivity() {
+class TodaySolveScreen : AppCompatActivity() {
 
     val DataList = arrayListOf(
-        Data(R.drawable.text_background, "0번"),
         Data(R.drawable.text_background, "1번"),
         Data(R.drawable.text_background, "2번"),
         Data(R.drawable.text_background, "3번"),
@@ -25,13 +26,11 @@ class RetryProblemScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.retry_problem)
+        setContentView(R.layout.today_solve)
 
-
-        retryProblemList.layoutManager = LinearLayoutManager(this)
-        retryProblemList.adapter = CustomAdapter(DataList)
+        todaySolveList.layoutManager = LinearLayoutManager(this)
+        todaySolveList.adapter = CustomAdapter(DataList)
     }
-
 
     fun home(v : View){
         startActivity(Intent(this, BasicScreen::class.java))

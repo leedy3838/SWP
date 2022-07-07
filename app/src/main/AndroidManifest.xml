@@ -18,6 +18,7 @@
         <activity android:name=".HelpScreen"/>
         <activity android:name=".ProblemSolveScreen"/>
         <activity android:name=".ProblemSolveNextScreen"/>
+        <activity android:name=".TodaySolveScreen"/>
         <activity
             android:name=".BasicScreen"
             android:exported="true">

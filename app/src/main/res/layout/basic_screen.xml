@@ -110,6 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:text="오늘 푼 문제"
+            android:onClick="todaySolveClicked"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/wrongProblem"
             app:layout_constraintHorizontal_bias="0"
