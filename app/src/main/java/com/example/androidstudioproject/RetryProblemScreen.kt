@@ -29,7 +29,6 @@ class RetryProblemScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.retry_problem)
 
-
         retryProblemList.layoutManager = LinearLayoutManager(this)
         retryProblemList.adapter = customAdapter
 
@@ -41,7 +40,6 @@ class RetryProblemScreen : AppCompatActivity() {
             }
         })
     }
-
 
     fun home(v : View){
         startActivity(Intent(this, BasicScreen::class.java))

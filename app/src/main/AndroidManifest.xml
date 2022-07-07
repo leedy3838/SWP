@@ -19,6 +19,7 @@
         <activity android:name=".ProblemSolveScreen"/>
         <activity android:name=".ProblemSolveNextScreen"/>
         <activity android:name=".TodaySolveScreen"/>
+        <activity android:name=".TodaySolvedNextScreen"/>
         <activity android:name=".WrongProblemScreen"/>
         <activity android:name=".RetryProblemSelectScreen"/>
         <activity
