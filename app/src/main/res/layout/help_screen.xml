@@ -45,7 +45,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/helpLayout2"
         android:layout_width="match_parent"
-        android:layout_height="525dp"
+        android:layout_height="575dp"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
