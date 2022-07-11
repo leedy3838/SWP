@@ -5,12 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import kotlinx.android.synthetic.main.practice_database.*
+import kotlinx.android.synthetic.main.ldy_practice.*
 
-class Practice : AppCompatActivity() {
+class LDYPractice : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.practice_database)
+        setContentView(R.layout.ldy_practice)
 
         btn.setOnClickListener {
             val storage: FirebaseStorage = FirebaseStorage.getInstance()
