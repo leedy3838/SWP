@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.practicedatabase.*
 class Practice : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.practicedatabase)
+        setContentView(R.layout.practice_database)
 
         btn.setOnClickListener {
             val storage: FirebaseStorage = FirebaseStorage.getInstance()
