@@ -12,10 +12,10 @@ class LDYPractice : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ldy_practice)
 
-        btn.setOnClickListener {
+        btnLDY.setOnClickListener {
             val storage: FirebaseStorage = FirebaseStorage.getInstance()
             val storageRef: StorageReference = storage.getReference("image.png")
-            Glide.with(btn).load(storageRef).into(imageView2)
+            Glide.with(btnLDY).load(storageRef).into(imageViewLDY)
         }
     }
 }
