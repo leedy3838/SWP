@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import kotlinx.android.synthetic.main.practicedatabase.*
+import kotlinx.android.synthetic.main.practice_database.*
 
 class Practice : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
