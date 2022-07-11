@@ -27,7 +27,7 @@
         <activity android:name=".WrongProblemScreen"/>
         <activity android:name=".WrongProblemNextScreen"/>
         <activity android:name=".BasicScreen"/>
-        <activity android:name=".IJCpractice"/>
+        <activity android:name=".IJCPractice"/>
         <activity
             android:name=".LDYPractice"
             android:exported="true">
