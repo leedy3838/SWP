@@ -27,9 +27,9 @@
         <activity android:name=".WrongProblemScreen"/>
         <activity android:name=".WrongProblemNextScreen"/>
         <activity android:name=".BasicScreen"/>
-        <activity android:name=".LDYPractice"/>
+        <activity android:name=".IJCPractice"/>
         <activity
-            android:name=".IJCPractice"
+            android:name=".LDYPractice"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
