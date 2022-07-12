@@ -1,5 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2045" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/drawable/button_background.xml" value="0.182" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/drawable/dot.xml" value="0.182" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2045" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/drawable/layer_list_practice.xml" value="0.176" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/drawable/newdrawble.xml" value="0.221" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/drawable/selector_practice.xml" value="0.2045" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/drawable/text_background.xml" value="0.182" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/activity_sub.xml" value="0.22488242838820008" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/basic_screen.xml" value="0.264" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/example.xml" value="0.264" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/help_screen.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/ijc_practice.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/ldy_practice.xml" value="0.27395833333333336" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/listlayout.xml" value="0.27395833333333336" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/main_activity.xml" value="0.2604166666666667" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/practice_database.xml" value="0.27395833333333336" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/practicedatabase.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/problem_solve.xml" value="0.1" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/problem_solve_next.xml" value="0.2604166666666667" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/recyclerview.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/recyclerviewpractice.xml" value="0.26145833333333335" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/retry_problem.xml" value="0.27395833333333336" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/retry_problem_select.xml" value="0.26145833333333335" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/setting.xml" value="0.27395833333333336" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/setting_screen.xml" value="0.1" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/today_solve.xml" value="0.2604166666666667" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/today_solved_next.xml" value="0.27395833333333336" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/todya_wrong_next.xml" value="0.26145833333333335" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/wrong_problem.xml" value="0.2604166666666667" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/wrong_problem_next.xml" value="0.2604166666666667" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
