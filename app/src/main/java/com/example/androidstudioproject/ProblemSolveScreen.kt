@@ -16,14 +16,14 @@ class ProblemSolveScreen :AppCompatActivity() {
         setContentView(R.layout.problem_solve)
 
         val db = FirebaseFirestore.getInstance()
-        var st : String = ""
+        var st = ""
 
         val docRef = db.collection("고등학생")
             .document("3학년")
-            .collection("수학")
+            .collection("국어")
             .document("공통")
             .collection("공통")
-            .document("2022년 3월 모의고사 10번")
+            .document("문제 1번")
 
         docRef.get()
             .addOnSuccessListener { document ->
