@@ -9,8 +9,6 @@
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2045" />
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/drawable/layer_list_practice.xml" value="0.176" />
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/drawable/newdrawble.xml" value="0.221" />
-        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/drawable/problem_backgound.xml" value="0.1815" />
-        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/drawable/problem_background.xml" value="0.1815" />
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/drawable/selector_practice.xml" value="0.2045" />
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/drawable/text_background.xml" value="0.182" />
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/activity_main.xml" value="0.264" />
@@ -24,20 +22,19 @@
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/main_activity.xml" value="0.2604166666666667" />
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/practice_database.xml" value="0.27395833333333336" />
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/practicedatabase.xml" value="0.27291666666666664" />
-        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/problem_solve.xml" value="0.18947368421052632" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/problem_solve.xml" value="0.264" />
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/problem_solve_next.xml" value="0.2604166666666667" />
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/recyclerview.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/recyclerviewpractice.xml" value="0.26145833333333335" />
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/retry_problem.xml" value="0.27395833333333336" />
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/retry_problem_select.xml" value="0.26145833333333335" />
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/setting.xml" value="0.27395833333333336" />
-        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/setting_screen.xml" value="0.264" />
+        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/setting_screen.xml" value="0.1" />
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/today_solve.xml" value="0.2604166666666667" />
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/today_solved_next.xml" value="0.27395833333333336" />
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/todya_wrong_next.xml" value="0.26145833333333335" />
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/wrong_problem.xml" value="0.2604166666666667" />
         <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/layout/wrong_problem_next.xml" value="0.2604166666666667" />
-        <entry key="..\:/Users/LDY/Desktop/git_directory/AndroidStudioProject/app/src/main/res/xml/setting_with_preference_screen.xml" value="0.1" />
       </map>
     </option>
   </component>

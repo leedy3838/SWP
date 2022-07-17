@@ -25,6 +25,13 @@ class ProblemSolveScreen :AppCompatActivity() {
             .collection("공통")
             .document("문제 1번")
 
+        val docRefMath = db.collection("고등학생")
+            .document("3학년")
+            .collection("수학")
+            .document("공통")
+            .collection("공통")
+            .document("2022년 3월 모의고사 1번")
+
         docRef.get()
             .addOnSuccessListener { document ->
                 st = document.get("이미지").toString()
