@@ -1,86 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/settingScreenLayout1"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="62dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Button
-            android:id="@+id/backInSetting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="home"
-            android:text="뒤로 가기"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.003"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/settingScreenLayout2"
-        android:layout_width="406dp"
-        android:layout_height="564dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settingScreenLayout1">
-
-
-        <Button
-            android:id="@+id/settingUserInfo"
-            android:layout_width="319dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="100dp"
-            android:text="사용자 정보"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/settingDifficulty"
-            android:layout_width="319dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="40dp"
-            android:text="문제 난이도"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/settingUserInfo" />
-
-        <Button
-            android:id="@+id/settingUsingTime"
-            android:layout_width="319dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="40dp"
-            android:text="사용 시간 설정"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/settingDifficulty" />
-
-        <Switch
-            android:id="@+id/settingUsingWidets"
-            android:layout_width="200dp"
-            android:layout_height="59dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="40dp"
-            android:text="상단바 위젯 사용"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/settingUsingTime"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        android:layout_height="match_parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
