@@ -10,6 +10,11 @@ class SettingScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.setting_screen)
+
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.setting_screen, SettingFragment())
+            .commit()
     }
 
     fun home(v : View){
