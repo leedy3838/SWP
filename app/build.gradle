@@ -77,6 +77,4 @@ dependencies {
     //setting preference
     implementation 'androidx.preference:preference-ktx:1.1.1'
 
-    //preference
-    implementation 'androidx.preference:preference:1.2.0'
 }
