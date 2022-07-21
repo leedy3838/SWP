@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Preference
         app:key="userInfoSetting"
@@ -19,10 +20,15 @@
 
     <Preference
         app:key="timeSettingPref"
-        app:title="사용시간 설정"
-        app:summary="사용시간을 설정하려면 클릭하세요"
-        app:fragment="com.example.androidstudioproject.NestedTimeFragment"
-        />
+        app:title ="사용시간 설정"
+        app:summary="사용시간을 설정하려면 클릭하세요">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.androidstudioproject"
+            android:targetClass="com.example.androidstudioproject.SettingTime"
+            />
+
+    </Preference>
 
 
     <SwitchPreference

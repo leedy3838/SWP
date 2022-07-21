@@ -1,9 +1,12 @@
 package com.example.androidstudioproject
 
+import android.content.Intent
 import android.os.Bundle
+
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+
 
 class SettingScreen : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
@@ -29,11 +32,16 @@ class SettingScreen : AppCompatActivity(), PreferenceFragmentCompat.OnPreference
         fragment.arguments = args
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment, "nested_fragment")
+            .addToBackStack(null)
             .commit()
         return true
     }
 
-
-
-
 }
+
+
+
+
+
+
+

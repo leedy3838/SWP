@@ -36,6 +36,7 @@ class TodaySolveScreen : AppCompatActivity() {
             override fun onClick(v: View, position: Int) {
                 // 클릭 시 이벤트 작성
                 toTodaySolvedNext(v)
+
             }
         })
     }
