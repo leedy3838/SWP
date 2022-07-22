@@ -109,11 +109,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:text="오늘 푼 문제"
             android:onClick="todaySolveClicked"
+            android:text="오늘 푼 문제"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/wrongProblem"
-            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_bias="0.253"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -121,25 +121,16 @@
             android:id="@+id/wrongProblem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:text="내가 틀린 문제"
+            android:layout_marginLeft="140dp"
+            android:layout_marginEnd="44dp"
             android:onClick="wrongProblemClicked"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/help"
-            app:layout_constraintLeft_toRightOf="@+id/todaySolveProblem"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/help"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
-            android:text="도움말"
-            android:onClick="helpClicked"
+            android:text="내가 틀린 문제"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/wrongProblem"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintLeft_toRightOf="@+id/todaySolveProblem"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.557" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
