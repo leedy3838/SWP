@@ -1,2 +1,2 @@
 # AndroidStudioProject
-안드로이드 스튜디오 팀프로젝트 개발 repository입니다.
+pull request는 releases 브랜치에 하세요 ^^
