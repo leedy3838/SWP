@@ -1,42 +1,38 @@
 package com.example.androidstudioproject
 
-import android.content.Intent
-import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.help_screen.*
-import kotlinx.android.synthetic.main.retry_problem.*
+import android.os.Bundle as Bundle1
 
-class HelpScreen :AppCompatActivity(){
+class HelpScreen : AppCompatActivity() {
 
-    val DataList = arrayListOf(
-        Data(R.drawable.dot, "도움말 1"),
-        Data(R.drawable.dot, "도움말 2"),
-        Data(R.drawable.dot, "도움말 3"),
-        Data(R.drawable.dot, "도움말 4"),
-        Data(R.drawable.dot, "도움말 5"),
-        Data(R.drawable.dot, "도움말 6"),
-        Data(R.drawable.dot, "도움말 7"),
-        Data(R.drawable.dot, "도움말 8"),
-        Data(R.drawable.dot, "도움말 9"),
-        Data(R.drawable.dot, "도움말 10"),
-        Data(R.drawable.dot, "도움말 11"),
-        Data(R.drawable.dot, "도움말 12"),
-        Data(R.drawable.dot, "도움말 13"),
-        Data(R.drawable.dot, "도움말 14"),
-        Data(R.drawable.dot, "도움말 15")
-    )
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle1?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.help_screen)
 
-        helpList.layoutManager = LinearLayoutManager(this)
-        helpList.adapter = HelpViewAdapter(DataList)
+        /* 여백, 너비에 대한 정의 */
+        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin)
+        val pagerWidth = resources.getDimensionPixelOffset(R.dimen.pageWidth) // dimen 파일이 없으면 생성해야함
+        val screenWidth = resources.displayMetrics.widthPixels // 스마트폰의 너비 길이를 가져옴
+        val offsetPx = screenWidth - pageMarginPx - pagerWidth
+
+        viewPager_help.setPageTransformer { page, position ->
+            page.translationX = position * -offsetPx
+        }
+
+        viewPager_help.offscreenPageLimit = 1
+        viewPager_help.adapter = ViewPagerAdapter(getHelpList())
+        viewPager_help.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+        spring_dots_indicator.setViewPager2(viewPager_help) // indicator 설정
+
     }
 
-    fun home(v : View){
-        startActivity(Intent(this, BasicScreen::class.java))
+
+    // 뷰 페이저에 들어갈 아이템
+    private fun getHelpList(): ArrayList<Int> {
+        return arrayListOf<Int>(R.drawable.helpscreen1, R.drawable.helpscreen2, R.drawable.helpscreen1, R.drawable.helpscreen2)
     }
 }
