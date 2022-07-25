@@ -11,6 +11,10 @@ class RetryProblemSelectScreen : AppCompatActivity() {
         setContentView(R.layout.retry_problem_select)
     }
 
+    override fun onBackPressed() {
+        startActivity(Intent(this, RetryProblemScreen::class.java))
+    }
+
     fun home(v : View){
         startActivity(Intent(this, BasicScreen::class.java))
     }

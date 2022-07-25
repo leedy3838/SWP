@@ -11,6 +11,10 @@ class WrongProblemNextScreen:AppCompatActivity() {
         setContentView(R.layout.wrong_problem_next)
     }
 
+    override fun onBackPressed() {
+        startActivity(Intent(this, WrongProblemScreen::class.java))
+    }
+
     fun home(v : View){
         startActivity(Intent(this, BasicScreen::class.java))
     }
