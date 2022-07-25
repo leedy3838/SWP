@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <ListPreference
         app:key="userGradeSetting"
         app:title="학년 설정"
         app:summary="학년을 설정하려면 클릭하세요"
         app:entries="@array/userGrade"
-        app:entryValues="@array/userGrade"
-        />
+    app:entryValues="@array/userGrade"
+    />
 
-    <Preference
-        app:key="passwordInitialization"
-        app:title ="비밀번호 분실 시 초기화"
-        app:summary="비밀번호를 초기화하시려면 클릭하세요"
-        />
-<!--        app:fragment = ""-->
+<Preference
+app:key="passwordInitialization"
+app:title ="비밀번호 분실 시 초기화"
+app:summary="비밀번호를 초기화하시려면 클릭하세요">
+<intent
+    android:action="android.intent.action.VIEW"
+    android:targetPackage="com.example.androidstudioproject"
+    android:targetClass="com.example.androidstudioproject.SettingScreen"
+    />
 
-</PreferenceScreen>
+</Preference>
+    </PreferenceScreen>

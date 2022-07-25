@@ -11,47 +11,77 @@
         android:id="@+id/basicScreenLayout1"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:background="@drawable/top_blue_bar_right"
+        android:elevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/userInfo"
-            android:layout_width="166dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="36dp"
-            android:background="@drawable/text_background"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="56dp"
+            android:background="@drawable/white_bar_right2"
             android:gravity="center"
+            android:elevation="10dp"
+            android:fontFamily="@font/nanum_barun_gothic_font"
             android:text="사용자 기본 정보"
+            android:textColor="@color/background"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/setting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginTop="16dp"
-            android:onClick="settingClicked"
-            android:text="설정"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/white_icon_right"
+            android:elevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.95"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/wheel_icon3"
+            android:elevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/leftTime"
-            android:layout_width="258dp"
-            android:layout_height="92dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/text_background"
+            android:layout_width="360dp"
+            android:layout_height="120dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/white_bar_right"
+            android:elevation="100dp"
+            android:fontFamily="@font/ds_digi"
             android:gravity="center"
-            android:text="남은 시간"
+            android:text="00:00:00"
+            android:textColor="@color/background"
+            android:textSize="80sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/setting"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/wheel_icon_right"
+            android:contentDescription="설정창으로 이동"
+            android:elevation="10dp"
+            android:onClick="settingClicked"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -67,18 +97,23 @@
 
         <Button
             android:id="@+id/problemSolveDisplay"
-            android:layout_width="250dp"
-            android:layout_height="100dp"
+            android:layout_width="350dp"
+            android:layout_height="315dp"
             android:layout_marginTop="16dp"
-            android:text="문제 풀이 화면"
+            android:background="@drawable/blue_bar_right"
+            android:elevation="10dp"
+            android:fontFamily="@font/nanum_barun_gothic_font"
             android:onClick="problemSolveClicked"
-            app:layout_constraintBottom_toTopOf="@+id/retry"
+            android:text="문제 풀이"
+            android:textColor="@color/white"
+            android:textSize="40sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <!--            app:layout_constraintBottom_toTopOf="@+id/retry"-->
 
-        <Button
+        <!--<Button
             android:id="@+id/retry"
             android:layout_width="250dp"
             android:layout_height="100dp"
@@ -90,7 +125,23 @@
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/problemSolveDisplay"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0" />-->
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/white_bar_right2"
+            android:elevation="10dp"
+            android:fontFamily="@font/nanum_barun_gothic_font"
+            android:text="학년/과목"
+            android:textColor="@color/background"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/problemSolveDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/problemSolveDisplay"
+            app:layout_constraintTop_toTopOf="@+id/problemSolveDisplay"
+            app:layout_constraintVertical_bias="0.058"
+            tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -98,47 +149,182 @@
         android:id="@+id/basicScreenLayout3"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bottom_blue_bar_right"
+        android:elevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/basicScreenLayout2">
 
+        <!--            app:layout_constraintTop_toBottomOf="@+id/problemSolveDisplay"-->
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="21dp"
+            android:background="@drawable/white_icon_right"
+            android:elevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.55" />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="21dp"
+            android:background="@drawable/today2"
+            android:elevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.55" />
+
         <Button
             android:id="@+id/todaySolveProblem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:text="오늘 푼 문제"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/today_right"
+            android:elevation="10dp"
+            android:fontFamily="@font/nanum_barun_gothic_font"
+            android:lineSpacingExtra="2dp"
             android:onClick="todaySolveClicked"
+            android:text="\n\n\n\n오늘푼문제"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.55" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/white_icon_right"
+            android:elevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/wrongProblem"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/todaySolveProblem" />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:elevation="10dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/retry2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/wrongProblem"
+            app:layout_constraintStart_toEndOf="@+id/todaySolveProblem"/>
+
+        <Button
+            android:id="@+id/retry"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:background="@drawable/retry_right"
+            android:elevation="10dp"
+            android:fontFamily="@font/nanum_barun_gothic_font"
+            android:lineSpacingExtra="2dp"
+            android:onClick="retryProblemClicked"
+            android:text="\n\n\n\n다시풀기"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/wrongProblem"
+            app:layout_constraintStart_toEndOf="@+id/todaySolveProblem"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="21dp"
+            android:background="@drawable/white_icon_right"
+            android:elevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/help"
+            app:layout_constraintStart_toEndOf="@+id/retry"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="217dp" />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:elevation="10dp"
+            android:layout_marginBottom="21dp"
+            android:background="@drawable/wrong2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/help"
+            app:layout_constraintStart_toEndOf="@+id/retry"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.55"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="217dp"/>
 
         <Button
             android:id="@+id/wrongProblem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:text="내가 틀린 문제"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:background="@drawable/wrong_right"
+            android:elevation="10dp"
+            android:fontFamily="@font/nanum_barun_gothic_font"
+            android:lineSpacingExtra="2dp"
             android:onClick="wrongProblemClicked"
+            android:text="\n\n\n\n틀린문제"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/retry"
             app:layout_constraintEnd_toStartOf="@+id/help"
-            app:layout_constraintLeft_toRightOf="@+id/todaySolveProblem"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.55"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:elevation="10dp"
+            android:layout_marginEnd="23dp"
+            android:layout_marginBottom="21dp"
+            android:background="@drawable/white_icon_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/wrongProblem"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:elevation="10dp"
+            android:layout_marginBottom="21dp"
+            android:layout_marginEnd="23dp"
+            android:background="@drawable/help3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/wrongProblem"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/help"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
-            android:text="도움말"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/help_right"
+            android:elevation="10dp"
+            android:fontFamily="@font/nanum_barun_gothic_font"
+            android:lineSpacingExtra="2dp"
             android:onClick="helpClicked"
+            android:text="\n\n\n\n 도움말"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/wrongProblem"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
