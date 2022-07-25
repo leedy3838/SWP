@@ -13,6 +13,12 @@ plugins {
 android {
     compileSdk 32
 
+    task wrapper(type: Wrapper) {
+        gradleVersion = '7.0'
+    }
+
+    tasks.register("prepareKotlinBuildScriptModel"){}
+
     defaultConfig {
         applicationId "com.example.androidstudioproject"
         minSdk 23
@@ -70,4 +76,10 @@ dependencies {
 
     //indicator
     implementation("com.tbuonomo:dotsindicator:4.3")
+
+    //setting preference
+    implementation 'androidx.preference:preference-ktx:1.1.1'
+
+    //setting fragment
+    implementation 'androidx.fragment:fragment-ktx:1.5.0'
 }

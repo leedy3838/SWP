@@ -38,8 +38,8 @@
         <activity android:name=".TodaySolvedNextScreen" />
         <activity android:name=".WrongProblemScreen" />
         <activity android:name=".WrongProblemNextScreen" />
+        <activity android:name=".SettingTime"/>
         <activity android:name=".LDYPractice" />
-        <activity android:name=".IJCPractice" />
         <activity
             android:name=".BasicScreen"
             android:exported="true">
