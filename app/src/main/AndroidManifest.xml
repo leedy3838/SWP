@@ -39,7 +39,6 @@
         <activity android:name=".WrongProblemScreen" />
         <activity android:name=".WrongProblemNextScreen" />
         <activity android:name=".SettingTime"/>
-        <activity android:name=".LDYPractice" />
         <activity
             android:name=".BasicScreen"
             android:exported="true">

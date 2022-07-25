@@ -63,7 +63,7 @@ dependencies {
     //파이어베이스 스토리지
     implementation 'com.google.firebase:firebase-storage-ktx'
 
-    // FirebaseUI Storage only
+    // Firestore
     implementation 'com.firebaseui:firebase-ui-storage:8.0.0'
     implementation 'com.google.firebase:firebase-firestore:24.2.0'
 
