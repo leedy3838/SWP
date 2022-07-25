@@ -40,6 +40,10 @@ class WrongProblemScreen : AppCompatActivity() {
         })
     }
 
+    override fun onBackPressed() {
+        startActivity(Intent(this, BasicScreen::class.java))
+    }
+
     fun home(v : View){
         startActivity(Intent(this, BasicScreen::class.java))
     }

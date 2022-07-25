@@ -11,6 +11,10 @@ class TodaySolvedNextScreen :AppCompatActivity() {
         setContentView(R.layout.today_solved_next)
     }
 
+    override fun onBackPressed() {
+        startActivity(Intent(this, TodaySolveScreen::class.java))
+    }
+
     fun home(v : View){
         startActivity(Intent(this, BasicScreen::class.java))
     }

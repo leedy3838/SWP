@@ -24,6 +24,10 @@ class TodaySolveScreen : AppCompatActivity() {
 
     val customAdapter = CustomAdapter(DataList)
 
+    override fun onBackPressed() {
+        startActivity(Intent(this, BasicScreen::class.java))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.today_solve)
