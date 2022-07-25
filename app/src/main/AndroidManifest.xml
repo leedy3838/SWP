@@ -32,7 +32,9 @@
         <activity android:name=".RetryProblemSelectScreen" />
         <activity android:name=".SettingScreen" />
         <activity android:name=".HelpScreen" />
-        <activity android:name=".ProblemSolveScreen" />
+        <activity android:name=".ProblemSolveScreen"
+            android:windowSoftInputMode="adjustResize"
+            />
         <activity android:name=".ProblemSolveNextScreen" />
         <activity android:name=".TodaySolveScreen" />
         <activity android:name=".TodaySolvedNextScreen" />
