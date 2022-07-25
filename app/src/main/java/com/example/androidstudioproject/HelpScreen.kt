@@ -33,6 +33,6 @@ class HelpScreen : AppCompatActivity() {
 
     // 뷰 페이저에 들어갈 아이템
     private fun getHelpList(): ArrayList<Int> {
-        return arrayListOf<Int>(R.drawable.helpscreen1, R.drawable.helpscreen2, R.drawable.helpscreen1, R.drawable.helpscreen2)
+        return arrayListOf(R.drawable.helpscreen1, R.drawable.helpscreen2, R.drawable.helpscreen1, R.drawable.helpscreen2)
     }
 }
