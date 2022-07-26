@@ -17,7 +17,7 @@ class WrongProblemScreen : AppCompatActivity() {
         val db = FirebaseFirestore.getInstance()
         var st = ""
 
-        val docRef = db.collection("retryProblem")
+        val docRef = db.collection("틀린 문제")
             .document("LDY")
             .collection("LDY")
 

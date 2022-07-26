@@ -25,7 +25,7 @@ class TodaySolveScreen : AppCompatActivity() {
         val db = FirebaseFirestore.getInstance()
         var st = ""
 
-        val docRef = db.collection("retryProblem")
+        val docRef = db.collection("오늘 푼 문제")
             .document("LDY")
             .collection("LDY")
 

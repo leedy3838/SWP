@@ -21,7 +21,7 @@ class RetryProblemScreen : AppCompatActivity() {
         val db = FirebaseFirestore.getInstance()
         var st = ""
 
-        val docRef = db.collection("retryProblem")
+        val docRef = db.collection("다시 풀기")
             .document("LDY")
             .collection("LDY")
 
