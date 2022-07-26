@@ -54,7 +54,7 @@ class BasicScreen : AppCompatActivity() {
         val intent = Intent(this, ProblemSolveScreen::class.java)
 
         // 설정에 따라서 나중에 값을 받아주면 됨
-        intent.putExtra("정답률", 100)
+        intent.putExtra("정답률", 99)
         intent.putExtra("학년", "1학년")
         intent.putExtra("과목", "과학탐구")
 

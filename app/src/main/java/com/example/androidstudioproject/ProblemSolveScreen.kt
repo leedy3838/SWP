@@ -27,7 +27,7 @@ class ProblemSolveScreen :AppCompatActivity() {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("문제 포기")
             builder.setMessage("문제를 포기하시겠습니까?")
-                .setPositiveButton("포기", DialogInterface.OnClickListener { dialog, which ->
+                .setPositiveButton("확인", DialogInterface.OnClickListener { dialog, which ->
                     startActivity(Intent(this, BasicScreen::class.java))
                 })
                 .setNegativeButton("취소", DialogInterface.OnClickListener { dialog, which ->
@@ -44,7 +44,7 @@ class ProblemSolveScreen :AppCompatActivity() {
 
         val grade = intent.getStringExtra("학년").toString()
         val subject = intent.getStringExtra("과목").toString()
-        val answerRate : Int = intent.getIntExtra("정답률", 100)
+        var answerRate : Int = intent.getIntExtra("정답률", 100)
 
         var answer : Long
         var questionYear : String
@@ -61,24 +61,31 @@ class ProblemSolveScreen :AppCompatActivity() {
         docRef
             .get()
             .addOnSuccessListener { result ->
-                for(document in result) {
-                    answerRateInDocument = document.get("정답률") as Long
+                var find = false
 
-                    answer = document.get("정답") as Long
-                    questionYear = document.get("출제 년도").toString()
-                    tryNum = document.get("시도 횟수") as Long
-                    answerNum = document.get("정답수") as Long
+                while(!find) {
+                    for (document in result) {
+                        answerRateInDocument = document.get("정답률") as Long
+                        answer = document.get("정답") as Long
+                        questionYear = document.get("출제 년도").toString()
+                        tryNum = document.get("시도 횟수") as Long
+                        answerNum = document.get("정답수") as Long
 
-                    if(answerRateInDocument <= answerRate) {
-                        st = document.get("경로").toString()
-                        problemInfo.text = questionYear
+                        if (answerRateInDocument <= answerRate) {
+                            st = document.get("경로").toString()
+                            problemInfo.text = questionYear
 
-                        intent.putExtra("정답률", answerRateInDocument)
-                        intent.putExtra("학년", grade)
-                        intent.putExtra("과목", subject)
+                            intent.putExtra("정답률", answerRateInDocument)
+                            intent.putExtra("학년", grade)
+                            intent.putExtra("과목", subject)
 
-                        break
+                            find = true
+                            break
+                        }
                     }
+
+                    answerRate += 5
+                    println(answerRate)
                 }
 
                 val storage: FirebaseStorage = FirebaseStorage.getInstance()
