@@ -13,12 +13,14 @@ class ProblemSolveNextScreen : AppCompatActivity() {
         val grade = intent.getStringExtra("학년").toString()
         val subject = intent.getStringExtra("과목").toString()
         val answerRate : Int = intent.getIntExtra("정답률", 100)
+        val user = intent.getStringExtra("유저")
 
         intent = Intent(this, ProblemSolveScreen::class.java)
 
         intent.putExtra("정답률", answerRate)
         intent.putExtra("학년", grade)
         intent.putExtra("과목", subject)
+        intent.putExtra("유저", user)
     }
 
     override fun onBackPressed() {

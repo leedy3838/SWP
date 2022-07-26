@@ -45,6 +45,7 @@ class ProblemSolveScreen :AppCompatActivity() {
         val grade = intent.getStringExtra("학년").toString()
         val subject = intent.getStringExtra("과목").toString()
         var answerRate : Int = intent.getIntExtra("정답률", 100)
+        val user = intent.getStringExtra("유저")
 
         var answer : Long
         var questionYear : String
@@ -78,6 +79,7 @@ class ProblemSolveScreen :AppCompatActivity() {
                             intent.putExtra("정답률", answerRateInDocument)
                             intent.putExtra("학년", grade)
                             intent.putExtra("과목", subject)
+                            intent.putExtra("유저", user)
 
                             find = true
                             break

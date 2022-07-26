@@ -57,6 +57,7 @@ class BasicScreen : AppCompatActivity() {
         intent.putExtra("정답률", 99)
         intent.putExtra("학년", "1학년")
         intent.putExtra("과목", "과학탐구")
+        intent.putExtra("유저", "LDY")
 
         startActivity(intent)
     }
