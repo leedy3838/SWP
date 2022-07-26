@@ -20,7 +20,7 @@ class ProblemSolveScreen :AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.problem_solve)
 
-
+        //뒤로 가기 기능
         val btn_event = findViewById<Button>(R.id.giveUp)
 
         btn_event.setOnClickListener {
@@ -42,23 +42,44 @@ class ProblemSolveScreen :AppCompatActivity() {
         val db = FirebaseFirestore.getInstance()
         var st = ""
 
+        val grade = intent.getStringExtra("학년").toString()
+        val subject = intent.getStringExtra("과목").toString()
+        val answerRate : Int = intent.getIntExtra("정답률", 100)
+
+        var answer : Long
+        var questionYear : String
+        var tryNum : Long
+        var answerRateInDocument : Long
+        var answerNum : Long
+
+        intent = Intent(this, ProblemSolveNextScreen::class.java)
+
         val docRef = db.collection("고등학생")
-            .document("3학년")
-            .collection("국어")
-            .document("공통")
-            .collection("공통")
-            .document("2022년 3월 모의고사 30번")
+            .document(grade)
+            .collection(subject)
 
-        val docRefMath = db.collection("고등학생")
-            .document("3학년")
-            .collection("수학")
-            .document("공통")
-            .collection("공통")
-            .document("2022년 3월 모의고사 1번")
+        docRef
+            .get()
+            .addOnSuccessListener { result ->
+                for(document in result) {
+                    answerRateInDocument = document.get("정답률") as Long
 
-        docRef.get()
-            .addOnSuccessListener { document ->
-                st = document.get("경로").toString()
+                    answer = document.get("정답") as Long
+                    questionYear = document.get("출제 년도").toString()
+                    tryNum = document.get("시도 횟수") as Long
+                    answerNum = document.get("정답수") as Long
+
+                    if(answerRateInDocument <= answerRate) {
+                        st = document.get("경로").toString()
+                        problemInfo.text = questionYear
+
+                        intent.putExtra("정답률", answerRateInDocument)
+                        intent.putExtra("학년", grade)
+                        intent.putExtra("과목", subject)
+
+                        break
+                    }
+                }
 
                 val storage: FirebaseStorage = FirebaseStorage.getInstance()
                 val storageRef: StorageReference = storage.getReference(st)
@@ -69,7 +90,6 @@ class ProblemSolveScreen :AppCompatActivity() {
                     .placeholder(R.drawable.text_background)
                     .into(imageViewProblemSolve)
             }
-            
     }
         override fun onBackPressed() {
             val builder = AlertDialog.Builder(this)
@@ -88,11 +108,11 @@ class ProblemSolveScreen :AppCompatActivity() {
         }
 
     fun home(v : View){
-        startActivity(Intent(this, BasicScreen::class.java))
+        startActivity(intent)
     }
 
     fun toProblemSolveNext(v : View){
-        startActivity(Intent(this, ProblemSolveNextScreen::class.java))
+        startActivity(intent)
     }
 
 

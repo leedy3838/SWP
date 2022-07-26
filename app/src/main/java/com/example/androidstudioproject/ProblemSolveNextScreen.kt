@@ -9,6 +9,10 @@ class ProblemSolveNextScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.problem_solve_next)
+
+        val grade = intent.getStringExtra("학년").toString()
+        val subject = intent.getStringExtra("과목").toString()
+        val answerRate : Int = intent.getIntExtra("정답률", 100)
     }
 
     override fun onBackPressed() {
