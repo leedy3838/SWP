@@ -108,12 +108,10 @@ class ProblemSolveScreen :AppCompatActivity() {
         }
 
     fun home(v : View){
-        startActivity(intent)
+        startActivity(Intent(this, BasicScreen::class.java))
     }
 
     fun toProblemSolveNext(v : View){
         startActivity(intent)
     }
-
-
 }
