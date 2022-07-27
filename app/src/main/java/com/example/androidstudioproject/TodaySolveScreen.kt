@@ -16,39 +16,53 @@ class TodaySolveScreen : AppCompatActivity() {
         startActivity(Intent(this, BasicScreen::class.java))
     }
 
+    val DataList = mutableListOf<Data>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.today_solve)
 
-
-        val DataList = mutableListOf<Data>()
         val db = FirebaseFirestore.getInstance()
         var st = ""
 
-        val docRef = db.collection("오늘 푼 문제")
-            .document("LDY")
-            .collection("LDY")
+        var user = "LDY"
+
+        val docRef = db.collection("다시 풀기")
+            .document(user)
+            .collection(user)
 
         docRef
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    if(document.get("경로").toString() == "null")
+                    if(document.get("체크").toString() == "null")
                         continue
 
-                    DataList.add(Data(document.get("경로").toString()))
+                    //name grade subject path
+                    DataList.add(
+                        Data(
+                            document.id,
+                            document.get("학년").toString(),
+                            document.get("과목").toString(),
+                        )
+                    )
                 }
 
                 val customAdapter = CustomAdapter(DataList)
 
-                todaySolveList.layoutManager = LinearLayoutManager(this)
-                todaySolveList.adapter = customAdapter
+                retryProblemList.layoutManager = LinearLayoutManager(this)
+                retryProblemList.adapter = customAdapter
 
                 //RecyclerView에 onClickListener 붙이기
                 customAdapter.setItemClickListener(object: CustomAdapter.OnItemClickListener{
-                    override fun onClick(v: View, position: Int) {
-                        // 클릭 시 이벤트 작성
-                        toTodaySolvedNext(v)
+                    override fun onClick(v: View, position: Int, DataList: List<Data>) {
+                        val intent = Intent(v.context, TodaySolvedNextScreen::class.java)
+
+                        intent.putExtra("학년", DataList[position].grade)
+                        intent.putExtra("과목", DataList[position].subject)
+                        intent.putExtra("문제 정보", DataList[position].name)
+
+                        startActivity(intent)
                     }
                 })
             }
@@ -56,9 +70,5 @@ class TodaySolveScreen : AppCompatActivity() {
 
     fun home(v : View){
         startActivity(Intent(this, BasicScreen::class.java))
-    }
-
-    fun toTodaySolvedNext(v : View){
-        startActivity(Intent(this, TodaySolvedNextScreen::class.java))
     }
 }

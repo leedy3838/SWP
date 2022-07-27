@@ -58,6 +58,7 @@ class BasicScreen : AppCompatActivity() {
         intent.putExtra("학년", "1학년")
         intent.putExtra("과목", "과학탐구")
         intent.putExtra("유저", "LDY")
+        intent.putExtra("풀어본 문제", false)
 
         startActivity(intent)
     }

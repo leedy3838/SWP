@@ -49,6 +49,8 @@ class ProblemSolveScreen :AppCompatActivity() {
         val subject = intent.getStringExtra("과목").toString()
         var answerRate : Int = intent.getIntExtra("정답률", 100)
         val user = intent.getStringExtra("유저")
+        //시간 추가 여부 확인
+        val solved = intent.getBooleanExtra("풀어본 문제", false)
 
         var answer : Long
         var questionYear : String
@@ -143,7 +145,6 @@ class ProblemSolveScreen :AppCompatActivity() {
                     alertDialog.show()
                 }
             }
-
     }
         override fun onBackPressed() {
             val builder = AlertDialog.Builder(this)

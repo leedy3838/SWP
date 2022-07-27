@@ -25,14 +25,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0">
 
-            <TextView
-                android:id="@+id/problemSolve"
+            <ImageView
+                android:id="@+id/imageViewRetryProblem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/text_background"
-                android:gravity="center"
-                android:text="문제 풀이 화면\n\n\n\n\n\n\n\n\n\n\n\n
-                \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" />
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
         </ScrollView>
 
 
