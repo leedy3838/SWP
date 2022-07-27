@@ -98,15 +98,18 @@
             android:layout_width="241dp"
             android:layout_height="61dp"
             android:hint="정답을 입력하세요"
+            app:counterEnabled="true"
+            app:counterMaxLength="4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/answerSubmit"
             app:layout_constraintStart_toEndOf="@+id/giveUp"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/textInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="5"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
