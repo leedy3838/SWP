@@ -6,10 +6,10 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.retry_problem.*
+import kotlinx.android.synthetic.main.wrong_problem.*
 
 class WrongProblemScreen : AppCompatActivity() {
-    val DataList = mutableListOf<Data>()
+    private val DataList = mutableListOf<Data>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +19,7 @@ class WrongProblemScreen : AppCompatActivity() {
 
         val user = "LDY"
 
-        val docRef = db.collection("다시 풀기")
+        val docRef = db.collection("틀린 문제")
             .document(user)
             .collection(user)
 
@@ -27,23 +27,23 @@ class WrongProblemScreen : AppCompatActivity() {
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    if(document.get("체크").toString() == "null")
+                    if(document.get("base").toString() == "yes")
                         continue
 
-                    //name grade subject path
+                    //name grade subject
                     DataList.add(
                         Data(
                             document.id,
                             document.get("학년").toString(),
-                            document.get("과목").toString(),
+                            document.get("과목").toString()
                         )
                     )
                 }
 
                 val customAdapter = CustomAdapter(DataList)
 
-                retryProblemList.layoutManager = LinearLayoutManager(this)
-                retryProblemList.adapter = customAdapter
+                wrongProblemList.layoutManager = LinearLayoutManager(this)
+                wrongProblemList.adapter = customAdapter
 
                 //RecyclerView에 onClickListener 붙이기
                 customAdapter.setItemClickListener(object: CustomAdapter.OnItemClickListener{

@@ -9,16 +9,15 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.retry_problem.*
 
 class RetryProblemScreen : AppCompatActivity() {
-    val DataList = mutableListOf<Data>()
+    private val DataList = mutableListOf<Data>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.retry_problem)
 
         val db = FirebaseFirestore.getInstance()
-        var st = ""
 
-        var user = "LDY"
+        val user = "LDY"
 
         val docRef = db.collection("다시 풀기")
             .document(user)
@@ -28,7 +27,7 @@ class RetryProblemScreen : AppCompatActivity() {
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    if(document.get("체크").toString() == "null")
+                    if(document.get("base").toString() == "yes")
                         continue
 
                     //name grade subject path
@@ -36,7 +35,7 @@ class RetryProblemScreen : AppCompatActivity() {
                         Data(
                             document.id,
                             document.get("학년").toString(),
-                            document.get("과목").toString(),
+                            document.get("과목").toString()
                         )
                     )
                 }
