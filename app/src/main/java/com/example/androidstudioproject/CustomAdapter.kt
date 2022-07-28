@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.listlayout.view.*
 
 //여기에 데이터 더 많이 넣고 싶으면 수정하면 됩니다.
-class Data(val name:String, val grade:String, val subject:String)
+class Data(val name:String, val info:String, val grade:String, val subject:String)
 
 
 
@@ -23,7 +23,7 @@ class CustomAdapter(val DataList:List<Data>) : RecyclerView.Adapter<CustomAdapte
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.name.text = DataList[position].grade+" "+DataList[position].subject+" "+DataList[position].name
+        holder.name.text = DataList[position].name
 
         // (1) 리스트 내 항목 클릭 시 onClick() 호출
         holder.itemView.setOnClickListener {

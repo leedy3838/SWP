@@ -14,6 +14,7 @@ class ProblemSolveNextScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.problem_solve_next)
 
+        val user = intent.getStringExtra("user")
         val grade = intent.getStringExtra("학년").toString()
         val subject = intent.getStringExtra("과목").toString()
         val answerRate : Long = intent.getLongExtra("정답률", 100)

@@ -34,6 +34,7 @@ class RetryProblemScreen : AppCompatActivity() {
                     DataList.add(
                         Data(
                             document.id,
+                            document.get("문제 정보").toString(),
                             document.get("학년").toString(),
                             document.get("과목").toString()
                         )
@@ -50,9 +51,9 @@ class RetryProblemScreen : AppCompatActivity() {
                     override fun onClick(v: View, position: Int, DataList: List<Data>) {
                         val intent = Intent(v.context, RetryProblemSelectScreen::class.java)
 
+                        intent.putExtra("문제 정보", DataList[position].info)
                         intent.putExtra("학년", DataList[position].grade)
                         intent.putExtra("과목", DataList[position].subject)
-                        intent.putExtra("문제 정보", DataList[position].name)
 
                         startActivity(intent)
                     }

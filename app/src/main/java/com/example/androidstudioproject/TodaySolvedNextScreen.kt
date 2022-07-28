@@ -17,6 +17,7 @@ class TodaySolvedNextScreen :AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.today_solved_next)
 
+        val name = intent.getStringExtra("이름").toString()
         val grade = intent.getStringExtra("학년").toString()
         val subject = intent.getStringExtra("과목").toString()
         val problem = intent.getStringExtra("문제 정보").toString()
@@ -73,6 +74,7 @@ class TodaySolvedNextScreen :AppCompatActivity() {
         val db = FirebaseFirestore.getInstance()
         var st = ""
 
+        val name = intent.getStringExtra("이름").toString()
         val user = intent.getStringExtra("user").toString()
         val problem = intent.getStringExtra("문제 정보").toString()
         val grade = intent.getStringExtra("학년").toString()
@@ -82,9 +84,10 @@ class TodaySolvedNextScreen :AppCompatActivity() {
 
         val data = hashMapOf(
             "학년" to grade,
-            "과목" to subject
+            "과목" to subject,
+            "문제 정보" to problem
         )
-        retryRef.document(problem).set(data)
+        retryRef.document(name).set(data)
     }
 
 }

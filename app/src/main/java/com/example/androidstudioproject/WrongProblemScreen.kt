@@ -34,6 +34,7 @@ class WrongProblemScreen : AppCompatActivity() {
                     DataList.add(
                         Data(
                             document.id,
+                            document.get("문제 정보").toString(),
                             document.get("학년").toString(),
                             document.get("과목").toString()
                         )
@@ -52,7 +53,7 @@ class WrongProblemScreen : AppCompatActivity() {
 
                         intent.putExtra("학년", DataList[position].grade)
                         intent.putExtra("과목", DataList[position].subject)
-                        intent.putExtra("문제 정보", DataList[position].name)
+                        intent.putExtra("문제 정보", DataList[position].info)
 
                         startActivity(intent)
                     }

@@ -17,6 +17,7 @@ class WrongProblemNextScreen:AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.wrong_problem_next)
 
+        val name = intent.getStringExtra("이름").toString()
         val grade = intent.getStringExtra("학년").toString()
         val subject = intent.getStringExtra("과목").toString()
         val problem = intent.getStringExtra("문제 정보").toString()
