@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.setting_time.*
 
@@ -27,7 +28,6 @@ class SettingTime :AppCompatActivity() {
             putInt("hour",hour)
             putInt("minute",minute)
             commit()
-
         }
 
         finish()
