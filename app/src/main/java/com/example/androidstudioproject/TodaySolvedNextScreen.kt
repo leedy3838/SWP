@@ -69,4 +69,22 @@ class TodaySolvedNextScreen :AppCompatActivity() {
         startActivity(setintent)
     }
 
+    fun addToRetry(v : View){
+        val db = FirebaseFirestore.getInstance()
+        var st = ""
+
+        val user = intent.getStringExtra("user").toString()
+        val problem = intent.getStringExtra("문제 정보").toString()
+        val grade = intent.getStringExtra("학년").toString()
+        val subject = intent.getStringExtra("과목").toString()
+
+        val retryRef = db.collection("다시 풀기").document(user).collection(user)
+
+        val data = hashMapOf(
+            "학년" to grade,
+            "과목" to subject
+        )
+        retryRef.document(problem).set(data)
+    }
+
 }

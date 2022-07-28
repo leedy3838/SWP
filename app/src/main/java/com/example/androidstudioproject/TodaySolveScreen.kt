@@ -50,6 +50,7 @@ class TodaySolveScreen : AppCompatActivity() {
                     override fun onClick(v: View, position: Int, DataList: List<Data>) {
                         val intent = Intent(v.context, TodaySolvedNextScreen::class.java)
 
+                        intent.putExtra("user", user)
                         intent.putExtra("학년", DataList[position].grade)
                         intent.putExtra("과목", DataList[position].subject)
                         intent.putExtra("문제 정보", DataList[position].name)
