@@ -8,9 +8,6 @@ import androidx.preference.PreferenceFragmentCompat
 
 class SettingScreen : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

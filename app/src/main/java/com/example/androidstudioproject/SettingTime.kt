@@ -1,16 +1,14 @@
 package com.example.androidstudioproject
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.setting_time.*
 
 class SettingTime :AppCompatActivity() {
-    val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.setting_time)
@@ -22,6 +20,7 @@ class SettingTime :AppCompatActivity() {
     }
 
     private fun save(hour:Int, minute:Int){
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
         sharedPref.edit().run{
             putInt("hour",hour)
             putInt("minute",minute)

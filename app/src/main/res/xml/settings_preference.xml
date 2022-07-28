@@ -15,34 +15,53 @@
         app:title="문제 난이도"
         app:summary="난이도를 설정하려면 클릭하세요"
         app:entries="@array/difficulty"
-    app:entryValues="@array/difficulty"
-    />
+    app:entryValues="@array/difficulty"/>
+
+    <ListPreference
+        app:key="userGradeSetting"
+        app:title="학년 설정"
+        app:summary="학년을 설정하려면 클릭하세요"
+        app:entries="@array/userGrade"
+        app:entryValues="@array/userGrade"
+        />
+
+    <ListPreference
+        app:key="subject"
+        app:title="과목 설정"
+        app:summary="과목을 설정하려면 클릭하세요"
+        app:dependency="userGradeSetting"
+        app:entries="@array/subject"
+        app:entryValues="@array/subject"/>
 
 
-<ListPreference
-app:key="subject"
-app:title="과목 설정"
-app:summary="과목을 설정하려면 클릭하세요"
-app:entries="@array/subject"
-app:entryValues="@array/subject"/>
+
+    <ListPreference
+        app:key="detailSubject"
+        app:title="세부 과목 설정"
+        app:summary="세부 과목을 설정하려면 클릭하세요"
+        app:entries="@array/grade3_social"
+        app:dependency="subject"
+        app:entryValues="@array/grade3_social"/>
+
+    <Preference
+        app:key="timeSettingPref"
+        app:title ="사용시간 설정"
+        app:summary="사용시간을 설정하려면 클릭하세요">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.androidstudioproject"
+            android:targetClass="com.example.androidstudioproject.SettingTime"
+            />
+    </Preference>
 
 
-<Preference
-app:key="timeSettingPref"
-app:title ="사용시간 설정"
-app:summary="사용시간을 설정하려면 클릭하세요">
-<intent
-    android:action="android.intent.action.VIEW"
-    android:targetPackage="com.example.androidstudioproject"
-    android:targetClass="com.example.androidstudioproject.SettingTime"
-    />
-</Preference>
+    <SwitchPreference
+        app:key="upperWidget"
+        app:title="상단바 위젯 사용"
+        app:defaultValue="false" />
+</PreferenceScreen>
 
 
-<SwitchPreference
-app:key="upperWidget"
-app:title="상단바 위젯 사용"
-app:defaultValue="false"
-    />
 
-    </PreferenceScreen>
+
+
