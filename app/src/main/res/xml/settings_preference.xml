@@ -11,7 +11,7 @@
 
 
     <ListPreference
-        app:key="difficultySetting"
+        app:key="difficulty"
         app:title="문제 난이도"
         app:summary="난이도를 설정하려면 클릭하세요"
         app:entries="@array/difficulty"

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.setting_time.*
 
 class SettingTime :AppCompatActivity() {
@@ -21,7 +22,7 @@ class SettingTime :AppCompatActivity() {
     }
 
     private fun save(v:View, hour:Int, minute:Int){
-        val sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
         sharedPref.edit().run{
             putInt("hour",hour)
             putInt("minute",minute)
@@ -29,6 +30,6 @@ class SettingTime :AppCompatActivity() {
 
         }
 
-        startActivity(Intent(this, SettingScreen::class.java))
+        finish()
     }
 }
