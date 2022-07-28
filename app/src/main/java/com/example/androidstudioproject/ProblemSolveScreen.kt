@@ -17,6 +17,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.problem_solve.*
+import kotlin.math.round
+import kotlin.math.roundToLong
 
 class ProblemSolveScreen :AppCompatActivity() {
     lateinit var sendintent : Intent
@@ -118,7 +120,6 @@ class ProblemSolveScreen :AppCompatActivity() {
                             break
                         }
 
-
                         if (answerRate >= answerRateInDocument && answerRate <= answerRateInDocument+5 && problem == "없음") {
                             st = document.get("경로").toString()
                             problemInfo.text = questionYear
@@ -154,7 +155,7 @@ class ProblemSolveScreen :AppCompatActivity() {
                     val input = textInputEditText.text.toString()
                     val input1 : Long = input.toLong()
                     val builder = AlertDialog.Builder(this)
-
+                    var answerRateUpdate : Long = 0
                     builder.setTitle("정답을 제출하시겠습니까?")
                     builder.setMessage("한번 제출한 답은 변경할 수 없습니다.")
                         .setPositiveButton("제출", DialogInterface.OnClickListener { dialog, which ->
@@ -163,6 +164,11 @@ class ProblemSolveScreen :AppCompatActivity() {
                             if (answer == input1) {
                                 docRef.document(docName).update("시도 횟수", ++tryNum)  // 정답일 때 시도횟수 1 증가
                                 docRef.document(docName).update("정답수", ++answerNum)  // 정답일 때 정답수 1 증가
+
+                                answerRateUpdate = ((answerNum.toDouble() / tryNum.toDouble()) * 100.0).roundToLong()  // 정답률 저장 변수
+                                docRef.document(docName).update("정답률", answerRateUpdate)
+                                println(answerRateUpdate)
+
                                 builder.setMessage("정답입니다!")
                                     .setCancelable(false)    // 뒤로가기 불가
                                     .setPositiveButton(
@@ -171,6 +177,10 @@ class ProblemSolveScreen :AppCompatActivity() {
                             }
                             else {
                                 docRef.document(docName).update("시도 횟수", ++tryNum)  // 오답일 때 시도횟수 1 증가
+
+                                answerRateUpdate = ((answerNum.toDouble() / tryNum.toDouble()) * 100.0).roundToLong()  // 정답률 저장 변수
+                                docRef.document(docName).update("정답률", answerRateUpdate)
+
                                 builder.setMessage("오답입니다. 다시 시도해 보세요.")
                                     .setPositiveButton(
                                         "확인",
