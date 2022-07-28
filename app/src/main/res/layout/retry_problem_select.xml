@@ -49,16 +49,15 @@
         app:layout_constraintTop_toBottomOf="@id/retryProblemSelectLayout1">
 
         <Button
-            android:id="@+id/home"
-            android:layout_width="100dp"
-            android:layout_height="49dp"
-            android:layout_marginStart="152dp"
-            android:text="홈"
+            android:id="@+id/remove"
+            android:layout_width="137dp"
+            android:layout_height="62dp"
+            android:layout_marginStart="136dp"
             android:onClick="home"
+            android:text="다시 풀기에서 제거"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.509" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/toSolve"

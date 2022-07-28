@@ -1,5 +1,6 @@
 package com.example.androidstudioproject
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +23,7 @@ class CustomAdapter(val DataList:List<Data>) : RecyclerView.Adapter<CustomAdapte
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.name.text = DataList[position].name
+        holder.name.text = DataList[position].grade+" "+DataList[position].subject+" "+DataList[position].name
 
         // (1) 리스트 내 항목 클릭 시 onClick() 호출
         holder.itemView.setOnClickListener {

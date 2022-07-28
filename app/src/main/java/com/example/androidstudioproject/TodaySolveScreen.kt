@@ -9,12 +9,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.today_solve.*
 
 class TodaySolveScreen : AppCompatActivity() {
-
-
-    override fun onBackPressed() {
-        startActivity(Intent(this, BasicScreen::class.java))
-    }
-
     private val DataList = mutableListOf<Data>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +58,9 @@ class TodaySolveScreen : AppCompatActivity() {
                     }
                 })
             }
+    }
+    override fun onBackPressed() {
+        startActivity(Intent(this, BasicScreen::class.java))
     }
 
     fun home(v : View){

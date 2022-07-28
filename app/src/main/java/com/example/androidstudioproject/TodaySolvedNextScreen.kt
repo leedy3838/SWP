@@ -11,6 +11,8 @@ import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.today_solved_next.*
 
 class TodaySolvedNextScreen :AppCompatActivity() {
+    lateinit var setintent : Intent
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.today_solved_next)
@@ -39,7 +41,16 @@ class TodaySolvedNextScreen :AppCompatActivity() {
                     //대기 화면(placeholder)
                     .placeholder(R.drawable.text_background)
                     .into(imageViewTodaySolved)
-            }
+
+                setintent = Intent(this, ProblemSolveScreen::class.java)
+
+                setintent.putExtra("정답률", document.get("정답률") as Long)
+                setintent.putExtra("학년", grade)
+                setintent.putExtra("과목", subject)
+                setintent.putExtra("문제 정보", problem)
+                setintent.putExtra("풀어본 문제",true)
+                setintent.putExtra("이전 화면", "오늘 푼 문제")
+           }
     }
 
     override fun onBackPressed() {
@@ -55,7 +66,7 @@ class TodaySolvedNextScreen :AppCompatActivity() {
     }
 
     fun toProblemSolve(v : View){
-        startActivity(Intent(this, ProblemSolveScreen::class.java))
+        startActivity(setintent)
     }
 
 }

@@ -98,13 +98,16 @@ class ProblemSolveScreen :AppCompatActivity() {
                         tryNum = document.get("시도 횟수") as Long
                         answerNum = document.get("정답수") as Long
 
-                        if(problem != "없음" && problem == document.id){
+                        if(problem == document.id){
                             st = document.get("경로").toString()
                             problemInfo.text = questionYear
 
                             if(intent.getStringExtra("이전 화면") == "다시 풀기")
                                 sendintent = Intent(this, RetryProblemScreen::class.java)
-
+                            if(intent.getStringExtra("이전 화면") == "틀린 문제")
+                                sendintent = Intent(this, WrongProblemScreen::class.java)
+                            if(intent.getStringExtra("이전 화면") == "오늘 푼 문제")
+                                sendintent = Intent(this, TodaySolveScreen::class.java)
 
                             find = true
                             break
