@@ -34,6 +34,7 @@ class TodaySolveScreen : AppCompatActivity() {
                     DataList.add(
                         Data(
                             document.id,
+                            document.get("문제 정보").toString(),
                             document.get("학년").toString(),
                             document.get("과목").toString()
                         )
@@ -51,9 +52,10 @@ class TodaySolveScreen : AppCompatActivity() {
                         val intent = Intent(v.context, TodaySolvedNextScreen::class.java)
 
                         intent.putExtra("user", user)
+                        intent.putExtra("이름", DataList[position].name)
                         intent.putExtra("학년", DataList[position].grade)
                         intent.putExtra("과목", DataList[position].subject)
-                        intent.putExtra("문제 정보", DataList[position].name)
+                        intent.putExtra("문제 정보", DataList[position].info)
 
                         startActivity(intent)
                     }

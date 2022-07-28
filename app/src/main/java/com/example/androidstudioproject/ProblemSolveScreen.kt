@@ -65,6 +65,7 @@ class ProblemSolveScreen :AppCompatActivity() {
             alertDialog.show()
         }
 
+        val user = intent.getStringExtra("user").toString()
         val grade = intent.getStringExtra("학년").toString()
         val subject = intent.getStringExtra("과목").toString()
         val problem = intent.getStringExtra("문제 정보").toString()
@@ -117,14 +118,19 @@ class ProblemSolveScreen :AppCompatActivity() {
                             break
                         }
 
-                        if (answerRateInDocument <= answerRate && problem == "없음") {
+
+                        if (answerRate >= answerRateInDocument && answerRate <= answerRateInDocument+5 && problem == "없음") {
                             st = document.get("경로").toString()
                             problemInfo.text = questionYear
 
                             sendintent = Intent(this, ProblemSolveNextScreen::class.java)
+                            sendintent.putExtra("user", user)
                             sendintent.putExtra("정답률", answerRateInDocument)
                             sendintent.putExtra("학년", grade)
                             sendintent.putExtra("과목", subject)
+
+                            println(answerRate)
+                            println(answerRateInDocument)
 
                             find = true
                             break
