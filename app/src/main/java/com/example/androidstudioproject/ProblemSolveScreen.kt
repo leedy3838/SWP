@@ -2,7 +2,6 @@ package com.example.androidstudioproject
 
 import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,6 +19,7 @@ import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.problem_solve.*
 
 class ProblemSolveScreen :AppCompatActivity() {
+    lateinit var sendintent : Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,23 +65,21 @@ class ProblemSolveScreen :AppCompatActivity() {
             alertDialog.show()
         }
 
-        val db = FirebaseFirestore.getInstance()
-        var st = ""
-
         val grade = intent.getStringExtra("학년").toString()
         val subject = intent.getStringExtra("과목").toString()
-        var answerRate : Int = intent.getIntExtra("정답률", 100)
-        val user = intent.getStringExtra("유저")
+        val problem = intent.getStringExtra("문제 정보").toString()
+        var answerRate : Long = intent.getLongExtra("정답률", 100)
         //시간 추가 여부 확인
         val solved = intent.getBooleanExtra("풀어본 문제", false)
+
+        val db = FirebaseFirestore.getInstance()
+        var st = ""
 
         var answer : Long = 0    // 정답 번호를 받아오기 전 초기화
         var questionYear : String
         var tryNum : Long
         var answerRateInDocument : Long
         var answerNum : Long
-
-        intent = Intent(this, ProblemSolveNextScreen::class.java)
 
         val docRef = db.collection("고등학생")
             .document(grade)
@@ -100,24 +98,35 @@ class ProblemSolveScreen :AppCompatActivity() {
                         tryNum = document.get("시도 횟수") as Long
                         answerNum = document.get("정답수") as Long
 
-                        if (answerRateInDocument <= answerRate) {
+                        if(problem != "없음" && problem == document.id){
                             st = document.get("경로").toString()
                             problemInfo.text = questionYear
 
-                            intent.putExtra("정답률", answerRateInDocument)
-                            intent.putExtra("학년", grade)
-                            intent.putExtra("과목", subject)
-                            intent.putExtra("유저", user)
+                            sendintent = Intent(this, ProblemSolveNextScreen::class.java)
+                            sendintent.putExtra("정답률", answerRateInDocument)
+                            sendintent.putExtra("학년", grade)
+                            sendintent.putExtra("과목", subject)
 
-                            println(answer)
+                            find = true
+                            break
+                        }
+
+                        if (answerRateInDocument <= answerRate && problem == "없음") {
+                            st = document.get("경로").toString()
+                            problemInfo.text = questionYear
+
+                            sendintent = Intent(this, ProblemSolveNextScreen::class.java)
+                            sendintent.putExtra("정답률", answerRateInDocument)
+                            sendintent.putExtra("학년", grade)
+                            sendintent.putExtra("과목", subject)
 
                             find = true
                             break
                         }
                     }
 
-                    answerRate += 5
                     println(answerRate)
+                    answerRate += 5
                 }
 
                 val storage: FirebaseStorage = FirebaseStorage.getInstance()
@@ -145,7 +154,7 @@ class ProblemSolveScreen :AppCompatActivity() {
                                     .setPositiveButton(
                                         "확인",
                                         DialogInterface.OnClickListener { dialog, which ->
-                                            startActivity(Intent(this, ProblemSolveNextScreen::class.java))
+                                            startActivity(sendintent)
                                         })
                             }
                             else {
@@ -153,7 +162,7 @@ class ProblemSolveScreen :AppCompatActivity() {
                                     .setPositiveButton(
                                         "확인",
                                         DialogInterface.OnClickListener { dialog, which ->
-                                            startActivity(Intent(this, ProblemSolveNextScreen::class.java))
+                                            startActivity(sendintent)
                                         })
                             }
 
@@ -191,9 +200,5 @@ class ProblemSolveScreen :AppCompatActivity() {
 
     fun home(v : View){
         startActivity(Intent(this, BasicScreen::class.java))
-    }
-
-    fun toProblemSolveNext(v : View){
-        startActivity(intent)
     }
 }
