@@ -49,6 +49,7 @@ class RetryProblemSelectScreen : AppCompatActivity() {
                 setintent.putExtra("과목", subject)
                 setintent.putExtra("문제 정보", problem)
                 setintent.putExtra("풀어본 문제",true)
+                setintent.putExtra("이전 화면", "다시 풀기")
             }
     }
 

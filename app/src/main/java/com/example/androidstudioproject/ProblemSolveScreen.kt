@@ -102,10 +102,9 @@ class ProblemSolveScreen :AppCompatActivity() {
                             st = document.get("경로").toString()
                             problemInfo.text = questionYear
 
-                            sendintent = Intent(this, ProblemSolveNextScreen::class.java)
-                            sendintent.putExtra("정답률", answerRateInDocument)
-                            sendintent.putExtra("학년", grade)
-                            sendintent.putExtra("과목", subject)
+                            if(intent.getStringExtra("이전 화면") == "다시 풀기")
+                                sendintent = Intent(this, RetryProblemScreen::class.java)
+
 
                             find = true
                             break
