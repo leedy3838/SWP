@@ -43,7 +43,7 @@ class ProblemSolveScreen :AppCompatActivity() {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 //텍스트 입력 중
-                val message = textInputEditText.getText().toString();
+                val message = textInputEditText.getText().toString()
                 btn_answerSubmit.isEnabled = !message.isEmpty()  // 정답 입력 칸에 숫자가 생기면 버튼 활성화
             }
         })
@@ -75,11 +75,14 @@ class ProblemSolveScreen :AppCompatActivity() {
         val db = FirebaseFirestore.getInstance()
         var st = ""
 
+        var docName = ""
+
+
         var answer : Long = 0    // 정답 번호를 받아오기 전 초기화
         var questionYear : String
-        var tryNum : Long
+        var tryNum : Long = 0
         var answerRateInDocument : Long
-        var answerNum : Long
+        var answerNum : Long = 0
 
         val docRef = db.collection("고등학생")
             .document(grade)
@@ -97,6 +100,7 @@ class ProblemSolveScreen :AppCompatActivity() {
                         questionYear = document.get("출제 년도").toString()
                         tryNum = document.get("시도 횟수") as Long
                         answerNum = document.get("정답수") as Long
+                        docName = document.id
 
                         if(problem == document.id){
                             st = document.get("경로").toString()
@@ -151,21 +155,20 @@ class ProblemSolveScreen :AppCompatActivity() {
                             val builder = AlertDialog.Builder(this)
 
                             if (answer == input1) {
-
+                                docRef.document(docName).update("시도 횟수", ++tryNum)  // 정답일 때 시도횟수 1 증가
+                                docRef.document(docName).update("정답수", ++answerNum)  // 정답일 때 정답수 1 증가
                                 builder.setMessage("정답입니다!")
+                                    .setCancelable(false)    // 뒤로가기 불가
                                     .setPositiveButton(
                                         "확인",
-                                        DialogInterface.OnClickListener { dialog, which ->
-                                            startActivity(sendintent)
-                                        })
+                                        DialogInterface.OnClickListener { dialog, which -> startActivity(sendintent) })
                             }
                             else {
-                                builder.setMessage("오답입니다.")
+                                docRef.document(docName).update("시도 횟수", ++tryNum)  // 오답일 때 시도횟수 1 증가
+                                builder.setMessage("오답입니다. 다시 시도해 보세요.")
                                     .setPositiveButton(
                                         "확인",
-                                        DialogInterface.OnClickListener { dialog, which ->
-                                            startActivity(sendintent)
-                                        })
+                                        DialogInterface.OnClickListener { dialog, which -> })
                             }
 
                             val alertDialog = builder.create()
