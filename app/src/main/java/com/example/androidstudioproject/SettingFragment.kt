@@ -13,11 +13,6 @@ class SettingFragment : PreferenceFragmentCompat() {
     lateinit var prefs : SharedPreferences
     private var mPref: SharedPreferences? = null
 
-
-
-
-
-
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.settings_preference, rootKey)
         mPref = PreferenceManager.getDefaultSharedPreferences(context)
@@ -33,9 +28,8 @@ class SettingFragment : PreferenceFragmentCompat() {
         gradePre?.setSummary(mPref?.getString("grade","난이도를 선택해주세요"))
         timePre?.setSummary(mPref?.getInt("hour",0).toString()+"시간  "+mPref?.getInt("minute",0).toString()+"분")
 
-
-
     }
+
 
     private val mPrefChangeListener =
         SharedPreferences.OnSharedPreferenceChangeListener { mPref, key ->
@@ -55,7 +49,8 @@ class SettingFragment : PreferenceFragmentCompat() {
                 }
             } else if (key.equals("hour")||key.equals("minute")) {
                 mPref.edit().run {
-                    preference?.setSummary(
+                    val timePre : Preference? = findPreference("timeSettingPref")
+                    timePre?.setSummary(
                         mPref.getInt("hour", 0).toString() + "시간  " + mPref.getInt("minute", 0)
                             .toString() + "분")
                     apply()
