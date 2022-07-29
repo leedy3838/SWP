@@ -17,7 +17,7 @@ class WrongProblemScreen : AppCompatActivity() {
 
         val db = FirebaseFirestore.getInstance()
 
-        val user = "LDY"
+        val user = intent.getStringExtra("user").toString()
 
         val docRef = db.collection("틀린 문제")
             .document(user)
@@ -51,6 +51,7 @@ class WrongProblemScreen : AppCompatActivity() {
                     override fun onClick(v: View, position: Int, DataList: List<Data>) {
                         val intent = Intent(v.context, WrongProblemNextScreen::class.java)
 
+                        intent.putExtra("user", user)
                         intent.putExtra("학년", DataList[position].grade)
                         intent.putExtra("과목", DataList[position].subject)
                         intent.putExtra("문제 정보", DataList[position].info)

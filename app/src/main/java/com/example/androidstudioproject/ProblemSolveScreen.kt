@@ -72,8 +72,6 @@ class ProblemSolveScreen :AppCompatActivity() {
         val subject = intent.getStringExtra("과목").toString()
         val problem = intent.getStringExtra("문제 정보").toString()
         var answerRate : Long = intent.getLongExtra("정답률", 100)
-        //시간 추가 여부 확인
-        val solved = intent.getBooleanExtra("풀어본 문제", false)
 
         val db = FirebaseFirestore.getInstance()
         var st = ""
@@ -105,6 +103,7 @@ class ProblemSolveScreen :AppCompatActivity() {
                         answerNum = document.get("정답수") as Long
                         docName = document.id
 
+                        //basicScreen 이외에서 넘어온 경우
                         if(problem == document.id){
                             st = document.get("경로").toString()
                             problemInfo.text = questionYear
@@ -120,6 +119,7 @@ class ProblemSolveScreen :AppCompatActivity() {
                             break
                         }
 
+                        //basicScreen에서 넘어온 경우
                         if (answerRate >= answerRateInDocument && answerRate <= answerRateInDocument+5 && problem == "없음") {
                             st = document.get("경로").toString()
                             problemInfo.text = questionYear
@@ -162,12 +162,17 @@ class ProblemSolveScreen :AppCompatActivity() {
                             val builder = AlertDialog.Builder(this)
 
                             if (answer == input1) {
-                                docRef.document(docName).update("시도 횟수", ++tryNum)  // 정답일 때 시도횟수 1 증가
-                                docRef.document(docName).update("정답수", ++answerNum)  // 정답일 때 정답수 1 증가
+                                if(problem == "없음") {
+                                    docRef.document(docName)
+                                        .update("시도 횟수", ++tryNum)  // 정답일 때 시도횟수 1 증가
+                                    docRef.document(docName)
+                                        .update("정답수", ++answerNum)  // 정답일 때 정답수 1 증가
 
-                                answerRateUpdate = ((answerNum.toDouble() / tryNum.toDouble()) * 100.0).roundToLong()  // 정답률 저장 변수
-                                docRef.document(docName).update("정답률", answerRateUpdate)
-                                println(answerRateUpdate)
+                                    answerRateUpdate =
+                                        ((answerNum.toDouble() / tryNum.toDouble()) * 100.0).roundToLong()  // 정답률 저장 변수
+                                    docRef.document(docName).update("정답률", answerRateUpdate)
+                                    println(answerRateUpdate)
+                                }
 
                                 builder.setMessage("정답입니다!")
                                     .setCancelable(false)    // 뒤로가기 불가
@@ -176,10 +181,14 @@ class ProblemSolveScreen :AppCompatActivity() {
                                         DialogInterface.OnClickListener { dialog, which -> startActivity(sendintent) })
                             }
                             else {
-                                docRef.document(docName).update("시도 횟수", ++tryNum)  // 오답일 때 시도횟수 1 증가
+                                if(problem == "없음") {
+                                    docRef.document(docName)
+                                        .update("시도 횟수", ++tryNum)  // 오답일 때 시도횟수 1 증가
 
-                                answerRateUpdate = ((answerNum.toDouble() / tryNum.toDouble()) * 100.0).roundToLong()  // 정답률 저장 변수
-                                docRef.document(docName).update("정답률", answerRateUpdate)
+                                    answerRateUpdate =
+                                        ((answerNum.toDouble() / tryNum.toDouble()) * 100.0).roundToLong()  // 정답률 저장 변수
+                                    docRef.document(docName).update("정답률", answerRateUpdate)
+                                }
 
                                 builder.setMessage("오답입니다. 다시 시도해 보세요.")
                                     .setPositiveButton(
@@ -200,7 +209,6 @@ class ProblemSolveScreen :AppCompatActivity() {
                     window?.setGravity(Gravity.CENTER)
                     alertDialog.show()
                 }
-
             }
     }
         override fun onBackPressed() {

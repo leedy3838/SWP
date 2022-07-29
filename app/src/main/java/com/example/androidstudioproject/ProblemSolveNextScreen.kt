@@ -25,10 +25,10 @@ class ProblemSolveNextScreen : AppCompatActivity() {
 
         sendintent = Intent(this, ProblemSolveScreen::class.java)
 
+        sendintent.putExtra("user", user)
         sendintent.putExtra("정답률", answerRate)
         sendintent.putExtra("학년", grade)
         sendintent.putExtra("과목", subject)
-        sendintent.putExtra("풀어본 문제",false)
         sendintent.putExtra("문제 정보", "없음")
     }
 
