@@ -47,6 +47,7 @@ class RetryProblemSelectScreen : AppCompatActivity() {
 
                 setintent = Intent(this, ProblemSolveScreen::class.java)
 
+                setintent.putExtra("user", user)
                 setintent.putExtra("학년", grade)
                 setintent.putExtra("과목", subject)
                 setintent.putExtra("문제 정보", problem)

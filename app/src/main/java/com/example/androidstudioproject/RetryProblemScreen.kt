@@ -58,6 +58,8 @@ class RetryProblemScreen : AppCompatActivity() {
                         intent.putExtra("학년", DataList[position].grade)
                         intent.putExtra("과목", DataList[position].subject)
 
+                        println(user)
+
                         startActivity(intent)
                     }
                 })

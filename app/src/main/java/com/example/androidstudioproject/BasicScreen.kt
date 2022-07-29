@@ -26,7 +26,7 @@ class BasicScreen : AppCompatActivity() {
     var grade = "1학년"
     var subject ="국어"
     var difficulty = ""
-    var answerRate = 100
+    var answerRate = 100L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

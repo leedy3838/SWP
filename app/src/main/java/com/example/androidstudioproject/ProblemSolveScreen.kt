@@ -115,6 +115,8 @@ class ProblemSolveScreen :AppCompatActivity() {
                             if(intent.getStringExtra("이전 화면") == "오늘 푼 문제")
                                 sendintent = Intent(this, TodaySolveScreen::class.java)
 
+                            sendintent.putExtra("user", user)
+
                             find = true
                             break
                         }
@@ -125,11 +127,11 @@ class ProblemSolveScreen :AppCompatActivity() {
                             problemInfo.text = questionYear
 
                             sendintent = Intent(this, ProblemSolveNextScreen::class.java)
-                            sendintent.putExtra("user", user)
                             sendintent.putExtra("정답률", answerRateInDocument)
                             sendintent.putExtra("학년", grade)
                             sendintent.putExtra("과목", subject)
                             sendintent.putExtra("문제 정보", document.id)
+                            sendintent.putExtra("user", user)
 
                             println(answerRate)
                             println(answerRateInDocument)
@@ -179,7 +181,8 @@ class ProblemSolveScreen :AppCompatActivity() {
                                     .setCancelable(false)    // 뒤로가기 불가
                                     .setPositiveButton(
                                         "확인",
-                                        DialogInterface.OnClickListener { dialog, which -> startActivity(sendintent) })
+                                        DialogInterface.OnClickListener { dialog, which ->
+                                            startActivity(sendintent) })
                             }
                             else {
                                 if(problem == "없음") {
