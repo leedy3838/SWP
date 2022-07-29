@@ -2,6 +2,12 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <EditTextPreference
+        app:key="userName"
+        app:title="닉네임 설정"
+        app:useSimpleSummaryProvider="true"
+        />
+
     <Preference
         app:key="passwordInitialization"
         app:title ="비밀번호 분실 시 초기화"

@@ -2,12 +2,7 @@ package com.example.androidstudioproject
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.clearFragmentResult
-import androidx.preference.ListPreference
-import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
+import androidx.preference.*
 
 
 class SettingFragment : PreferenceFragmentCompat() {
@@ -31,6 +26,7 @@ class SettingFragment : PreferenceFragmentCompat() {
         gradePre?.setSummary(mPref?.getString("userGradeSetting","학년을 선택해주세요"))
         timePre?.setSummary(mPref?.getInt("hour",0).toString()+"시간  "+mPref?.getInt("minute",0).toString()+"분")
         subjectPre?.setSummary(mPref?.getString("subject","과목을 선택해주세요"))
+        checked()
     }
 
 
@@ -58,6 +54,7 @@ class SettingFragment : PreferenceFragmentCompat() {
                 }
             }
             else if (key.equals("userGradeSetting")) {
+                checked()
                 mPref.edit().run {
                     preference?.setSummary(mPref.getString(key, ""))
                     apply()
@@ -73,4 +70,16 @@ class SettingFragment : PreferenceFragmentCompat() {
 
             }
         }
+    private fun checked(){
+        val detailSubjectPre : Preference? = findPreference("detailSubject")
+        val grade = mPref?.getString("userGradeSetting","")
+        val subject = mPref?.getString("subject","")
+        if(grade.equals("")||subject.equals("")){
+            detailSubjectPre?.setEnabled(false)
+        }else{
+            detailSubjectPre?.setEnabled(true)
+            val listPreference : ListPreference?= findPreference("detailSubject")
+            //if(grade.equals("3학년"))
+        }
+    }
 }
