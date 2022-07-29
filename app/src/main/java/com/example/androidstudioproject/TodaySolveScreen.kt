@@ -38,7 +38,8 @@ class TodaySolveScreen : AppCompatActivity() {
                             document.id,
                             document.get("문제 정보").toString(),
                             document.get("학년").toString(),
-                            document.get("과목").toString()
+                            document.get("과목").toString(),
+                            document.get("세부과목").toString()
                         )
                     )
                 }
