@@ -55,15 +55,21 @@ class ProblemSolveNextScreen : AppCompatActivity() {
         val problem = intent.getStringExtra("문제 정보").toString()
         val grade = intent.getStringExtra("학년").toString()
         val subject = intent.getStringExtra("과목").toString()
+        val detailSubject = intent.getStringExtra("세부과목").toString()
 
-        val name = grade+" "+subject+" "+problem
+        val name : String
+        if(detailSubject == "없음")
+            name = grade+" "+subject+" "+problem
+        else
+            name = grade+" "+subject+" "+detailSubject+" "+problem
 
         val retryRef = db.collection("다시 풀기").document(user).collection(user)
 
         val data = hashMapOf(
             "학년" to grade,
             "과목" to subject,
-            "문제 정보" to problem
+            "문제 정보" to problem,
+            "세부과목" to detailSubject
         )
         retryRef.document(name).set(data)
     }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -20,15 +21,26 @@ class TodaySolvedNextScreen :AppCompatActivity() {
 
         val user = intent.getStringExtra("user").toString()
         val grade = intent.getStringExtra("학년").toString()
+        val detailSubject = intent.getStringExtra("세부과목").toString()
         val subject = intent.getStringExtra("과목").toString()
         val problem = intent.getStringExtra("문제 정보").toString()
 
         val db = FirebaseFirestore.getInstance()
 
-        val docRef = db.collection("고등학생")
-            .document(grade)
-            .collection(subject)
-            .document(problem)
+        val docRef : DocumentReference
+
+        if(detailSubject == "없음")
+            docRef = db.collection("고등학생")
+                .document(grade)
+                .collection(subject)
+                .document(problem)
+        else
+            docRef = db.collection("고등학생")
+                .document(grade)
+                .collection(subject)
+                .document(detailSubject)
+                .collection(detailSubject)
+                .document(problem)
 
         docRef
             .get()
@@ -49,6 +61,7 @@ class TodaySolvedNextScreen :AppCompatActivity() {
                 setintent.putExtra("user", user)
                 setintent.putExtra("학년", grade)
                 setintent.putExtra("과목", subject)
+                setintent.putExtra("세부과목",detailSubject)
                 setintent.putExtra("문제 정보", problem)
                 setintent.putExtra("이전 화면", "오늘 푼 문제")
            }
@@ -75,6 +88,7 @@ class TodaySolvedNextScreen :AppCompatActivity() {
         val name = intent.getStringExtra("이름").toString()
         val user = intent.getStringExtra("user").toString()
         val problem = intent.getStringExtra("문제 정보").toString()
+        val detailSubject = intent.getStringExtra("세부과목").toString()
         val grade = intent.getStringExtra("학년").toString()
         val subject = intent.getStringExtra("과목").toString()
 
@@ -83,7 +97,8 @@ class TodaySolvedNextScreen :AppCompatActivity() {
         val data = hashMapOf(
             "학년" to grade,
             "과목" to subject,
-            "문제 정보" to problem
+            "문제 정보" to problem,
+            "세부과목" to detailSubject
         )
         retryRef.document(name).set(data)
     }

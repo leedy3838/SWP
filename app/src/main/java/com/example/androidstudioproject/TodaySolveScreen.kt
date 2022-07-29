@@ -59,6 +59,7 @@ class TodaySolveScreen : AppCompatActivity() {
                         intent.putExtra("학년", DataList[position].grade)
                         intent.putExtra("과목", DataList[position].subject)
                         intent.putExtra("문제 정보", DataList[position].info)
+                        intent.putExtra("세부과목", DataList[position].detailSubject)
 
                         startActivity(intent)
                     }
