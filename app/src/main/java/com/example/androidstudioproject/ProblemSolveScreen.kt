@@ -74,8 +74,6 @@ class ProblemSolveScreen :AppCompatActivity() {
         val subject = intent.getStringExtra("과목").toString()
         val problem = intent.getStringExtra("문제 정보").toString()
         var answerRate : Long = intent.getLongExtra("정답률", 100)
-        //시간 추가 여부 확인
-        val solved = intent.getBooleanExtra("풀어본 문제", false)
 
         val selectSubject = intent.getStringExtra("세부과목").toString()
 
@@ -117,6 +115,7 @@ class ProblemSolveScreen :AppCompatActivity() {
                         answerNum = document.get("정답수") as Long
                         docName = document.id
 
+                        //basicScreen 이외에서 넘어온 경우
                         if(problem == document.id){
                             st = document.get("경로").toString()
                             problemInfo.text = questionYear
@@ -128,20 +127,25 @@ class ProblemSolveScreen :AppCompatActivity() {
                             if(intent.getStringExtra("이전 화면") == "오늘 푼 문제")
                                 sendintent = Intent(this, TodaySolveScreen::class.java)
 
+                            sendintent.putExtra("user", user)
+
                             find = true
                             break
                         }
 
+                        //basicScreen에서 넘어온 경우
                         if (answerRate >= answerRateInDocument && answerRate <= answerRateInDocument+5 && problem == "없음") {
                             st = document.get("경로").toString()
                             problemInfo.text = questionYear
 
                             sendintent = Intent(this, ProblemSolveNextScreen::class.java)
-                            sendintent.putExtra("user", user)
                             sendintent.putExtra("정답률", answerRateInDocument)
                             sendintent.putExtra("학년", grade)
                             sendintent.putExtra("과목", subject)
                             sendintent.putExtra("세부과목", selectSubject)
+                            sendintent.putExtra("문제 정보", document.id)
+                            sendintent.putExtra("user", user)
+
 
                             println(answerRate)
                             println(answerRateInDocument)
@@ -175,7 +179,7 @@ class ProblemSolveScreen :AppCompatActivity() {
                             val builder = AlertDialog.Builder(this)
 
                             if (answer == input1) {
-                                if (problem == "없음") {
+                                if(problem == "없음") {
                                     docRef.document(docName)
                                         .update("시도 횟수", ++tryNum)  // 정답일 때 시도횟수 1 증가
                                     docRef.document(docName)
@@ -191,10 +195,12 @@ class ProblemSolveScreen :AppCompatActivity() {
                                     .setCancelable(false)    // 뒤로가기 불가
                                     .setPositiveButton(
                                         "확인",
-                                        DialogInterface.OnClickListener { dialog, which -> startActivity(sendintent) })
+                                        DialogInterface.OnClickListener { dialog, which ->
+                                            startActivity(sendintent) })
                             }
                             else {
-                                if (problem == "없음") {
+
+                                if(problem == "없음") {
                                     docRef.document(docName)
                                         .update("시도 횟수", ++tryNum)  // 오답일 때 시도횟수 1 증가
 
@@ -222,7 +228,6 @@ class ProblemSolveScreen :AppCompatActivity() {
                     window?.setGravity(Gravity.CENTER)
                     alertDialog.show()
                 }
-
             }
     }
         override fun onBackPressed() {

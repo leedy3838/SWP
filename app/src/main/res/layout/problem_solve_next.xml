@@ -83,6 +83,7 @@
             android:layout_height="57dp"
             android:layout_marginStart="30dp"
             android:text="방금 푼 문제 다시 풀어보기에 등록"
+            android:onClick="addToRetry"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -8,9 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.listlayout.view.*
 
 //여기에 데이터 더 많이 넣고 싶으면 수정하면 됩니다.
-class Data(val name:String, val info:String, val grade:String, val subject:String)
-
-
+class Data(val name:String, val info:String, val grade:String, val subject:String, val detailSubject:String)
 
 class CustomAdapter(val DataList:List<Data>) : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {

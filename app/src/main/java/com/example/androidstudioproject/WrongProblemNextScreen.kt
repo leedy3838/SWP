@@ -12,12 +12,13 @@ import kotlinx.android.synthetic.main.wrong_problem_next.*
 
 class WrongProblemNextScreen:AppCompatActivity() {
     lateinit var setintent : Intent
+    lateinit var backintent :Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.wrong_problem_next)
 
-        val name = intent.getStringExtra("이름").toString()
+        val user = intent.getStringExtra("user").toString()
         val grade = intent.getStringExtra("학년").toString()
         val subject = intent.getStringExtra("과목").toString()
         val problem = intent.getStringExtra("문제 정보").toString()
@@ -45,28 +46,45 @@ class WrongProblemNextScreen:AppCompatActivity() {
 
                 setintent = Intent(this, ProblemSolveScreen::class.java)
 
-                setintent.putExtra("정답률", document.get("정답률") as Long)
+                setintent.putExtra("user", user)
                 setintent.putExtra("학년", grade)
                 setintent.putExtra("과목", subject)
                 setintent.putExtra("문제 정보", problem)
-                setintent.putExtra("풀어본 문제",true)
                 setintent.putExtra("이전 화면", "틀린 문제")
             }
+
+        backintent = Intent(this, WrongProblemScreen::class.java)
+        backintent.putExtra("user", user)
     }
 
     override fun onBackPressed() {
-        startActivity(Intent(this, WrongProblemScreen::class.java))
-    }
-
-    fun home(v : View){
-        startActivity(Intent(this, BasicScreen::class.java))
+        startActivity(backintent)
     }
 
     fun back(v : View){
-        startActivity(Intent(this, WrongProblemScreen::class.java))
+        startActivity(backintent)
     }
 
     fun toProblemSolve(v : View){
         startActivity(setintent)
+    }
+
+    fun addToRetry(v : View){
+        val db = FirebaseFirestore.getInstance()
+
+        val name = intent.getStringExtra("이름").toString()
+        val user = intent.getStringExtra("user").toString()
+        val problem = intent.getStringExtra("문제 정보").toString()
+        val grade = intent.getStringExtra("학년").toString()
+        val subject = intent.getStringExtra("과목").toString()
+
+        val retryRef = db.collection("다시 풀기").document(user).collection(user)
+
+        val data = hashMapOf(
+            "학년" to grade,
+            "과목" to subject,
+            "문제 정보" to problem
+        )
+        retryRef.document(name).set(data)
     }
 }

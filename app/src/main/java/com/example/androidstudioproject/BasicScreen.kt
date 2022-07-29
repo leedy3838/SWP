@@ -22,7 +22,11 @@ import java.lang.System.exit
 
 
 class BasicScreen : AppCompatActivity() {
-    var user = "IJC"
+    var user = "LDY"
+    var grade = "1학년"
+    var subject ="국어"
+    var difficulty = ""
+    var answerRate = 100L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +34,7 @@ class BasicScreen : AppCompatActivity() {
 
         val db = FirebaseFirestore.getInstance()
         var st = ""
+
         val docRef = db.collection("user")
         var exist = false
 
@@ -67,7 +72,7 @@ class BasicScreen : AppCompatActivity() {
                     db.collection("틀린 문제")
                         .document(user)
                         .set(data)
-                    db.collection("다시 풀기")
+                    db.collection("틀린 문제")
                         .document(user)
                         .collection(user)
                         .document("기본 문서")
@@ -95,7 +100,10 @@ class BasicScreen : AppCompatActivity() {
 
 
     fun retryProblemClicked(v : View){
-        startActivity(Intent(this, RetryProblemScreen::class.java))
+        val intent = Intent(this, RetryProblemScreen::class.java)
+        intent.putExtra("user", user)
+
+        startActivity(intent)
     }
 
     fun settingClicked(v : View){
@@ -115,10 +123,11 @@ class BasicScreen : AppCompatActivity() {
         val selectSubject : String = "공통"
 
         intent.putExtra("user", user)
-        intent.putExtra("정답률", 99)
+
+        intent.putExtra("정답률", answerRate)
         intent.putExtra("학년", grade)
         intent.putExtra("과목", subject)
-        intent.putExtra("풀어본 문제", false)
+        //문제 정보가 없음이면 basicScreen에서 문제 풀기를 실행한 것이므로 시간 추가
         intent.putExtra("문제 정보", "없음")
 
         if (grade == "2학년") {
@@ -141,10 +150,16 @@ class BasicScreen : AppCompatActivity() {
     }
 
     fun todaySolveClicked(v : View){
-        startActivity(Intent(this, TodaySolveScreen::class.java))
+        val intent = Intent(this, TodaySolveScreen::class.java)
+        intent.putExtra("user", user)
+
+        startActivity(Intent(intent))
     }
 
     fun wrongProblemClicked(v : View){
-        startActivity(Intent(this, WrongProblemScreen::class.java))
+        val intent = Intent(this, WrongProblemScreen::class.java)
+        intent.putExtra("user", user)
+
+        startActivity(intent)
     }
 }

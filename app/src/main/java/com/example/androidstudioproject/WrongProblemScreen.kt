@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.wrong_problem.*
+import java.util.*
+import kotlin.Comparator
 
 class WrongProblemScreen : AppCompatActivity() {
     private val DataList = mutableListOf<Data>()
@@ -17,7 +19,7 @@ class WrongProblemScreen : AppCompatActivity() {
 
         val db = FirebaseFirestore.getInstance()
 
-        val user = "LDY"
+        val user = intent.getStringExtra("user").toString()
 
         val docRef = db.collection("틀린 문제")
             .document(user)
@@ -36,7 +38,8 @@ class WrongProblemScreen : AppCompatActivity() {
                             document.id,
                             document.get("문제 정보").toString(),
                             document.get("학년").toString(),
-                            document.get("과목").toString()
+                            document.get("과목").toString(),
+                            document.get("세부과목").toString()
                         )
                     )
                 }
@@ -51,12 +54,28 @@ class WrongProblemScreen : AppCompatActivity() {
                     override fun onClick(v: View, position: Int, DataList: List<Data>) {
                         val intent = Intent(v.context, WrongProblemNextScreen::class.java)
 
+                        intent.putExtra("user", user)
+                        intent.putExtra("이름", DataList[position].name)
                         intent.putExtra("학년", DataList[position].grade)
                         intent.putExtra("과목", DataList[position].subject)
                         intent.putExtra("문제 정보", DataList[position].info)
 
                         startActivity(intent)
                     }
+                })
+
+                Collections.sort(DataList, Comparator() { data1: Data, data2: Data ->
+                    val answer1 =
+                        data1.info.substring(data1.info.length - 3, data1.info.length - 1)
+                            .trim().toInt()
+                    val answer2 =
+                        data2.info.substring(data2.info.length - 3, data2.info.length - 1)
+                            .trim().toInt()
+
+                    if(data1.subject == data2.subject)
+                        answer1 - answer2
+                    else
+                        data1.subject.compareTo(data2.subject)
                 })
             }
     }

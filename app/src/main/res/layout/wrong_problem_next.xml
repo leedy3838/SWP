@@ -54,6 +54,7 @@
             android:layout_width="368dp"
             android:layout_height="70dp"
             android:text="다시 풀어볼 문제에 추가"
+            android:onClick="addToRetry"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

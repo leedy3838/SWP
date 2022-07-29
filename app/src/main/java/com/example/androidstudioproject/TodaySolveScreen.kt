@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.today_solve.*
+import java.util.*
+import kotlin.Comparator
 
 class TodaySolveScreen : AppCompatActivity() {
     private val DataList = mutableListOf<Data>()
@@ -17,7 +19,7 @@ class TodaySolveScreen : AppCompatActivity() {
 
         val db = FirebaseFirestore.getInstance()
 
-        val user = "LDY"
+        val user = intent.getStringExtra("user").toString()
 
         val docRef = db.collection("오늘 푼 문제")
             .document(user)
@@ -36,7 +38,8 @@ class TodaySolveScreen : AppCompatActivity() {
                             document.id,
                             document.get("문제 정보").toString(),
                             document.get("학년").toString(),
-                            document.get("과목").toString()
+                            document.get("과목").toString(),
+                            document.get("세부과목").toString()
                         )
                     )
                 }
@@ -59,6 +62,20 @@ class TodaySolveScreen : AppCompatActivity() {
 
                         startActivity(intent)
                     }
+                })
+
+                Collections.sort(DataList, Comparator() { data1: Data, data2: Data ->
+                    val answer1 =
+                        data1.info.substring(data1.info.length - 3, data1.info.length - 1)
+                            .trim().toInt()
+                    val answer2 =
+                        data2.info.substring(data2.info.length - 3, data2.info.length - 1)
+                            .trim().toInt()
+
+                    if(data1.subject == data2.subject)
+                        answer1 - answer2
+                    else
+                        data1.subject.compareTo(data2.subject)
                 })
             }
     }
