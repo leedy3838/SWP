@@ -33,6 +33,7 @@ class BasicScreen : AppCompatActivity() {
         setContentView(R.layout.basic_screen)
 
         val db = FirebaseFirestore.getInstance()
+        var st = ""
 
         val docRef = db.collection("user")
         var exist = false
@@ -115,14 +116,35 @@ class BasicScreen : AppCompatActivity() {
 
     fun problemSolveClicked(v : View){
         val intent = Intent(this, ProblemSolveScreen::class.java)
-
+        val db = FirebaseFirestore.getInstance()
         // 설정에 따라서 나중에 값을 받아주면 됨
+        val grade : String = "3학년"
+        val subject : String = "국어"
+        val selectSubject : String = "공통"
+
         intent.putExtra("user", user)
+
         intent.putExtra("정답률", answerRate)
         intent.putExtra("학년", grade)
         intent.putExtra("과목", subject)
         //문제 정보가 없음이면 basicScreen에서 문제 풀기를 실행한 것이므로 시간 추가
         intent.putExtra("문제 정보", "없음")
+
+        if (grade == "2학년") {
+               if (subject == "과학탐구" || subject == "사회탐구") {
+                    intent.putExtra("세부과목", selectSubject)
+                }
+        }
+
+        else if (grade == "3학년") {
+            if (subject == "국어" || subject == "수학" ||
+                subject == "과학탐구" || subject == "사회탐구") {
+                intent.putExtra("세부과목", selectSubject)
+            }
+        }
+
+        else intent.putExtra("세부과목", "없음")
+
 
         startActivity(intent)
     }

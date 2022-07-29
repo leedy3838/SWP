@@ -13,10 +13,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.NonCancellable.cancel
 import com.bumptech.glide.Glide
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.problem_solve.*
+import kotlinx.coroutines.selects.select
 import kotlin.math.round
 import kotlin.math.roundToLong
 
@@ -73,6 +75,8 @@ class ProblemSolveScreen :AppCompatActivity() {
         val problem = intent.getStringExtra("문제 정보").toString()
         var answerRate : Long = intent.getLongExtra("정답률", 100)
 
+        val selectSubject = intent.getStringExtra("세부과목").toString()
+
         val db = FirebaseFirestore.getInstance()
         var st = ""
 
@@ -85,10 +89,18 @@ class ProblemSolveScreen :AppCompatActivity() {
         var answerRateInDocument : Long
         var answerNum : Long = 0
 
-        val docRef = db.collection("고등학생")
+        var docRef = db.collection("고등학생")
             .document(grade)
             .collection(subject)
 
+
+        if (selectSubject != "없음") {
+            docRef = db.collection("고등학생")
+                .document(grade)
+                .collection(subject)
+                .document(selectSubject)
+                .collection(selectSubject)
+        }
         docRef
             .get()
             .addOnSuccessListener { result ->
@@ -130,8 +142,10 @@ class ProblemSolveScreen :AppCompatActivity() {
                             sendintent.putExtra("정답률", answerRateInDocument)
                             sendintent.putExtra("학년", grade)
                             sendintent.putExtra("과목", subject)
+                            sendintent.putExtra("세부과목", selectSubject)
                             sendintent.putExtra("문제 정보", document.id)
                             sendintent.putExtra("user", user)
+
 
                             println(answerRate)
                             println(answerRateInDocument)
@@ -185,6 +199,7 @@ class ProblemSolveScreen :AppCompatActivity() {
                                             startActivity(sendintent) })
                             }
                             else {
+
                                 if(problem == "없음") {
                                     docRef.document(docName)
                                         .update("시도 횟수", ++tryNum)  // 오답일 때 시도횟수 1 증가
