@@ -52,6 +52,7 @@ class RetryProblemScreen : AppCompatActivity() {
                         val intent = Intent(v.context, RetryProblemSelectScreen::class.java)
 
                         intent.putExtra("user", user)
+                        intent.putExtra("이름", DataList[position].name)
                         intent.putExtra("문제 정보", DataList[position].info)
                         intent.putExtra("학년", DataList[position].grade)
                         intent.putExtra("과목", DataList[position].subject)

@@ -53,7 +53,7 @@
             android:layout_width="137dp"
             android:layout_height="62dp"
             android:layout_marginStart="136dp"
-            android:onClick="home"
+            android:onClick="removedClicked"
             android:text="다시 풀기에서 제거"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

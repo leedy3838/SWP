@@ -14,6 +14,7 @@ class RetryProblemSelectScreen : AppCompatActivity() {
     lateinit var setintent : Intent
     lateinit var backintent : Intent
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.retry_problem_select)
@@ -60,15 +61,24 @@ class RetryProblemSelectScreen : AppCompatActivity() {
         startActivity(backintent)
     }
 
-    fun home(v : View){
-        startActivity(Intent(this, BasicScreen::class.java))
-    }
-
     fun back(v : View){
         startActivity(backintent)
     }
 
     fun toProblemSolve(v : View){
         startActivity(setintent)
+    }
+
+    fun removedClicked(v : View){
+        val name = intent.getStringExtra("이름").toString()
+        val user = intent.getStringExtra("user").toString()
+
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("다시 풀기")
+            .document(user)
+            .collection(user)
+            .document(name)
+            .delete()
     }
 }

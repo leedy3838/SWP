@@ -52,16 +52,12 @@ class WrongProblemNextScreen:AppCompatActivity() {
                 setintent.putExtra("이전 화면", "틀린 문제")
             }
 
-        backintent = Intent(this, RetryProblemScreen::class.java)
+        backintent = Intent(this, WrongProblemScreen::class.java)
         backintent.putExtra("user", user)
     }
 
     override fun onBackPressed() {
         startActivity(backintent)
-    }
-
-    fun home(v : View){
-        startActivity(Intent(this, BasicScreen::class.java))
     }
 
     fun back(v : View){
