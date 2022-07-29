@@ -129,6 +129,7 @@ class ProblemSolveScreen :AppCompatActivity() {
                             sendintent.putExtra("정답률", answerRateInDocument)
                             sendintent.putExtra("학년", grade)
                             sendintent.putExtra("과목", subject)
+                            sendintent.putExtra("문제 정보", document.id)
 
                             println(answerRate)
                             println(answerRateInDocument)

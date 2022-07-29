@@ -24,7 +24,7 @@ import java.lang.System.exit
 class BasicScreen : AppCompatActivity() {
     var user = "LDY"
     var grade = "1학년"
-    var subject ="과학탐구"
+    var subject ="국어"
     var difficulty = ""
     var answerRate = 100
 

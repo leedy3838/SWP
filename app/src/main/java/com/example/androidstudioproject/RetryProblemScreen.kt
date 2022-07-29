@@ -7,6 +7,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.retry_problem.*
+import java.util.*
 
 class RetryProblemScreen : AppCompatActivity() {
     private val DataList = mutableListOf<Data>()
@@ -27,10 +28,10 @@ class RetryProblemScreen : AppCompatActivity() {
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    if(document.get("base").toString() == "yes")
+                    if (document.get("base").toString() == "yes")
                         continue
 
-                    //name grade subject path
+                    //name info grade subject
                     DataList.add(
                         Data(
                             document.id,
@@ -47,7 +48,7 @@ class RetryProblemScreen : AppCompatActivity() {
                 retryProblemList.adapter = customAdapter
 
                 //RecyclerView에 onClickListener 붙이기
-                customAdapter.setItemClickListener(object: CustomAdapter.OnItemClickListener{
+                customAdapter.setItemClickListener(object : CustomAdapter.OnItemClickListener {
                     override fun onClick(v: View, position: Int, DataList: List<Data>) {
                         val intent = Intent(v.context, RetryProblemSelectScreen::class.java)
 
@@ -59,6 +60,21 @@ class RetryProblemScreen : AppCompatActivity() {
 
                         startActivity(intent)
                     }
+                })
+
+
+                Collections.sort(DataList, Comparator() { data1: Data, data2: Data ->
+                    val answer1 =
+                        data1.info.substring(data1.info.length - 3, data1.info.length - 1)
+                            .trim().toInt()
+                    val answer2 =
+                        data2.info.substring(data2.info.length - 3, data2.info.length - 1)
+                            .trim().toInt()
+
+                    if(data1.subject == data2.subject)
+                        answer1 - answer2
+                    else
+                        data1.subject.compareTo(data2.subject)
                 })
             }
     }
