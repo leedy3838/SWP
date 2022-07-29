@@ -17,6 +17,7 @@ class ProblemSolveNextScreen : AppCompatActivity() {
         val user = intent.getStringExtra("user")
         val grade = intent.getStringExtra("학년").toString()
         val subject = intent.getStringExtra("과목").toString()
+        val selectSubject = intent.getStringExtra("세부과목").toString()
         val answerRate : Long = intent.getLongExtra("정답률", 100)
 
         println(grade)
@@ -28,6 +29,7 @@ class ProblemSolveNextScreen : AppCompatActivity() {
         sendintent.putExtra("정답률", answerRate)
         sendintent.putExtra("학년", grade)
         sendintent.putExtra("과목", subject)
+        sendintent.putExtra("세부과목", selectSubject)
         sendintent.putExtra("풀어본 문제",false)
         sendintent.putExtra("문제 정보", "없음")
     }
