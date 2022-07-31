@@ -12,20 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Button
-            android:id="@+id/backToBasic"
-            android:layout_width="50dp"
-            android:layout_height="58dp"
-            android:layout_marginStart="4dp"
-            android:onClick="home"
-            android:text="뒤로 가기"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0" />
+        app:layout_constraintTop_toBottomOf="@+id/problemSolveLayout3">
 
         <TextView
             android:id="@+id/problemInfo"
@@ -36,7 +25,6 @@
             android:gravity="center"
             android:text="문제 이름"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.704"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,29 +34,29 @@
         android:id="@+id/problemSolveLayout2"
         android:layout_width="match_parent"
         android:layout_height="450dp"
-        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ProblemSolveLayout1">
+        app:layout_constraintTop_toBottomOf="@+id/ProblemSolveLayout1">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0">
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/problemSolve"
+            <ImageView
+                android:id="@+id/imageViewProblemSolve"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/text_background"
-                android:gravity="center"
-                android:text="문제 풀이 화면\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-                />
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
         </ScrollView>
 
 
@@ -78,21 +66,9 @@
         android:id="@+id/problemSolveLayout3"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/problemSolveLayout2">
-
-        <Button
-            android:id="@+id/answer"
-            android:layout_width="215dp"
-            android:layout_height="61dp"
-            android:layout_marginStart="120dp"
-            android:text="문제 답 적는 칸"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.589" />
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/answerSubmit"
@@ -111,11 +87,32 @@
             android:layout_width="60dp"
             android:layout_height="58dp"
             android:layout_marginStart="16dp"
-            android:text="포기하기"
             android:onClick="toProblemSolveNext"
+            android:text="포기하기"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayOut"
+            android:layout_width="241dp"
+            android:layout_height="61dp"
+            android:hint="정답을 입력하세요"
+            app:counterEnabled="true"
+            app:counterMaxLength="4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/answerSubmit"
+            app:layout_constraintStart_toEndOf="@+id/giveUp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/textInputEditText"
+                android:layout_width="match_parent"
+                android:maxEms="5"
+                android:layout_height="wrap_content"
+                android:maxLength="5"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
