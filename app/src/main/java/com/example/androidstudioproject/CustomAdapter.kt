@@ -1,16 +1,16 @@
 package com.example.androidstudioproject
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.listlayout.view.*
 
-class Data(val profile:Int, val name:String)
+//여기에 데이터 더 많이 넣고 싶으면 수정하면 됩니다.
+class Data(val name:String, val info:String, val grade:String, val subject:String, val detailSubject:String)
 
-
-
-class CustomAdapter(val DataList:ArrayList<Data>) : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
+class CustomAdapter(val DataList:List<Data>) : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val cellForRow = LayoutInflater.from(parent.context).inflate(R.layout.listlayout, parent, false)
         return CustomViewHolder(cellForRow)
@@ -21,17 +21,16 @@ class CustomAdapter(val DataList:ArrayList<Data>) : RecyclerView.Adapter<CustomA
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.profile.setImageResource(DataList[position].profile)
         holder.name.text = DataList[position].name
 
         // (1) 리스트 내 항목 클릭 시 onClick() 호출
         holder.itemView.setOnClickListener {
-            itemClickListener.onClick(it, position)
+            itemClickListener.onClick(it, position, DataList)
         }
     }
     // (2) 리스너 인터페이스
     interface OnItemClickListener {
-        fun onClick(v: View, position: Int)
+        fun onClick(v: View, position: Int, DataList: List<Data>)
     }
     // (3) 외부에서 클릭 시 이벤트 설정
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {
@@ -42,7 +41,6 @@ class CustomAdapter(val DataList:ArrayList<Data>) : RecyclerView.Adapter<CustomA
 
 
     class CustomViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        var profile = v.imageView
         var name = v.exampletextView
     }
 }
