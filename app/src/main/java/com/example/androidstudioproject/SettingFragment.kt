@@ -2,8 +2,10 @@ package com.example.androidstudioproject
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.annotation.ArrayRes
-import androidx.core.content.edit
+import android.text.InputFilter
+import android.text.InputFilter.LengthFilter
+import android.text.InputType
+import android.widget.EditText
 import androidx.preference.*
 
 
@@ -23,12 +25,24 @@ class SettingFragment : PreferenceFragmentCompat() {
         val gradePre : Preference?= findPreference("userGradeSetting")
         val timePre : Preference? = findPreference("timeSettingPref")
         val subjectPre : Preference? = findPreference("subject")
+        val userNamePre : EditTextPreference? = findPreference("userName")
         
         difPre?.setSummary(mPref?.getString("difficulty","난이도를 선택해주세요"))
         gradePre?.setSummary(mPref?.getString("userGradeSetting","학년을 선택해주세요"))
         timePre?.setSummary(mPref?.getInt("hour",0).toString()+"시간  "+mPref?.getInt("minute",0).toString()+"분")
         subjectPre?.setSummary(mPref?.getString("subject","과목을 선택해주세요"))
+        userNamePre?.setSummary(mPref?.getString("userName","닉네임을 선택해주세요"))
         checked()
+
+        userNamePre?.setOnBindEditTextListener(object : EditTextPreference.OnBindEditTextListener {
+            override fun onBindEditText(editText: EditText) {
+                editText.inputType = InputType.TYPE_CLASS_TEXT
+                editText.selectAll() // select all text
+                val maxLength = 10
+                editText.filters =
+                    arrayOf<InputFilter>(LengthFilter(maxLength))
+            }
+        })
     }
 
 
@@ -69,8 +83,15 @@ class SettingFragment : PreferenceFragmentCompat() {
                     preference?.setSummary(mPref.getString(key, ""))
                     apply()
                 }
+            } else if(key.equals("userName")){
+                mPref.edit().run {
+                    preference?.setSummary(mPref.getString(key,""))
+                    apply()
+                }
             }
         }
+
+
 
 
     private fun checked(){

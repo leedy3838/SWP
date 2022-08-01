@@ -2,6 +2,12 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <EditTextPreference
+        app:key="userName"
+        app:title="닉네임 설정"
+        android:maxLength="10"
+        />
+
     <Preference
         app:key="userInfoSetting"
         app:title="사용자 정보"
