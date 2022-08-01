@@ -93,5 +93,7 @@ class RetryProblemSelectScreen : AppCompatActivity() {
             .collection(user)
             .document(name)
             .delete()
+
+        startActivity(backintent)
     }
 }

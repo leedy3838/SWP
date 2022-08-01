@@ -19,11 +19,13 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.problem_solve.*
 import kotlinx.coroutines.selects.select
+import java.sql.Timestamp
 import kotlin.math.round
 import kotlin.math.roundToLong
 
 class ProblemSolveScreen :AppCompatActivity() {
     lateinit var sendintent : Intent
+    lateinit var problemId :String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -146,6 +148,7 @@ class ProblemSolveScreen :AppCompatActivity() {
                             sendintent.putExtra("문제 정보", document.id)
                             sendintent.putExtra("user", user)
 
+                            problemId = document.id
 
                             println(answerRate)
                             println(answerRateInDocument)
@@ -179,6 +182,11 @@ class ProblemSolveScreen :AppCompatActivity() {
                             val builder = AlertDialog.Builder(this)
 
                             if (answer == input1) {
+                                //틀린 문제에 있는 문제를 맞추면 틀린 문제 리스트에서 제거
+                                if(intent.getStringExtra("이전 화면") == "틀린 문제") {
+                                    val name = intent.getStringExtra("이름").toString()
+                                    db.collection("틀린 문제").document(user).collection(user).document(name).delete()
+                                }
                                 if(problem == "없음") {
                                     docRef.document(docName)
                                         .update("시도 횟수", ++tryNum)  // 정답일 때 시도횟수 1 증가
@@ -189,6 +197,24 @@ class ProblemSolveScreen :AppCompatActivity() {
                                         ((answerNum.toDouble() / tryNum.toDouble()) * 100.0).roundToLong()  // 정답률 저장 변수
                                     docRef.document(docName).update("정답률", answerRateUpdate)
                                     println(answerRateUpdate)
+
+                                    //문제 풀기에서 맞았을 때 오늘 푼 문제에 추가
+                                    val name : String
+
+                                    if(selectSubject == "없음")
+                                        name = "$grade $subject $problemId"
+                                    else
+                                        name = "$grade $subject $selectSubject $problemId"
+
+                                    val retryRef = db.collection("오늘 푼 문제").document(user).collection(user)
+
+                                    val data = hashMapOf(
+                                        "학년" to grade,
+                                        "과목" to subject,
+                                        "문제 정보" to problemId,
+                                        "세부과목" to selectSubject
+                                    )
+                                    retryRef.document(name).set(data)
                                 }
 
                                 builder.setMessage("정답입니다!")
@@ -199,7 +225,7 @@ class ProblemSolveScreen :AppCompatActivity() {
                                             startActivity(sendintent) })
                             }
                             else {
-
+                                //기본 화면에서 문제 풀기로 바로 넘어왔을 때 (오답) 정답률 수정
                                 if(problem == "없음") {
                                     docRef.document(docName)
                                         .update("시도 횟수", ++tryNum)  // 오답일 때 시도횟수 1 증가
@@ -207,6 +233,24 @@ class ProblemSolveScreen :AppCompatActivity() {
                                     answerRateUpdate =
                                         ((answerNum.toDouble() / tryNum.toDouble()) * 100.0).roundToLong()  // 정답률 저장 변수
                                     docRef.document(docName).update("정답률", answerRateUpdate)
+
+                                    //문제 풀기에서 틀렸을 때 틀린 문제에 추가
+                                    val name : String
+
+                                    if(selectSubject == "없음")
+                                        name = "$grade $subject $problemId"
+                                    else
+                                        name = "$grade $subject $selectSubject $problemId"
+
+                                    val retryRef = db.collection("틀린 문제").document(user).collection(user)
+
+                                    val data = hashMapOf(
+                                        "학년" to grade,
+                                        "과목" to subject,
+                                        "문제 정보" to problemId,
+                                        "세부과목" to selectSubject
+                                    )
+                                    retryRef.document(name).set(data)
                                 }
 
                                 builder.setMessage("오답입니다. 다시 시도해 보세요.")

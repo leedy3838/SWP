@@ -120,6 +120,7 @@ class BasicScreen : AppCompatActivity() {
         // 설정에 따라서 나중에 값을 받아주면 됨
         val grade : String = "3학년"
         val subject : String = "국어"
+        //세부 과목
         val selectSubject : String = "공통"
 
         intent.putExtra("user", user)

@@ -19,6 +19,7 @@ class WrongProblemNextScreen:AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.wrong_problem_next)
 
+        val name = intent.getStringExtra("이름").toString()
         val user = intent.getStringExtra("user").toString()
         val grade = intent.getStringExtra("학년").toString()
         val detailSubject = intent.getStringExtra("세부과목").toString()
@@ -58,6 +59,7 @@ class WrongProblemNextScreen:AppCompatActivity() {
 
                 setintent = Intent(this, ProblemSolveScreen::class.java)
 
+                setintent.putExtra("이름", name)
                 setintent.putExtra("user", user)
                 setintent.putExtra("학년", grade)
                 setintent.putExtra("과목", subject)
