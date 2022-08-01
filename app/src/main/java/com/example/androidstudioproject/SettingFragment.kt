@@ -3,6 +3,7 @@ package com.example.androidstudioproject
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.annotation.ArrayRes
+import androidx.core.content.edit
 import androidx.preference.*
 
 
@@ -34,7 +35,6 @@ class SettingFragment : PreferenceFragmentCompat() {
     private val mPrefChangeListener =
         SharedPreferences.OnSharedPreferenceChangeListener { mPref, key ->
             val preference: Preference? = findPreference(key)
-            println(key)
             if (key.equals("difficulty")) {
                 mPref.edit().run {
                     preference?.setSummary(mPref.getString(key, ""))
@@ -45,7 +45,7 @@ class SettingFragment : PreferenceFragmentCompat() {
                 mPref.edit().run {
                     remove("detailSubject")
                     checked()
-                    preference?.setSummary(mPref.getString(key,""))
+                    preference?.setSummary(mPref.getString(key, ""))
                     apply()
                 }
             }
@@ -71,6 +71,8 @@ class SettingFragment : PreferenceFragmentCompat() {
                 }
             }
         }
+
+
     private fun checked(){
         val detailSubjectPre : Preference? = findPreference("detailSubject")
         val grade = mPref?.getString("userGradeSetting","")
@@ -82,25 +84,68 @@ class SettingFragment : PreferenceFragmentCompat() {
         }else{
             detailSubjectPre?.setEnabled(true)
             val listPreference : ListPreference?= findPreference("detailSubject")
-            if(grade.equals("1학년")) arr=R.array.common
+            if(grade.equals("1학년")){
+                detailSubjectPre?.setEnabled(false)
+                detailSubjectPre?.setSummary("선택과목 없음")
+                mPref?.edit()?.run {
+                    putString("detailSubject","없음")
+                }
+            }
             else if(grade.equals("2학년")){
-                if(subject.equals("과학탐구")) arr = R.array.grade2_science
-                else if(subject.equals("사회탐구")) arr = R.array.grade23_social
-                else arr=R.array.common
+                if(subject.equals("과학탐구")){
+                    detailSubjectPre?.setEnabled(true)
+                    detailSubjectPre?.setSummary(mPref?.getString("detailSubject",""))
+                    arr = R.array.grade2_science
+                }
+                else if(subject.equals("사회탐구")){
+                    detailSubjectPre?.setEnabled(true)
+                    detailSubjectPre?.setSummary(mPref?.getString("detailSubject",""))
+                    arr = R.array.grade23_social
+                }
+                else{
+                    detailSubjectPre?.setEnabled(false)
+                    detailSubjectPre?.setSummary("선택과목 없음")
+                    mPref?.edit()?.run {
+                        putString("detailSubject","없음")
+                    }
+                }
             }
             else if(grade.equals("3학년")){
-                if(subject.equals("과학탐구")) arr= R.array.grade3_science
-                else if(subject.equals("사회탐구")) arr=R.array.grade23_social
-                else if(subject.equals("국어")) arr =R.array.grade3_korean
-                else if(subject.equals("수학")) arr=R.array.grade3_math
-                else arr = R.array.common
+                if(subject.equals("과학탐구")){
+                    detailSubjectPre?.setEnabled(true)
+                    detailSubjectPre?.setSummary(mPref?.getString("detailSubject",""))
+                    arr= R.array.grade3_science
+                }
+                else if(subject.equals("사회탐구")){
+                    detailSubjectPre?.setEnabled(true)
+                    detailSubjectPre?.setSummary(mPref?.getString("detailSubject",""))
+                    arr=R.array.grade23_social
+                }
+                else if(subject.equals("국어")){
+                    detailSubjectPre?.setEnabled(true)
+                    detailSubjectPre?.setSummary(mPref?.getString("detailSubject",""))
+                    arr =R.array.grade3_korean
+                }
+                else if(subject.equals("수학")){
+                    detailSubjectPre?.setEnabled(true)
+                    detailSubjectPre?.setSummary(mPref?.getString("detailSubject",""))
+                    arr=R.array.grade3_math
+                }
+                else{
+                    detailSubjectPre?.setEnabled(false)
+                    detailSubjectPre?.setSummary("선택과목 없음")
+                    mPref?.edit()?.run {
+                        putString("detailSubject","없음")
+                    }
+                }
             }else{
                 detailSubjectPre?.setEnabled(false)
                 return
             }
-            detailSubjectPre?.setSummary(mPref?.getString("detailSubject",""))
+
             listPreference?.setEntries(arr)
             listPreference?.setEntryValues(arr)
         }
+
     }
 }

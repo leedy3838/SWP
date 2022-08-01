@@ -15,7 +15,7 @@
         app:title="문제 난이도"
         app:summary="난이도를 설정하려면 클릭하세요"
         app:entries="@array/difficulty"
-    app:entryValues="@array/difficulty"/>
+        app:entryValues="@array/difficulty"/>
 
     <ListPreference
         app:key="userGradeSetting"
