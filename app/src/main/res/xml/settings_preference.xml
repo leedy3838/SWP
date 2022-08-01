@@ -1,70 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <EditTextPreference
-        app:key="userName"
-        app:title="닉네임 설정"
-        android:maxLength="10"
-        />
-
-    <Preference
-        app:key="userInfoSetting"
-        app:title="사용자 정보"
-        app:summary="사용자 정보를 설정하려면 클릭하세요"
-        app:fragment = "com.example.androidstudioproject.NestedUserInfoFragment"
-        />
-
-
-    <ListPreference
-        app:key="difficulty"
-        app:title="문제 난이도"
-        app:summary="난이도를 설정하려면 클릭하세요"
-        app:entries="@array/difficulty"
-        app:entryValues="@array/difficulty"/>
-
-    <ListPreference
-        app:key="userGradeSetting"
-        app:title="학년 설정"
-        app:summary="학년을 설정하려면 클릭하세요"
-        app:entries="@array/userGrade"
-        app:entryValues="@array/userGrade"
-        />
-
-    <ListPreference
-        app:key="subject"
-        app:title="과목 설정"
-        app:summary="과목을 설정하려면 클릭하세요"
-        app:dependency="userGradeSetting"
-        app:entries="@array/subject"
-        app:entryValues="@array/subject"/>
-
-
-
-    <ListPreference
-        app:key="detailSubject"
-        app:title="세부 과목 설정"
-        app:summary="세부 과목을 설정하려면 클릭하세요"
-        app:entries="@array/common"
-        app:dependency="subject"
-        android:entryValues="@array/grade23_social"/>
-
-    <Preference
-        app:key="timeSettingPref"
-        app:title ="사용시간 설정"
-        app:summary="사용시간을 설정하려면 클릭하세요">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetPackage="com.example.androidstudioproject"
-            android:targetClass="com.example.androidstudioproject.SettingTime"
+    <PreferenceCategory
+        app:title="사용자 정보">
+        <EditTextPreference
+            app:key="userName"
+            app:title="닉네임 설정"
+            android:maxLength="10"
             />
-    </Preference>
+
+        <Preference
+            app:key="passwordInitialization"
+            app:title ="비밀번호 분실 시 초기화"
+            app:summary="비밀번호를 초기화하시려면 클릭하세요">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="com.example.androidstudioproject"
+                android:targetClass="com.example.androidstudioproject.SettingScreen"
+                />
+
+        </Preference>
+    </PreferenceCategory>
 
 
-    <SwitchPreference
-        app:key="upperWidget"
-        app:title="상단바 위젯 사용"
-        app:defaultValue="false" />
+    <PreferenceCategory
+        app:title="문제 설정">
+
+        <ListPreference
+            app:key="difficulty"
+            app:title="문제 난이도"
+            app:summary="난이도를 설정하려면 클릭하세요"
+            app:entries="@array/difficulty"
+            app:entryValues="@array/difficulty"/>
+
+        <ListPreference
+            app:key="userGradeSetting"
+            app:title="학년 설정"
+            app:summary="학년을 설정하려면 클릭하세요"
+            app:entries="@array/userGrade"
+            app:entryValues="@array/userGrade"
+            />
+
+        <ListPreference
+            app:key="subject"
+            app:title="과목 설정"
+            app:summary="과목을 설정하려면 클릭하세요"
+            app:dependency="userGradeSetting"
+            app:entries="@array/subject"
+            app:entryValues="@array/subject"/>
+
+
+
+        <ListPreference
+            app:key="detailSubject"
+            app:title="세부 과목 설정"
+            app:summary="세부 과목을 설정하려면 클릭하세요"
+            app:entries="@array/common"
+            app:dependency="subject"
+            android:entryValues="@array/grade23_social"/>
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="기타 설정">
+        <Preference
+            app:key="timeSettingPref"
+            app:title ="사용시간 설정"
+            app:summary="사용시간을 설정하려면 클릭하세요">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="com.example.androidstudioproject"
+                android:targetClass="com.example.androidstudioproject.SettingTime"
+                />
+        </Preference>
+
+
+        <SwitchPreference
+            app:key="upperWidget"
+            app:title="상단바 위젯 사용"
+            app:defaultValue="false" />
+
+
+
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
 
 
