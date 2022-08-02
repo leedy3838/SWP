@@ -1,6 +1,5 @@
 package com.example.androidstudioproject
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -11,7 +10,6 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.coroutines.NonCancellable.cancel
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,8 +19,8 @@ import kotlinx.android.synthetic.main.problem_solve.*
 import kotlin.math.roundToLong
 
 class ProblemSolveScreen :AppCompatActivity() {
-    lateinit var sendintent : Intent
-    lateinit var problemId :String
+    private lateinit var sendintent : Intent
+    private lateinit var problemId :String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +44,8 @@ class ProblemSolveScreen :AppCompatActivity() {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 //텍스트 입력 중
-                val message = textInputEditText.getText().toString()
-                btn_answerSubmit.isEnabled = !message.isEmpty()  // 정답 입력 칸에 숫자가 생기면 버튼 활성화
+                val message = textInputEditText.text.toString()
+                btn_answerSubmit.isEnabled = message.isNotEmpty()  // 정답 입력 칸에 숫자가 생기면 버튼 활성화
             }
         })
 
@@ -56,11 +54,12 @@ class ProblemSolveScreen :AppCompatActivity() {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("문제 포기")
             builder.setMessage("문제를 포기하시겠습니까?")
-                .setPositiveButton("확인", DialogInterface.OnClickListener { dialog, which ->
+                .setPositiveButton("확인") { _, _ ->
                     startActivity(Intent(this, BasicScreen::class.java))
-                })
-                .setNegativeButton("취소", DialogInterface.OnClickListener { dialog, which ->
-                })
+                }
+                .setNegativeButton("취소") { _, _ ->
+                    // 취소 버튼 클릭
+                }
             val alertDialog = builder.create()
             val window = alertDialog.window
             window?.setGravity(Gravity.CENTER)
@@ -133,6 +132,28 @@ class ProblemSolveScreen :AppCompatActivity() {
 
                         //basicScreen에서 넘어온 경우
                         if (answerRate >= answerRateInDocument && answerRate <= answerRateInDocument+5 && problem == "없음") {
+                            var existInToday = false
+
+                            db.collection("오늘 푼 문제")
+                                .document(user)
+                                .collection(user)
+                                .get()
+                                .addOnSuccessListener{ col ->
+                                    for(doc in col){
+                                        val age = doc.get("학년").toString()
+                                        val selectedSub = doc.get("세부과목").toString()
+                                        val sub = doc.get("과목").toString()
+                                        val problemInfo = doc.get("문제 정보").toString()
+
+                                        if(age == grade && selectedSub == selectSubject && sub == subject && problemInfo == problem) {
+                                            existInToday = true
+                                            break
+                                        }
+                                    }
+                                }
+                            if(existInToday)
+                                continue
+
                             st = document.get("경로").toString()
                             problemInfo.text = questionYear
 
@@ -174,16 +195,18 @@ class ProblemSolveScreen :AppCompatActivity() {
                     var answerRateUpdate : Long
                     builder.setTitle("정답을 제출하시겠습니까?")
                     builder.setMessage("한번 제출한 답은 변경할 수 없습니다.")
-                        .setPositiveButton("제출", DialogInterface.OnClickListener { dialog, which ->
+                        .setPositiveButton("제출") { _, _ ->
+
                             val builder = AlertDialog.Builder(this)
 
                             if (answer == input1) {
                                 //틀린 문제에 있는 문제를 맞추면 틀린 문제 리스트에서 제거
-                                if(intent.getStringExtra("이전 화면") == "틀린 문제") {
+                                if (intent.getStringExtra("이전 화면") == "틀린 문제") {
                                     val name = intent.getStringExtra("이름").toString()
-                                    db.collection("틀린 문제").document(user).collection(user).document(name).delete()
+                                    db.collection("틀린 문제").document(user).collection(user)
+                                        .document(name).delete()
                                 }
-                                if(problem == "없음") {
+                                if (problem == "없음") {
                                     docRef.document(docName)
                                         .update("시도 횟수", ++tryNum)  // 정답일 때 시도횟수 1 증가
                                     docRef.document(docName)
@@ -195,14 +218,14 @@ class ProblemSolveScreen :AppCompatActivity() {
                                     println(answerRateUpdate)
 
                                     //문제 풀기에서 맞았을 때 오늘 푼 문제에 추가
-                                    val name : String
 
-                                    if(selectSubject == "없음")
-                                        name = "$grade $subject $problemId"
+                                    val name: String = if (selectSubject == "없음")
+                                        "$grade $subject $problemId"
                                     else
-                                        name = "$grade $subject $selectSubject $problemId"
+                                        "$grade $subject $selectSubject $problemId"
 
-                                    val retryRef = db.collection("오늘 푼 문제").document(user).collection(user)
+                                    val retryRef =
+                                        db.collection("오늘 푼 문제").document(user).collection(user)
 
                                     val data = hashMapOf(
                                         "학년" to grade,
@@ -217,13 +240,11 @@ class ProblemSolveScreen :AppCompatActivity() {
                                 builder.setMessage("정답입니다!")
                                     .setCancelable(false)    // 뒤로가기 불가
                                     .setPositiveButton(
-                                        "확인",
-                                        DialogInterface.OnClickListener { dialog, which ->
-                                            startActivity(sendintent) })
-                            }
-                            else {
+                                        "확인"
+                                    ) { _, _ -> startActivity(sendintent) }
+                            } else {
                                 //기본 화면에서 문제 풀기로 바로 넘어왔을 때 (오답) 정답률 수정
-                                if(problem == "없음") {
+                                if (problem == "없음") {
                                     docRef.document(docName)
                                         .update("시도 횟수", ++tryNum)  // 오답일 때 시도횟수 1 증가
 
@@ -232,14 +253,14 @@ class ProblemSolveScreen :AppCompatActivity() {
                                     docRef.document(docName).update("정답률", answerRateUpdate)
 
                                     //문제 풀기에서 틀렸을 때 틀린 문제에 추가
-                                    val name : String
 
-                                    if(selectSubject == "없음")
-                                        name = "$grade $subject $problemId"
+                                    val name: String = if (selectSubject == "없음")
+                                        "$grade $subject $problemId"
                                     else
-                                        name = "$grade $subject $selectSubject $problemId"
+                                        "$grade $subject $selectSubject $problemId"
 
-                                    val retryRef = db.collection("틀린 문제").document(user).collection(user)
+                                    val retryRef =
+                                        db.collection("틀린 문제").document(user).collection(user)
 
                                     val data = hashMapOf(
                                         "학년" to grade,
@@ -252,18 +273,19 @@ class ProblemSolveScreen :AppCompatActivity() {
 
                                 builder.setMessage("오답입니다. 다시 시도해 보세요.")
                                     .setPositiveButton(
-                                        "확인",
-                                        DialogInterface.OnClickListener { dialog, which -> })
+                                        "확인"
+                                    )
+                                    { _, _ -> }
                             }
 
                             val alertDialog = builder.create()
                             val window = alertDialog.window
                             window?.setGravity(Gravity.CENTER)
                             alertDialog.show()
-                        })
-                        .setNegativeButton("취소", DialogInterface.OnClickListener { dialog, which ->
-                            cancel()
-                        })
+                        }
+                        .setNegativeButton("취소") { _, _ ->
+                            //취소 버튼 클릭
+                        }
                     val alertDialog = builder.create()
                     val window = alertDialog.window
                     window?.setGravity(Gravity.CENTER)
@@ -275,12 +297,12 @@ class ProblemSolveScreen :AppCompatActivity() {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("문제 포기")
             builder.setMessage("문제를 포기하시겠습니까?")
-                .setPositiveButton("포기", DialogInterface.OnClickListener { dialog, which ->
+                .setPositiveButton("포기") { _, _ ->
                     startActivity(Intent(this, BasicScreen::class.java))
-                })
-                .setNegativeButton("취소", DialogInterface.OnClickListener { dialog, which ->
-                    cancel()
-                })
+                }
+                .setNegativeButton("취소") { _, _ ->
+                    //취소 버튼 클릭
+                }
             val alertDialog = builder.create()
             val window = alertDialog.window
             window?.setGravity(Gravity.CENTER)

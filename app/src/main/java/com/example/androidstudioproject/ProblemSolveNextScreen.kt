@@ -2,6 +2,7 @@ package com.example.androidstudioproject
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -71,17 +72,20 @@ class ProblemSolveNextScreen : AppCompatActivity() {
             .get()
             .addOnSuccessListener { result ->
                 var flag = false
-
                 for (document in result) {
                     if (document.id == name) {
                         flag = true
-                        Toast.makeText(this, "이미 존재하는 문제입니다.", Toast.LENGTH_SHORT).show()
+                        val toast = Toast.makeText(this, "이미 존재하는 문제입니다.", Toast.LENGTH_SHORT)
+                        toast.setGravity(Gravity.BOTTOM, 0, 200)
+                        toast.show()
                         break
                     }
                 }
 
                 if (!flag) {
-                    Toast.makeText(this, "다시 풀어보고 싶은 문제에 추가하였습니다.", Toast.LENGTH_SHORT).show()
+                    val toast = Toast.makeText(this, "이미 존재하는 문제입니다.", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.BOTTOM, 0, 200)
+                    toast.show()
                     val retryRef = db.collection("다시 풀기").document(user).collection(user)
 
                     val data = hashMapOf(

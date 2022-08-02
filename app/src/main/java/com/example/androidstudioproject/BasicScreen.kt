@@ -8,15 +8,18 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import kotlin.system.exitProcess
 
 
 class BasicScreen : AppCompatActivity() {
-    private var user = "LDY"
-    var grade = "1학년"
-    var subject ="국어"
-    var difficulty = ""
-    private var answerRate = 100L
+    lateinit var user : String
+    lateinit var grade : String
+    lateinit var subject : String
+    lateinit var difficulty : String
+    lateinit var selectSubject : String
+    var answerRate : Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +29,20 @@ class BasicScreen : AppCompatActivity() {
 
         val docRef = db.collection("user")
         var exist = false
+
+        val sharedPreferences : SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+
+        user = sharedPreferences.getString("userName","default").toString()
+        grade = sharedPreferences.getString("userGradeSetting", "").toString()
+        subject = sharedPreferences.getString("subject", "").toString()
+        difficulty = sharedPreferences.getString("difficulty", "Easy").toString()
+        selectSubject = sharedPreferences.getString("detailSubject", "없음").toString()
+
+        println(user)
+        println(grade)
+        println(subject)
+        println(difficulty)
+        println(selectSubject)
 
         docRef
             .get()
@@ -105,35 +122,22 @@ class BasicScreen : AppCompatActivity() {
 
     fun problemSolveClicked(v : View){
         val intent = Intent(this, ProblemSolveScreen::class.java)
-        // 설정에 따라서 나중에 값을 받아주면 됨
-        val grade = "3학년"
-        val subject = "국어"
-        //세부 과목
-        val selectSubject = "공통"
 
-        intent.putExtra("user", user)
-
-        intent.putExtra("정답률", answerRate)
-        intent.putExtra("학년", grade)
-        intent.putExtra("과목", subject)
+        intent.putExtra("user", user) // 닉네임
+        intent.putExtra("학년", grade) // 학년
+        intent.putExtra("과목", subject) // 과목
         //문제 정보가 없음이면 basicScreen에서 문제 풀기를 실행한 것이므로 시간 추가
         intent.putExtra("문제 정보", "없음")
+        intent.putExtra("세부과목", selectSubject) // 세부과목 디폴트값 "없음"
 
-        if (grade == "2학년") {
-               if (subject == "과학탐구" || subject == "사회탐구") {
-                    intent.putExtra("세부과목", selectSubject)
-                }
-        }
+        if (difficulty == "Easy")
+            answerRate = 100L
+        else if (difficulty == "Normal")
+            answerRate = 60L
+        else if (difficulty == "Hard")
+            answerRate = 30L
 
-        else if (grade == "3학년") {
-            if (subject == "국어" || subject == "수학" ||
-                subject == "과학탐구" || subject == "사회탐구") {
-                intent.putExtra("세부과목", selectSubject)
-            }
-        }
-
-        else intent.putExtra("세부과목", "없음")
-
+        intent.putExtra("정답률", answerRate) // 초기 정답률
 
         startActivity(intent)
     }
