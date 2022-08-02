@@ -6,25 +6,21 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.today_solved_next.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 class TodaySolvedNextScreen :AppCompatActivity() {
-    lateinit var setintent : Intent
-    lateinit var backintent : Intent
+    private lateinit var setintent : Intent
+    private lateinit var backintent : Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.today_solved_next)
 
         val user = intent.getStringExtra("user").toString()
-        val name = intent.getStringExtra("이름").toString()
         val grade = intent.getStringExtra("학년").toString()
         val detailSubject = intent.getStringExtra("세부과목").toString()
         val subject = intent.getStringExtra("과목").toString()
@@ -69,22 +65,6 @@ class TodaySolvedNextScreen :AppCompatActivity() {
                 setintent.putExtra("세부과목",detailSubject)
                 setintent.putExtra("문제 정보", problem)
                 setintent.putExtra("이전 화면", "오늘 푼 문제")
-
-
-                val ref = db.collection("오늘 푼 문제").document(user).collection(user).document(name)
-                ref.get()
-                    .addOnSuccessListener { document ->
-                        val storedDate = Date((document.get("푼 날짜") as Timestamp).seconds*1000)
-                        val date = Date(Timestamp.now().seconds*1000)
-
-                        val diff = (date.time - storedDate.time) /(24*60*60*1000)
-
-                        println(storedDate)
-                        println(date)
-
-                        println(diff)
-                }
-
            }
 
         backintent = Intent(this, TodaySolveScreen::class.java)

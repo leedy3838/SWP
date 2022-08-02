@@ -1,6 +1,5 @@
 package com.example.androidstudioproject
 
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.help_screen.*

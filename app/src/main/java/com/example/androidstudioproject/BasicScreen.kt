@@ -1,41 +1,28 @@
 package com.example.androidstudioproject
 
-import android.app.Dialog
-import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.service.controls.ControlsProviderService.TAG
 import android.util.Log
-import android.view.Gravity
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.preference.PreferenceManager
-import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import kotlinx.android.synthetic.main.problem_solve.*
-import kotlinx.coroutines.NonCancellable
-import java.lang.System.exit
+import kotlin.system.exitProcess
 
 
 class BasicScreen : AppCompatActivity() {
-    var user = "LDY"
+    private var user = "LDY"
     var grade = "1학년"
     var subject ="국어"
     var difficulty = ""
-    var answerRate = 100L
+    private var answerRate = 100L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.basic_screen)
 
         val db = FirebaseFirestore.getInstance()
-        var st = ""
 
         val docRef = db.collection("user")
         var exist = false
@@ -45,7 +32,7 @@ class BasicScreen : AppCompatActivity() {
             .addOnSuccessListener { result ->
                 for (document in result) {
                     if (document.id == user)
-                        exist = true;
+                        exist = true
                 }
                 if(!exist) {
                     val data = hashMapOf("user" to user)
@@ -91,7 +78,7 @@ class BasicScreen : AppCompatActivity() {
         // 2초내 다시 클릭하면 앱 종료
         if (System.currentTimeMillis() - backPressedTime < 2000) {
             ActivityCompat.finishAffinity(this)
-            System.exit(0)
+            exitProcess(0)
         }
 
         // 처음 클릭 메시지
@@ -118,12 +105,11 @@ class BasicScreen : AppCompatActivity() {
 
     fun problemSolveClicked(v : View){
         val intent = Intent(this, ProblemSolveScreen::class.java)
-        val db = FirebaseFirestore.getInstance()
         // 설정에 따라서 나중에 값을 받아주면 됨
-        val grade : String = "3학년"
-        val subject : String = "국어"
+        val grade = "3학년"
+        val subject = "국어"
         //세부 과목
-        val selectSubject : String = "공통"
+        val selectSubject = "공통"
 
         intent.putExtra("user", user)
 

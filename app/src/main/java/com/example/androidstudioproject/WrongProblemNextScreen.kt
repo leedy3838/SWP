@@ -13,8 +13,8 @@ import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.wrong_problem_next.*
 
 class WrongProblemNextScreen:AppCompatActivity() {
-    lateinit var setintent : Intent
-    lateinit var backintent :Intent
+    private lateinit var setintent : Intent
+    private lateinit var backintent :Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

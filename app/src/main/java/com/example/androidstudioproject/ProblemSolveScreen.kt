@@ -13,15 +13,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.NonCancellable.cancel
 import com.bumptech.glide.Glide
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.problem_solve.*
-import kotlinx.coroutines.selects.select
-import java.sql.Timestamp
-import kotlin.math.round
 import kotlin.math.roundToLong
 
 class ProblemSolveScreen :AppCompatActivity() {
@@ -64,7 +60,6 @@ class ProblemSolveScreen :AppCompatActivity() {
                     startActivity(Intent(this, BasicScreen::class.java))
                 })
                 .setNegativeButton("취소", DialogInterface.OnClickListener { dialog, which ->
-                    cancel()
                 })
             val alertDialog = builder.create()
             val window = alertDialog.window
@@ -176,7 +171,7 @@ class ProblemSolveScreen :AppCompatActivity() {
                     val input = textInputEditText.text.toString()
                     val input1 : Long = input.toLong()
                     val builder = AlertDialog.Builder(this)
-                    var answerRateUpdate : Long = 0
+                    var answerRateUpdate : Long
                     builder.setTitle("정답을 제출하시겠습니까?")
                     builder.setMessage("한번 제출한 답은 변경할 수 없습니다.")
                         .setPositiveButton("제출", DialogInterface.OnClickListener { dialog, which ->
