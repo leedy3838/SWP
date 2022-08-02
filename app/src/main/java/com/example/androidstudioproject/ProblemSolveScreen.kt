@@ -18,6 +18,7 @@ import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.problem_solve.*
 import kotlin.math.roundToLong
 
+
 class ProblemSolveScreen :AppCompatActivity() {
     private lateinit var sendintent : Intent
     private lateinit var problemId :String
@@ -66,6 +67,8 @@ class ProblemSolveScreen :AppCompatActivity() {
             alertDialog.show()
         }
 
+
+
         val user = intent.getStringExtra("user").toString()
         val grade = intent.getStringExtra("학년").toString()
         val subject = intent.getStringExtra("과목").toString()
@@ -79,6 +82,22 @@ class ProblemSolveScreen :AppCompatActivity() {
 
         var docName = ""
 
+        val DataList = mutableListOf<Data>()
+
+        db.collection("오늘 푼 문제")
+            .document(user)
+            .collection(user)
+            .get()
+            .addOnSuccessListener{ col ->
+                for(doc in col){
+                    val age = doc.get("학년").toString()
+                    val selectedSub = doc.get("세부과목").toString()
+                    val sub = doc.get("과목").toString()
+                    val problemInfo = doc.get("문제 정보").toString()
+
+                    DataList.add(Data("", problemInfo, age, sub, selectedSub))
+                }
+            }
 
         var answer : Long = 0    // 정답 번호를 받아오기 전 초기화
         var questionYear : String
@@ -134,23 +153,24 @@ class ProblemSolveScreen :AppCompatActivity() {
                         if (answerRate >= answerRateInDocument && answerRate <= answerRateInDocument+5 && problem == "없음") {
                             var existInToday = false
 
-                            db.collection("오늘 푼 문제")
-                                .document(user)
-                                .collection(user)
-                                .get()
-                                .addOnSuccessListener{ col ->
-                                    for(doc in col){
-                                        val age = doc.get("학년").toString()
-                                        val selectedSub = doc.get("세부과목").toString()
-                                        val sub = doc.get("과목").toString()
-                                        val problemInfo = doc.get("문제 정보").toString()
+                            for(i in DataList){
+                                val age = i.grade
+                                val selectedSub = i.detailSubject
+                                val sub = i.subject
+                                val problemInfo = i.info
 
-                                        if(age == grade && selectedSub == selectSubject && sub == subject && problemInfo == problem) {
-                                            existInToday = true
-                                            break
-                                        }
-                                    }
+                                println(age +" " + grade)
+                                println(selectedSub +" " + selectSubject)
+                                println(sub +" " + subject)
+                                println(problemInfo +" " + document.id)
+
+                                if(age == grade && selectedSub == selectSubject && sub == subject && problemInfo == document.id){
+                                    existInToday = true
+                                    break
                                 }
+                            }
+
+                            println(existInToday)
                             if(existInToday)
                                 continue
 

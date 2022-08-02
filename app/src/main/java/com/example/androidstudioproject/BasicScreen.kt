@@ -8,9 +8,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import kotlin.system.exitProcess
+import androidx.preference.PreferenceManager
+import android.content.SharedPreferences
 
 
 class BasicScreen : AppCompatActivity() {
