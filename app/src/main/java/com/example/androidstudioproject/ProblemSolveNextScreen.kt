@@ -83,7 +83,7 @@ class ProblemSolveNextScreen : AppCompatActivity() {
                 }
 
                 if (!flag) {
-                    val toast = Toast.makeText(this, "이미 존재하는 문제입니다.", Toast.LENGTH_SHORT)
+                    val toast = Toast.makeText(this, "다시 풀어보고 싶은 문제에 추가하였습니다.", Toast.LENGTH_SHORT)
                     toast.setGravity(Gravity.BOTTOM, 0, 200)
                     toast.show()
                     val retryRef = db.collection("다시 풀기").document(user).collection(user)
