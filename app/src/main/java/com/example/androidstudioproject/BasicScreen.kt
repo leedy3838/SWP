@@ -1,26 +1,13 @@
 package com.example.androidstudioproject
 
-import android.app.Dialog
-import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.service.controls.ControlsProviderService.TAG
 import android.util.Log
-import android.view.Gravity
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.preference.PreferenceManager
-import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import kotlinx.android.synthetic.main.problem_solve.*
-import kotlinx.coroutines.NonCancellable
-import java.lang.System.exit
 import kotlin.system.exitProcess
 
 
@@ -37,7 +24,6 @@ class BasicScreen : AppCompatActivity() {
         setContentView(R.layout.basic_screen)
 
         val db = FirebaseFirestore.getInstance()
-        var st = ""
 
         val docRef = db.collection("user")
         var exist = false
@@ -61,7 +47,7 @@ class BasicScreen : AppCompatActivity() {
             .addOnSuccessListener { result ->
                 for (document in result) {
                     if (document.id == user)
-                        exist = true;
+                        exist = true
                 }
                 if(!exist) {
                     val data = hashMapOf("user" to user)
@@ -134,7 +120,6 @@ class BasicScreen : AppCompatActivity() {
 
     fun problemSolveClicked(v : View){
         val intent = Intent(this, ProblemSolveScreen::class.java)
-        val db = FirebaseFirestore.getInstance()
 
         intent.putExtra("user", user) // 닉네임
         intent.putExtra("학년", grade) // 학년

@@ -11,6 +11,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -59,6 +60,7 @@ class ProblemSolveScreen :AppCompatActivity() {
                 .setNegativeButton("취소") { _, _ ->
                     // 취소 버튼 클릭
                 }
+
             val alertDialog = builder.create()
             val window = alertDialog.window
             window?.setGravity(Gravity.CENTER)
@@ -204,9 +206,6 @@ class ProblemSolveScreen :AppCompatActivity() {
                                     val name = intent.getStringExtra("이름").toString()
                                     db.collection("틀린 문제").document(user).collection(user)
                                         .document(name).delete()
-                                }
-                                if (problem == "없음") {
-                                    docRef.document(docName)
                                         .update("시도 횟수", ++tryNum)  // 정답일 때 시도횟수 1 증가
                                     docRef.document(docName)
                                         .update("정답수", ++answerNum)  // 정답일 때 정답수 1 증가
@@ -229,8 +228,12 @@ class ProblemSolveScreen :AppCompatActivity() {
                                     val data = hashMapOf(
                                         "학년" to grade,
                                         "과목" to subject,
+                                }
+                                if (problem == "없음") {
+                                    docRef.document(docName)
                                         "문제 정보" to problemId,
-                                        "세부과목" to selectSubject
+                                        "세부과목" to selectSubject,
+                                        "푼 날짜" to FieldValue.serverTimestamp()
                                     )
                                     retryRef.document(name).set(data)
                                 }
