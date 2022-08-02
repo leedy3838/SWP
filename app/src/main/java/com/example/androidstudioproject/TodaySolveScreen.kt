@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.today_solve.*
 import java.util.*
@@ -25,12 +27,29 @@ class TodaySolveScreen : AppCompatActivity() {
             .document(user)
             .collection(user)
 
+
+
         docRef
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
                     if(document.get("base").toString() == "yes")
                         continue
+
+                    //문제를 푼 지 24시간이 넘었으면 제거
+                    val storedDate = Date((document.get("푼 날짜") as Timestamp).seconds*1000)
+                    val date = Date(Timestamp.now().seconds*1000)
+                    val diff = (date.time - storedDate.time) /(24*60*60*1000)
+
+                    if(diff>0) {
+                        db.collection("오늘 푼 문제")
+                            .document(user)
+                            .collection(user)
+                            .document(document.id)
+                            .delete()
+
+                        continue
+                    }
 
                     //name grade subject path
                     DataList.add(

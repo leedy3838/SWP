@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.NonCancellable.cancel
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -212,7 +213,8 @@ class ProblemSolveScreen :AppCompatActivity() {
                                         "학년" to grade,
                                         "과목" to subject,
                                         "문제 정보" to problemId,
-                                        "세부과목" to selectSubject
+                                        "세부과목" to selectSubject,
+                                        "푼 날짜" to FieldValue.serverTimestamp()
                                     )
                                     retryRef.document(name).set(data)
                                 }
