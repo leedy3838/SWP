@@ -2,17 +2,14 @@ package com.example.androidstudioproject
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.Gravity
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.problem_solve_next.*
 
 class ProblemSolveNextScreen : AppCompatActivity() {
-    lateinit var sendintent : Intent
+    private lateinit var sendintent : Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,9 +64,9 @@ class ProblemSolveNextScreen : AppCompatActivity() {
 
         val name: String
         if (detailSubject == "없음")
-            name = grade + " " + subject + " " + problem
+            name = "$grade $subject $problem"
         else
-            name = grade + " " + subject + " " + detailSubject + " " + problem
+            name = "$grade $subject $detailSubject $problem"
 
         docRef
             .get()
