@@ -1,5 +1,6 @@
 package com.example.androidstudioproject
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
@@ -35,6 +36,10 @@ class SettingScreen : AppCompatActivity(), PreferenceFragmentCompat.OnPreference
             .addToBackStack(null)
             .commit()
         return true
+    }
+
+    override fun onBackPressed() {
+        startActivity(Intent(this, BasicScreen::class.java))
     }
 
 }
