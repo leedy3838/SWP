@@ -59,11 +59,11 @@ class BasicScreen : AppCompatActivity() {
             
             val sharedPreferences : SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
-          user = sharedPreferences.getString("userName","default").toString()
-          grade = sharedPreferences.getString("userGradeSetting", "").toString()
-          subject = sharedPreferences.getString("subject", "").toString()
-          difficulty = sharedPreferences.getString("difficulty", "Easy").toString()
-          selectSubject = sharedPreferences.getString("detailSubject", "없음").toString()
+            user = sharedPreferences.getString("userName","default").toString()
+            grade = sharedPreferences.getString("userGradeSetting", "").toString()
+            subject = sharedPreferences.getString("subject", "").toString()
+            difficulty = sharedPreferences.getString("difficulty", "Easy").toString()
+            selectSubject = sharedPreferences.getString("detailSubject", "없음").toString()
 
             docRef
                 .get()
