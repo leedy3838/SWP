@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.retry_problem.*
 import java.util.*
 
 class RetryProblemScreen : AppCompatActivity() {
-    private val DataList = mutableListOf<Data>()
+    private val DataListRetry = mutableListOf<Data>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,7 @@ class RetryProblemScreen : AppCompatActivity() {
                         continue
 
                     //name info grade subject detailSubject
-                    DataList.add(
+                    DataListRetry.add(
                         Data(
                             document.id,
                             document.get("문제 정보").toString(),
@@ -43,7 +43,7 @@ class RetryProblemScreen : AppCompatActivity() {
                     )
                 }
 
-                val customAdapter = CustomAdapter(DataList)
+                val customAdapter = CustomAdapter(DataListRetry)
 
                 retryProblemList.layoutManager = LinearLayoutManager(this)
                 retryProblemList.adapter = customAdapter
@@ -65,7 +65,7 @@ class RetryProblemScreen : AppCompatActivity() {
                 })
 
 
-                Collections.sort(DataList, Comparator() { data1: Data, data2: Data ->
+                Collections.sort(DataListRetry, Comparator() { data1: Data, data2: Data ->
                     val answer1 =
                         data1.info.substring(data1.info.length - 3, data1.info.length - 1)
                             .trim().toInt()

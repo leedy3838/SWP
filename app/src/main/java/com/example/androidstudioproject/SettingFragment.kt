@@ -10,7 +10,7 @@ import android.widget.EditText
 import androidx.preference.*
 
 
-class SettingFragment : PreferenceFragmentCompat() {
+class SettingFragment : PreferenceFragmentCompat(){
 
     lateinit var prefs : SharedPreferences
     private var mPref: SharedPreferences? = null
@@ -170,5 +170,6 @@ class SettingFragment : PreferenceFragmentCompat() {
         }
 
     }
+
 
 }
