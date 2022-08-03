@@ -5,7 +5,8 @@
         app:title="사용자 정보">
         <EditTextPreference
             app:key="userName"
-            app:title="닉네임 설정"
+            app:title="닉네임"
+            app:enabled="false"
             android:maxLength="10"
             />
 
