@@ -27,7 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".UnlockQnA"/>
+        <activity android:name=".AppPassWordActivity"/>
         <activity android:name=".RetryProblemScreen" />
         <activity android:name=".RetryProblemSelectScreen" />
         <activity android:name=".SettingScreen" />
@@ -39,14 +40,17 @@
         <activity android:name=".WrongProblemScreen" />
         <activity android:name=".WrongProblemNextScreen" />
         <activity android:name=".SettingTime"/>
+        <activity android:name=".SettingPassword"/>
+        <activity android:name=".SettingQnA"/>
+        <activity android:name=".SettingUser"/>
         <activity
             android:name=".BasicScreen"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
     </application>
 

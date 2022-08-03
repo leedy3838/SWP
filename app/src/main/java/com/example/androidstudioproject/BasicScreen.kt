@@ -1,6 +1,8 @@
 package com.example.androidstudioproject
 
+import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
@@ -32,55 +34,80 @@ class BasicScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.basic_screen)
 
-        val db = FirebaseFirestore.getInstance()
-        var st = ""
+        val pref: SharedPreferences = getSharedPreferences("isFirst", Activity.MODE_PRIVATE)
+        var sharedPref = getSharedPreferences("appLock", Context.MODE_PRIVATE)
 
-        val docRef = db.collection("user")
-        var exist = false
+        /*
+        // 처음 설정을 두번째 실행 이후에도 실행시키고 싶다면 이 코드 활성화시키고
+        // run을 한번한 후에 다시 주석 처리 후 run하면 된다.
+        val editor: SharedPreferences.Editor = pref.edit()
+        editor.putBoolean("isFirst", true)
+        editor.commit()
+        */
 
-        docRef
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    if (document.id == user)
-                        exist = true;
+        var first: Boolean = pref.getBoolean("isFirst", true)
+
+        println("isFirst = " + first)
+
+        if (first == true) {
+            setContentView(R.layout.activity_app_lock_password)
+            startActivity(Intent(this, SettingUser::class.java))
+            //앱 최초 실행시 사용자 이름 설정 액티비티로 이동
+
+        } else {
+            setContentView(R.layout.basic_screen)
+            Log.d("Is first Time?", "not first")
+
+
+            val db = FirebaseFirestore.getInstance()
+            var st = ""
+
+            val docRef = db.collection("user")
+            var exist = false
+
+            docRef
+                .get()
+                .addOnSuccessListener { result ->
+                    for (document in result) {
+                        if (document.id == user)
+                            exist = true;
+                    }
+                    if (!exist) {
+                        val data = hashMapOf("user" to user)
+                        docRef.document(user).set(data)
+
+                        val base = hashMapOf("base" to "yes")
+
+                        db.collection("다시 풀기")
+                            .document(user)
+                            .set(data)
+                        db.collection("다시 풀기")
+                            .document(user)
+                            .collection(user)
+                            .document("기본 문서")
+                            .set(base)
+
+                        db.collection("오늘 푼 문제")
+                            .document(user)
+                            .set(data)
+                        db.collection("오늘 푼 문제")
+                            .document(user)
+                            .collection(user)
+                            .document("기본 문서")
+                            .set(base)
+
+                        db.collection("틀린 문제")
+                            .document(user)
+                            .set(data)
+                        db.collection("틀린 문제")
+                            .document(user)
+                            .collection(user)
+                            .document("기본 문서")
+                            .set(base)
+                    }
                 }
-                if(!exist) {
-                    val data = hashMapOf("user" to user)
-                    docRef.document(user).set(data)
-
-                    val base = hashMapOf("base" to "yes")
-
-                    db.collection("다시 풀기")
-                        .document(user)
-                        .set(data)
-                    db.collection("다시 풀기")
-                        .document(user)
-                        .collection(user)
-                        .document("기본 문서")
-                        .set(base)
-
-                    db.collection("오늘 푼 문제")
-                        .document(user)
-                        .set(data)
-                    db.collection("오늘 푼 문제")
-                        .document(user)
-                        .collection(user)
-                        .document("기본 문서")
-                        .set(base)
-
-                    db.collection("틀린 문제")
-                        .document(user)
-                        .set(data)
-                    db.collection("틀린 문제")
-                        .document(user)
-                        .collection(user)
-                        .document("기본 문서")
-                        .set(base)
-                }
-            }
+        }
     }
 
     private var backPressedTime : Long = 0
