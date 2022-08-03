@@ -2,14 +2,14 @@ package com.example.androidstudioproject
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.view.Gravity
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.problem_solve_next.*
 
 class ProblemSolveNextScreen : AppCompatActivity() {
-    lateinit var sendintent : Intent
+    private lateinit var sendintent : Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +34,7 @@ class ProblemSolveNextScreen : AppCompatActivity() {
         sendintent.putExtra("세부과목", selectSubject)
         
         sendintent.putExtra("문제 정보", "없음")
+
     }
 
     override fun onBackPressed() {
@@ -48,7 +49,7 @@ class ProblemSolveNextScreen : AppCompatActivity() {
         startActivity(sendintent)
     }
 
-    fun addToRetry(v : View){
+    fun addToRetry(v : View) {
         val db = FirebaseFirestore.getInstance()
 
         val user = intent.getStringExtra("user").toString()
@@ -57,20 +58,45 @@ class ProblemSolveNextScreen : AppCompatActivity() {
         val subject = intent.getStringExtra("과목").toString()
         val detailSubject = intent.getStringExtra("세부과목").toString()
 
-        val name : String
-        if(detailSubject == "없음")
-            name = grade+" "+subject+" "+problem
+        val docRef = db.collection("다시 풀기")
+            .document(user)
+            .collection(user)
+
+        val name: String
+        if (detailSubject == "없음")
+            name = "$grade $subject $problem"
         else
-            name = grade+" "+subject+" "+detailSubject+" "+problem
+            name = "$grade $subject $detailSubject $problem"
 
-        val retryRef = db.collection("다시 풀기").document(user).collection(user)
+        docRef
+            .get()
+            .addOnSuccessListener { result ->
+                var flag = false
+                for (document in result) {
+                    if (document.id == name) {
+                        flag = true
+                        val toast = Toast.makeText(this, "이미 존재하는 문제입니다.", Toast.LENGTH_SHORT)
+                        toast.setGravity(Gravity.BOTTOM, 0, 200)
+                        toast.show()
+                        break
+                    }
+                }
 
-        val data = hashMapOf(
-            "학년" to grade,
-            "과목" to subject,
-            "문제 정보" to problem,
-            "세부과목" to detailSubject
-        )
-        retryRef.document(name).set(data)
+                if (!flag) {
+                    val toast = Toast.makeText(this, "다시 풀어보고 싶은 문제에 추가하였습니다.", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.BOTTOM, 0, 200)
+                    toast.show()
+                    val retryRef = db.collection("다시 풀기").document(user).collection(user)
+
+                    val data = hashMapOf(
+                        "학년" to grade,
+                        "과목" to subject,
+                        "문제 정보" to problem,
+                        "세부과목" to detailSubject
+                    )
+                    retryRef.document(name).set(data)
+
+                }
+            }
     }
 }
