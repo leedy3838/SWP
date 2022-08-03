@@ -16,7 +16,7 @@
             <intent
                 android:action="android.intent.action.VIEW"
                 android:targetPackage="com.example.androidstudioproject"
-                android:targetClass="com.example.androidstudioproject.SettingScreen"
+                android:targetClass="com.example.androidstudioproject.SettingPassword"
                 />
 
         </Preference>
