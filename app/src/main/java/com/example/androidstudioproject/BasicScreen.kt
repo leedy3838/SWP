@@ -2,7 +2,6 @@ package com.example.androidstudioproject
 
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +13,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlin.system.exitProcess
 import androidx.preference.PreferenceManager
 import android.content.SharedPreferences
+import android.view.Gravity
+import androidx.appcompat.app.AlertDialog
 
 
 class BasicScreen : AppCompatActivity() {
@@ -61,7 +62,7 @@ class BasicScreen : AppCompatActivity() {
 
             user = sharedPreferences.getString("userName","default").toString()
             grade = sharedPreferences.getString("userGradeSetting", "").toString()
-            subject = sharedPreferences.getString("subject", "").toString()
+            subject = sharedPreferences.getString("subject", "없음").toString()
             difficulty = sharedPreferences.getString("difficulty", "Easy").toString()
             selectSubject = sharedPreferences.getString("detailSubject", "없음").toString()
 
@@ -161,7 +162,18 @@ class BasicScreen : AppCompatActivity() {
 
         intent.putExtra("정답률", answerRate) // 초기 정답률
 
-        startActivity(intent)
+        if (subject == "없음"){
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("설정에서 과목을 선택해주십시오.")
+                .setPositiveButton("확인") { _, _ ->
+
+                }
+            val alertDialog = builder.create()
+            val window = alertDialog.window
+            window?.setGravity(Gravity.CENTER)
+            alertDialog.show()
+        }
+        else startActivity(intent)
     }
 
     fun todaySolveClicked(v : View){
