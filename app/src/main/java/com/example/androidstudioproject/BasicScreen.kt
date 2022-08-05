@@ -30,13 +30,13 @@ class BasicScreen : AppCompatActivity() {
 
         val pref: SharedPreferences = getSharedPreferences("isFirst", Activity.MODE_PRIVATE)
 
-        /*
+/*
         // 처음 설정을 두번째 실행 이후에도 실행시키고 싶다면 이 코드 활성화시키고
         // run을 한번한 후에 다시 주석 처리 후 run하면 된다.
         val editor: SharedPreferences.Editor = pref.edit()
         editor.putBoolean("isFirst", true)
         editor.commit()
-        */
+*/
 
         var first: Boolean = pref.getBoolean("isFirst", true)
 
