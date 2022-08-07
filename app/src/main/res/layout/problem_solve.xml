@@ -13,16 +13,18 @@
         android:layout_height="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/problemSolveLayout3">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/problemInfo"
             android:layout_width="313dp"
             android:layout_height="58dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/text_background"
             android:gravity="center"
+            android:background="@drawable/blue_bar_right"
+            android:textColor="@color/white"
+            android:fontFamily="@font/nanum_barun_gothic_bold"
+            android:textSize="20sp"
             android:text="문제 이름"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,15 +70,19 @@
         android:layout_height="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/problemSolveLayout2">
 
         <Button
             android:id="@+id/answerSubmit"
-            android:layout_width="59dp"
-            android:layout_height="61dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginEnd="16dp"
             android:onClick="toProblemSolveNext"
             android:text="정답 제출"
+            android:textColor="@color/white"
+            android:fontFamily="@font/nanum_barun_gothic_bold"
+            android:textSize="14sp"
+            android:background="@drawable/blue_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -85,10 +91,14 @@
         <Button
             android:id="@+id/giveUp"
             android:layout_width="60dp"
-            android:layout_height="58dp"
+            android:layout_height="60dp"
             android:layout_marginStart="16dp"
             android:onClick="toProblemSolveNext"
             android:text="포기하기"
+            android:textColor="@color/white"
+            android:fontFamily="@font/nanum_barun_gothic_bold"
+            android:textSize="14sp"
+            android:background="@drawable/blue_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -108,10 +118,10 @@
             <EditText
                 android:id="@+id/textInputEditText"
                 android:layout_width="match_parent"
-                android:maxEms="5"
                 android:layout_height="wrap_content"
-                android:maxLength="5"
-                android:inputType="number" />
+                android:inputType="number"
+                android:maxEms="5"
+                android:maxLength="5" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/WrongProblemNextLayout1"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="550dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -40,6 +40,60 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/retryProblemSelectLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/WrongProblemNextLayout1">
+
+        <Button
+            android:id="@+id/addToRetry"
+            android:layout_width="137dp"
+            android:layout_height="62dp"
+            android:layout_marginStart="136dp"
+            android:background="@drawable/blue_bar_right"
+            android:fontFamily="@font/nanum_barun_gothic_bold"
+            android:onClick="addToRetry"
+            android:text="다시 풀어볼 문제에 추가"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/toSolve"
+            android:layout_width="110dp"
+            android:layout_height="51dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/blue_bar_right"
+            android:fontFamily="@font/nanum_barun_gothic_bold"
+            android:onClick="toProblemSolve"
+            android:text="문제 풀기"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.53" />
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="109dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/blue_bar_right"
+            android:fontFamily="@font/nanum_barun_gothic_bold"
+            android:onClick="back"
+            android:text="뒤로 가기"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/WrongProblemNextLayout2"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -91,7 +145,7 @@
             android:text="뒤로 가기"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
