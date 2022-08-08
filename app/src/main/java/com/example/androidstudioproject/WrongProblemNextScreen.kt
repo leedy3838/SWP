@@ -3,6 +3,7 @@ package com.example.androidstudioproject
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.DocumentReference
@@ -12,13 +13,14 @@ import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.wrong_problem_next.*
 
 class WrongProblemNextScreen:AppCompatActivity() {
-    lateinit var setintent : Intent
-    lateinit var backintent :Intent
+    private lateinit var setintent : Intent
+    private lateinit var backintent :Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.wrong_problem_next)
 
+        val name = intent.getStringExtra("이름").toString()
         val user = intent.getStringExtra("user").toString()
         val grade = intent.getStringExtra("학년").toString()
         val detailSubject = intent.getStringExtra("세부과목").toString()
@@ -58,6 +60,7 @@ class WrongProblemNextScreen:AppCompatActivity() {
 
                 setintent = Intent(this, ProblemSolveScreen::class.java)
 
+                setintent.putExtra("이름", name)
                 setintent.putExtra("user", user)
                 setintent.putExtra("학년", grade)
                 setintent.putExtra("과목", subject)
@@ -85,6 +88,7 @@ class WrongProblemNextScreen:AppCompatActivity() {
     fun addToRetry(v : View){
         val db = FirebaseFirestore.getInstance()
 
+
         val name = intent.getStringExtra("이름").toString()
         val user = intent.getStringExtra("user").toString()
         val problem = intent.getStringExtra("문제 정보").toString()
@@ -92,14 +96,36 @@ class WrongProblemNextScreen:AppCompatActivity() {
         val grade = intent.getStringExtra("학년").toString()
         val subject = intent.getStringExtra("과목").toString()
 
-        val retryRef = db.collection("다시 풀기").document(user).collection(user)
+        val docRef = db.collection("다시 풀기")
+            .document(user)
+            .collection(user)
 
-        val data = hashMapOf(
-            "학년" to grade,
-            "과목" to subject,
-            "문제 정보" to problem,
-            "세부과목" to detailSubject
-        )
-        retryRef.document(name).set(data)
+        docRef
+            .get()
+            .addOnSuccessListener { result ->
+                var flag = false
+
+                for (document in result) {
+                    if (document.id == name) {
+                        flag = true
+                        Toast.makeText(this, "이미 존재하는 문제입니다.", Toast.LENGTH_SHORT).show()
+                        break
+                    }
+                }
+
+                if (!flag) {
+                    Toast.makeText(this, "다시 풀어보고 싶은 문제에 추가하였습니다.", Toast.LENGTH_SHORT).show()
+                    val retryRef = db.collection("다시 풀기").document(user).collection(user)
+
+                    val data = hashMapOf(
+                        "학년" to grade,
+                        "과목" to subject,
+                        "문제 정보" to problem,
+                        "세부과목" to detailSubject
+                    )
+                    retryRef.document(name).set(data)
+
+                }
+            }
     }
 }

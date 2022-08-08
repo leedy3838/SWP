@@ -83,8 +83,12 @@
         <entry key="..\:/Users/chani/Desktop/And/project/AndroidStudioProject/app/src/main/res/layout/alert_popup.xml" value="0.17119565217391305" />
         <entry key="..\:/Users/chani/Desktop/And/project/AndroidStudioProject/app/src/main/res/layout/basic_screen.xml" value="0.5328125" />
         <entry key="..\:/Users/chani/Desktop/And/project/AndroidStudioProject/app/src/main/res/layout/problem_solve.xml" value="0.17119565217391305" />
+        <entry key="..\:/Users/chani/Desktop/And/project/AndroidStudioProject/app/src/main/res/layout/problem_solve_next.xml" value="0.2591185410334346" />
+        <entry key="..\:/Users/chani/Desktop/And/project/AndroidStudioProject/app/src/main/res/layout/today_solve.xml" value="0.2591185410334346" />
         <entry key="..\:/Users/chani/Desktop/And/project/AndroidStudioProject/app/src/main/res/layout/today_solved_next.xml" value="0.1453900709219858" />
+        <entry key="..\:/Users/chani/Desktop/And/project/AndroidStudioProject/app/src/main/res/layout/wrong_problem_next.xml" value="0.2591185410334346" />
         <entry key="..\:/Users/chani/Desktop/And/project/AndroidStudioProject/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Users/chani/Desktop/And/project/AndroidStudioProject/app/src/main/res/xml/settings_preference.xml" value="0.5328125" />
         <entry key="..\:/Users/ghikh/Desktop/gitclone/AndroidStudioProject/app/src/main/res/layout/basic_screen.xml" value="0.24456521739130435" />
         <entry key="..\:/Users/ghikh/Desktop/gitclone/AndroidStudioProject/app/src/main/res/layout/help_screen.xml" value="0.24456521739130435" />
         <entry key="..\:/Users/ghikh/Desktop/gitclone/AndroidStudioProject/app/src/main/res/layout/listlayout.xml" value="0.24456521739130435" />
@@ -113,6 +117,21 @@
         <entry key="..\:/Users/kyowon1/Desktop/AndroidStudioProject/app/src/main/res/xml/nested_user_info_setting.xml" value="0.2390625" />
         <entry key="..\:/Users/kyowon1/Desktop/AndroidStudioProject/app/src/main/res/xml/setting.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/kyowon1/Desktop/AndroidStudioProject/app/src/main/res/xml/settings_preference.xml" value="0.2364102564102564" />
+        <entry key="..\:/Users/kyowon1/Desktop/android0731/AndroidStudioProject/app/src/main/res/layout/activity_app_lock_password.xml" value="0.34717948717948716" />
+        <entry key="..\:/Users/kyowon1/Desktop/android0731/AndroidStudioProject/app/src/main/res/layout/activity_start.xml" value="0.2894399315946986" />
+        <entry key="..\:/Users/kyowon1/Desktop/android0731/AndroidStudioProject/app/src/main/res/layout/basic_screen.xml" value="0.240625" />
+        <entry key="..\:/Users/kyowon1/Desktop/android0731/AndroidStudioProject/app/src/main/res/layout/fragment_blank1.xml" value="0.2894399315946986" />
+        <entry key="..\:/Users/kyowon1/Desktop/android0731/AndroidStudioProject/app/src/main/res/layout/listlayout.xml" value="0.2894399315946986" />
+        <entry key="..\:/Users/kyowon1/Desktop/android0731/AndroidStudioProject/app/src/main/res/layout/problem_solve.xml" value="0.240625" />
+        <entry key="..\:/Users/kyowon1/Desktop/android0731/AndroidStudioProject/app/src/main/res/layout/retry_problem_select.xml" value="0.240625" />
+        <entry key="..\:/Users/kyowon1/Desktop/android0731/AndroidStudioProject/app/src/main/res/layout/setting_password.xml" value="0.34615384615384615" />
+        <entry key="..\:/Users/kyowon1/Desktop/android0731/AndroidStudioProject/app/src/main/res/layout/setting_qna.xml" value="0.34717948717948716" />
+        <entry key="..\:/Users/kyowon1/Desktop/android0731/AndroidStudioProject/app/src/main/res/layout/setting_screen.xml" value="0.240625" />
+        <entry key="..\:/Users/kyowon1/Desktop/android0731/AndroidStudioProject/app/src/main/res/layout/setting_time.xml" value="0.240625" />
+        <entry key="..\:/Users/kyowon1/Desktop/android0731/AndroidStudioProject/app/src/main/res/layout/setting_user.xml" value="0.26506024096385544" />
+        <entry key="..\:/Users/kyowon1/Desktop/android0731/AndroidStudioProject/app/src/main/res/layout/today_solve.xml" value="0.240625" />
+        <entry key="..\:/Users/kyowon1/Desktop/android0731/AndroidStudioProject/app/src/main/res/layout/unlock_qna.xml" value="0.2894399315946986" />
+        <entry key="..\:/Users/kyowon1/Desktop/android0731/AndroidStudioProject/app/src/main/res/xml/settings_preference.xml" value="0.240625" />
       </map>
     </option>
   </component>

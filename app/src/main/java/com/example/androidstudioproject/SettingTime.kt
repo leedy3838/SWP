@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.setting_time.*
 class SettingTime :AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.setting_time)
         val picker = findViewById<View>(R.id.timePicker) as TimePicker
