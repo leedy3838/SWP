@@ -11,7 +11,7 @@ import java.util.*
 import kotlin.Comparator
 
 class WrongProblemScreen : AppCompatActivity() {
-    private val DataList = mutableListOf<Data>()
+    private val DataListWrong = mutableListOf<Data>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +33,7 @@ class WrongProblemScreen : AppCompatActivity() {
                         continue
 
                     //name grade subject
-                    DataList.add(
+                    DataListWrong.add(
                         Data(
                             document.id,
                             document.get("문제 정보").toString(),
@@ -44,7 +44,7 @@ class WrongProblemScreen : AppCompatActivity() {
                     )
                 }
 
-                val customAdapter = CustomAdapter(DataList)
+                val customAdapter = CustomAdapter(DataListWrong)
 
                 wrongProblemList.layoutManager = LinearLayoutManager(this)
                 wrongProblemList.adapter = customAdapter
@@ -65,7 +65,7 @@ class WrongProblemScreen : AppCompatActivity() {
                     }
                 })
 
-                Collections.sort(DataList, Comparator() { data1: Data, data2: Data ->
+                Collections.sort(DataListWrong, Comparator() { data1: Data, data2: Data ->
                     val answer1 =
                         data1.info.substring(data1.info.length - 3, data1.info.length - 1)
                             .trim().toInt()

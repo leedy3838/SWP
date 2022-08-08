@@ -12,8 +12,8 @@ import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.retry_problem_select.*
 
 class RetryProblemSelectScreen : AppCompatActivity() {
-    lateinit var setintent : Intent
-    lateinit var backintent : Intent
+    private lateinit var setintent : Intent
+    private lateinit var backintent : Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,5 +93,7 @@ class RetryProblemSelectScreen : AppCompatActivity() {
             .collection(user)
             .document(name)
             .delete()
+
+        startActivity(backintent)
     }
 }
