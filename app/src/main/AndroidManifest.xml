@@ -40,7 +40,11 @@
                 android:name="android.AccessibilityService"
                 android:resource="@xml/accessibility_service_config" />
         </service>
-
+        <activity
+            android:name=".BasicScreen"
+            android:exported="true">
+        </activity>
+        <activity android:name=".SignUpScreen"/>
         <activity android:name=".UnlockQnA"/>
         <activity android:name=".AppPassWordActivity"/>
         <activity android:name=".RetryProblemScreen" />
@@ -56,11 +60,9 @@
         <activity android:name=".SettingTime"/>
         <activity android:name=".SettingPassword"/>
         <activity android:name=".SettingQnA"/>
-        <activity android:name=".SettingUser"/>
-        <activity
-            android:name=".BasicScreen"
-            android:exported="true">
-        </activity>
+        <activity android:name=".SettingGrade"/>
+        <activity android:name=".LogInScreen"/>
+
     </application>
 
 </manifest>

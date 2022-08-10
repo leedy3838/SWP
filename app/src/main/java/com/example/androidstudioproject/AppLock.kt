@@ -2,6 +2,7 @@ package com.example.androidstudioproject
 
 import android.content.Context
 
+
 class AppLock(context: Context) {
 
     private var sharedPref = context.getSharedPreferences("appLock", Context.MODE_PRIVATE)
