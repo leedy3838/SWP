@@ -13,17 +13,19 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlin.system.exitProcess
 import androidx.preference.PreferenceManager
 import android.content.SharedPreferences
+import android.os.CountDownTimer
 import android.view.Gravity
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 
 
 class BasicScreen : AppCompatActivity() {
-    lateinit var user : String
-    lateinit var grade : String
-    lateinit var subject : String
-    lateinit var difficulty : String
-    lateinit var selectSubject : String
-    var answerRate : Long = 0
+    lateinit var user: String
+    lateinit var grade: String
+    lateinit var subject: String
+    lateinit var difficulty: String
+    lateinit var selectSubject: String
+    var answerRate: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,10 +59,11 @@ class BasicScreen : AppCompatActivity() {
 
             val docRef = db.collection("user")
             var exist = false
-            
-            val sharedPreferences : SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
-            user = sharedPreferences.getString("userName","default").toString()
+            val sharedPreferences: SharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this)
+
+            user = sharedPreferences.getString("userName", "default").toString()
             grade = sharedPreferences.getString("userGradeSetting", "").toString()
             subject = sharedPreferences.getString("subject", "없음").toString()
             difficulty = sharedPreferences.getString("difficulty", "Easy").toString()
@@ -108,7 +111,110 @@ class BasicScreen : AppCompatActivity() {
                     }
                 }
         }
+
+        var sharedPreferences: SharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(this@BasicScreen)
+
+        var hour = sharedPreferences.getInt("hour", 0).toString()
+        var minute = sharedPreferences.getInt("minute", 0).toString()
+        var second = sharedPreferences.getInt("second", 0).toString()
+        if (hour.length == 1) hour = "0" + hour
+        if (minute.length == 1) minute = "0" + minute
+        if (second.length == 1) second = "0" + second
+        var conversionTime = hour + minute + second
+        countDown(conversionTime)
+
+        var userInfo = findViewById<TextView>(R.id.userInfo)
+        val userName = sharedPreferences.getString("userName", "?")
+        val userGrade = sharedPreferences.getString("userGradeSetting", "?")
+        userInfo.setText(userName + " / " + userGrade)
+
+        var userInfo2 = findViewById<TextView>(R.id.userInfo2)
+        val subject = sharedPreferences.getString("subject", "?")
+        val detailSubject = sharedPreferences.getString("detailSubject", subject)
+        val difficulty = sharedPreferences.getString("userGradeSetting", "?")
+        userInfo2.bringToFront()
+        userInfo2.setText(detailSubject + " / " + difficulty)
     }
+
+    fun countDown(time: String) {
+        var leftTime = findViewById<TextView>(R.id.leftTime)
+        var conversionTime: Long = 0
+
+        // 1000 단위가 1초
+        // 60000 단위가 1분
+        // 60000 * 3600 = 1시간
+
+        var getHour = time.substring(0, 2)
+        var getMin = time.substring(2, 4)
+        var getSecond = time.substring(4, 6)
+
+        // "00"이 아니고, 첫번째 자리가 0 이면 제거
+        if (getHour.substring(0, 1) == "0") {
+            getHour = getHour.substring(1, 2)
+        }
+
+        if (getMin.substring(0, 1) == "0") {
+            getMin = getMin.substring(1, 2)
+        }
+
+        if (getSecond.substring(0, 1) == "0") {
+            getSecond = getSecond.substring(1, 2)
+        }
+
+        // 변환시간
+        conversionTime =
+            getHour.toLong() * 1000 * 3600 + getMin.toLong() * 60 * 1000 + getSecond.toLong() * 1000
+
+        // 첫번쨰 인자 : 원하는 시간 (예를들어 30초면 30 x 1000(주기))
+        // 두번쨰 인자 : 주기( 1000 = 1초)
+        object : CountDownTimer(conversionTime, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                // 시간단위
+                var hour = (millisUntilFinished / (60 * 60 * 1000)).toString()
+
+                // 분단위
+                val getMin: Long = millisUntilFinished - (hour.toLong() * 60 * 60 * 1000)
+                var min = (getMin / (60 * 1000)).toString() // 몫
+
+                // 초단위
+                var second = ((getMin % (60 * 1000)) / 1000).toString() // 나머지
+
+                val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@BasicScreen)
+                sharedPref.edit().run {
+                    putInt("hour", hour.toInt())
+                    putInt("minute", min.toInt())
+                    putInt("second", second.toInt())
+                    commit()
+                }
+
+                // 시간이 한자리면 0을 붙인다
+                if (hour.length == 1) {
+                    hour = "0$hour"
+                }
+
+                // 분이 한자리면 0을 붙인다
+                if (min.length == 1) {
+                    min = "0$min"
+                }
+
+                // 초가 한자리면 0을 붙인다
+                if (second.length == 1) {
+                    second = "0$second"
+                }
+
+                leftTime.setText("$hour:$min:$second")
+            }
+
+            override fun onFinish() {
+                leftTime.setText("시간종료!")
+            }
+
+        }.start()
+
+    }
+
+
 
     private var backPressedTime : Long = 0
 

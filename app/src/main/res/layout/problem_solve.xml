@@ -23,8 +23,10 @@
             android:gravity="center"
             android:background="@drawable/blue_bar_right"
             android:textColor="@color/white"
-            android:fontFamily="@font/nanum_barun_gothic_bold"
-            android:textSize="20sp"
+            android:fontFamily="@font/basic_font"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:elevation="10dp"
             android:text="문제 이름"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,53 +38,68 @@
         android:id="@+id/problemSolveLayout2"
         android:layout_width="match_parent"
         android:layout_height="450dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ProblemSolveLayout1">
+        app:layout_constraintTop_toBottomOf="@+id/problemSolveLayout3"
+        tools:context=".ProblemSolveScreen">
+
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp">
 
             <ImageView
                 android:id="@+id/imageViewProblemSolve"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
         </ScrollView>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/problemSolveLayout3"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:clipToPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/problemSolveLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/ProblemSolveLayout1">
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="16dp"
+            android:stateListAnimator="@null"
+            android:translationZ="0dp"
+            android:elevation="10dp"
+            android:background="@drawable/blue_icon_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.589"/>
 
         <Button
             android:id="@+id/answerSubmit"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginEnd="16dp"
+            android:stateListAnimator="@null"
+            android:translationZ="10dp"
+            android:background="@color/Transparency"
+            android:fontFamily="@font/basic_font"
+            android:textStyle="bold"
             android:onClick="toProblemSolveNext"
             android:text="정답 제출"
             android:textColor="@color/white"
-            android:fontFamily="@font/nanum_barun_gothic_bold"
             android:textSize="14sp"
-            android:background="@drawable/blue_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -93,12 +110,17 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
+            android:layout_margin="16dp"
+            android:stateListAnimator="@null"
+            android:translationZ="0dp"
+            android:elevation="10dp"
+            android:background="@drawable/blue_icon_right"
+            android:fontFamily="@font/basic_font"
+            android:textStyle="bold"
             android:onClick="toProblemSolveNext"
             android:text="포기하기"
             android:textColor="@color/white"
-            android:fontFamily="@font/nanum_barun_gothic_bold"
             android:textSize="14sp"
-            android:background="@drawable/blue_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
