@@ -4,6 +4,8 @@
     package="com.example.androidstudioproject">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:allowBackup="true"
@@ -27,6 +29,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".AccessibilityService"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessbilityService"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.AccessibilityService"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+
         <activity android:name=".UnlockQnA"/>
         <activity android:name=".AppPassWordActivity"/>
         <activity android:name=".RetryProblemScreen" />
