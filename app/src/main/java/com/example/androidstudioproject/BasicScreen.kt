@@ -2,6 +2,7 @@ package com.example.androidstudioproject
 
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -24,11 +25,17 @@ class BasicScreen : AppCompatActivity() {
     lateinit var subject : String
     lateinit var difficulty : String
     lateinit var selectSubject : String
+    lateinit var qnaAnswer : String
+    lateinit var qnaQuestion : String
+    var password : String? = null
     var answerRate : Long = 0
+
+    lateinit var sharedPref : SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        sharedPref = getSharedPreferences("appLock", Context.MODE_PRIVATE)
         val pref: SharedPreferences = getSharedPreferences("isFirst", Activity.MODE_PRIVATE)
 
         var first: Boolean = pref.getBoolean("isFirst", true)
@@ -37,8 +44,8 @@ class BasicScreen : AppCompatActivity() {
 
         if (first == true) {
             setContentView(R.layout.activity_app_lock_password)
-            startActivity(Intent(this, SettingUser::class.java))
-            //앱 최초 실행시 사용자 이름 설정 액티비티로 이동
+            startActivity(Intent(this, LogInScreen::class.java))
+            //앱 최초 실행시 기존 사용자 로그인 액티비티로 이동 ( 기존 사용자 아닐 경우 회원가입으로도 이동 가능 )
 
         } else {
             setContentView(R.layout.basic_screen)
@@ -59,6 +66,11 @@ class BasicScreen : AppCompatActivity() {
             difficulty = sharedPreferences.getString("difficulty", "Easy").toString()
             selectSubject = sharedPreferences.getString("detailSubject", "없음").toString()
 
+            //user 정보들
+            qnaQuestion = sharedPreferences.getString("qnaQuestion","??").toString()
+            qnaAnswer = sharedPreferences.getString("qnaAnswer","??").toString()
+            password = sharedPref.getString("applock","")
+
             docRef
                 .get()
                 .addOnSuccessListener { result ->
@@ -69,6 +81,15 @@ class BasicScreen : AppCompatActivity() {
                     if (!exist) {
                         val data = hashMapOf("user" to user)
                         docRef.document(user).set(data)
+
+                        // user에게 비밀번호 설정
+                        val pwData = hashMapOf(
+                            "password" to password,
+                            "QnA_Answer" to qnaAnswer,
+                            "QnA_Question" to qnaQuestion,
+                            "grade" to grade
+                        )
+                        docRef.document(user).set(pwData)
 
                         val base = hashMapOf("base" to "yes")
 
