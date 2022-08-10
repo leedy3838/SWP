@@ -16,6 +16,7 @@ import androidx.preference.PreferenceManager
 import android.content.SharedPreferences
 import android.view.Gravity
 import androidx.appcompat.app.AlertDialog
+import androidx.preference.Preference
 
 
 class BasicScreen : AppCompatActivity() {
@@ -36,14 +37,6 @@ class BasicScreen : AppCompatActivity() {
 
         sharedPref = getSharedPreferences("appLock", Context.MODE_PRIVATE)
         val pref: SharedPreferences = getSharedPreferences("isFirst", Activity.MODE_PRIVATE)
-        println(sharedPref.getString("applock",""))
-/*
-        // 처음 설정을 두번째 실행 이후에도 실행시키고 싶다면 이 코드 활성화시키고
-        // run을 한번한 후에 다시 주석 처리 후 run하면 된다.
-        val editor: SharedPreferences.Editor = pref.edit()
-        editor.putBoolean("isFirst", true)
-        editor.commit()
-*/
 
         var first: Boolean = pref.getBoolean("isFirst", true)
 
@@ -167,6 +160,7 @@ class BasicScreen : AppCompatActivity() {
     fun problemSolveClicked(v : View){
         val intent = Intent(this, ProblemSolveScreen::class.java)
 
+
         intent.putExtra("user", user) // 닉네임
         intent.putExtra("학년", grade) // 학년
         intent.putExtra("과목", subject) // 과목
@@ -183,8 +177,9 @@ class BasicScreen : AppCompatActivity() {
 
         intent.putExtra("정답률", answerRate) // 초기 정답률
 
+        val builder = AlertDialog.Builder(this)
+
         if (subject == "없음"){
-            val builder = AlertDialog.Builder(this)
             builder.setMessage("설정에서 과목을 선택해주십시오.")
                 .setPositiveButton("확인") { _, _ ->
 
@@ -193,8 +188,39 @@ class BasicScreen : AppCompatActivity() {
             val window = alertDialog.window
             window?.setGravity(Gravity.CENTER)
             alertDialog.show()
+            return
         }
-        else startActivity(intent)
+
+
+        else if (grade == "2학년" && (subject == "과학탐구" || subject == "사회탐구")) {
+            if (selectSubject == "없음") {
+                builder.setMessage("설정에서 세부과목을 선택해주십시오.")
+                    .setPositiveButton("확인") { _, _ ->
+
+                    }
+                val alertDialog = builder.create()
+                val window = alertDialog.window
+                window?.setGravity(Gravity.CENTER)
+                alertDialog.show()
+                return
+            }
+        }
+        else if (grade == "3학년" && (subject == "국어" || subject == "수학" || subject == "과학탐구" || subject == "사회탐구")) {
+            if (selectSubject == "없음") {
+                builder.setMessage("설정에서 세부과목을 선택해주십시오.")
+                    .setPositiveButton("확인") { _, _ ->
+
+                    }
+                val alertDialog = builder.create()
+                val window = alertDialog.window
+                window?.setGravity(Gravity.CENTER)
+                alertDialog.show()
+                return
+            }
+        }
+
+        startActivity(intent)
+
     }
 
     fun todaySolveClicked(v : View){
