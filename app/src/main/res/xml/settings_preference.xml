@@ -21,6 +21,11 @@
                 />
 
         </Preference>
+
+        <Preference
+            app:key="logOutKey"
+            app:title="로그아웃">
+        </Preference>
     </PreferenceCategory>
 
 

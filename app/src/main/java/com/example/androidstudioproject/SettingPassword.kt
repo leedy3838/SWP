@@ -39,7 +39,7 @@ class SettingPassword : AppCompatActivity() {
 
         binding = SettingPasswordBinding.inflate(layoutInflater)
         // 첫 접속 구분하기 위한 SharedPreference 활용
-        val pref: SharedPreferences = getSharedPreferences("isFirst", Activity.MODE_PRIVATE)
+        val pref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         var first: Boolean = pref.getBoolean("isFirst", true)
 
         // 다른 액티비티를 실행 후 콜백 함수까지 실행하기 위한 registerForActivityResult 선언
