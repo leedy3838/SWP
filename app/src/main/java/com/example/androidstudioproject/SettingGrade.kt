@@ -1,5 +1,6 @@
 package com.example.androidstudioproject
 
+import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -41,5 +42,13 @@ class SettingGrade : AppCompatActivity() {
     fun userSaveClicked(v : View){
         Toast.makeText(this@SettingGrade, "이름 및 학년 설정됨", Toast.LENGTH_SHORT).show()
         startActivity(Intent(this, SettingQnA::class.java))
+    }
+
+    override fun onBackPressed() {
+        val pref: SharedPreferences = getSharedPreferences("isFirst", Activity.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = pref.edit()
+        editor.putBoolean("isFirst", true)
+        editor.commit()
+        startActivity(Intent(this, SettingPassword::class.java))
     }
 }

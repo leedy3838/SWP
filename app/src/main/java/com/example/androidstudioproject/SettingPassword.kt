@@ -140,6 +140,8 @@ class SettingPassword : AppCompatActivity() {
         }
 
 
+
+
         // 첫 접속 시 초기화
         if (first == true) {
             println("first access")
@@ -194,6 +196,14 @@ class SettingPassword : AppCompatActivity() {
 //        }
     }
 
+    override fun onBackPressed() {
+        val pref: SharedPreferences = getSharedPreferences("isFirst", Activity.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = pref.edit()
+        editor.putBoolean("isFirst", true)
+        editor.commit()
+        startActivity(Intent(this, SignUpScreen::class.java))
+    }
+
     // 액티비티가 onResume인 경우
     // onStart로 할 경우 AppPasswordActivity의 finish() 이후에
     // onStart가 실행되어 액티비티가 종료 되지않고 무한반복되는 현상 발생 이유는 아직 찾지 못함
@@ -206,4 +216,5 @@ class SettingPassword : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
     }
+
 }
