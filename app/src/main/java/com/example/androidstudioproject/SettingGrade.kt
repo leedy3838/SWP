@@ -7,17 +7,16 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
-import kotlinx.android.synthetic.main.setting_user.*
-import kotlinx.android.synthetic.main.setting_user.view.*
+import kotlinx.android.synthetic.main.setting_grade.*
 
-class SettingUser : AppCompatActivity() {
+class SettingGrade : AppCompatActivity() {
 
     private var mPref : SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.setting_user)
+        setContentView(R.layout.setting_grade)
 
         mPref = PreferenceManager.getDefaultSharedPreferences(this)
 
@@ -40,12 +39,7 @@ class SettingUser : AppCompatActivity() {
     }
 
     fun userSaveClicked(v : View){
-        mPref?.edit()?.run {
-            putString("userName", userInit.getText().toString())
-            apply()
-        }
-        println(mPref?.getString("qnaAnswer","?"))
-        Toast.makeText(this@SettingUser, "이름 및 학년 설정됨", Toast.LENGTH_SHORT).show()
-        startActivity(Intent(this, SettingPassword::class.java))
+        Toast.makeText(this@SettingGrade, "이름 및 학년 설정됨", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, SettingQnA::class.java))
     }
 }
