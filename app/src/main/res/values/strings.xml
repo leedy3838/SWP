@@ -7,4 +7,6 @@
         <item>list02</item>
         <item>list03</item>
     </string-array>
+
+    <string name="log_out_key">logOutKey</string>
 </resources>

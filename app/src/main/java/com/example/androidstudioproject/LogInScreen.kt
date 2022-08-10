@@ -32,7 +32,7 @@ class LogInScreen : AppCompatActivity() {
     }
 
     fun logInClicked(v: View){
-        val pref: SharedPreferences = getSharedPreferences("isFirst", Activity.MODE_PRIVATE)
+        val pref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         // 첫 접속 체크용 SharedPreference
 
         val db = FirebaseFirestore.getInstance()
@@ -42,7 +42,7 @@ class LogInScreen : AppCompatActivity() {
         lateinit var qnaAnswer : String
         lateinit var grade : String
 
-        var sharedPref = getSharedPreferences("appLock", Context.MODE_PRIVATE)
+        var sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
         // 비밀번호 저장을 위한 SharedPreference
 
         db.collection("user")

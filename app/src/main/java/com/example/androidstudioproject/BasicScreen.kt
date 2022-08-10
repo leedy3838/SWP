@@ -36,7 +36,7 @@ class BasicScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         sharedPref = getSharedPreferences("appLock", Context.MODE_PRIVATE)
-        val pref: SharedPreferences = getSharedPreferences("isFirst", Activity.MODE_PRIVATE)
+        val pref : SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
         var first: Boolean = pref.getBoolean("isFirst", true)
 
