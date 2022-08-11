@@ -45,10 +45,6 @@ class SettingGrade : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val pref: SharedPreferences = getSharedPreferences("isFirst", Activity.MODE_PRIVATE)
-        val editor: SharedPreferences.Editor = pref.edit()
-        editor.putBoolean("isFirst", true)
-        editor.commit()
-        startActivity(Intent(this, SettingPassword::class.java))
+        startActivity(Intent(this, SignUpScreen::class.java))
     }
 }

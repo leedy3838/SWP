@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import com.example.androidstudioproject.databinding.ActivityAppLockPasswordBinding
 
 class AppPassWordActivity : AppCompatActivity(){
@@ -210,5 +211,14 @@ class AppPassWordActivity : AppCompatActivity(){
                 }
             }
         }
+    }
+
+    override fun onBackPressed() {
+        val pref : SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        pref.edit().run {
+            putBoolean("isFirst",true)
+        }.apply()
+
+        startActivity(Intent(this, SignUpScreen::class.java))
     }
 }
