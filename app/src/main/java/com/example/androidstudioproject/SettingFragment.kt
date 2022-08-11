@@ -11,11 +11,11 @@ import androidx.preference.*
 
 
 class SettingFragment : PreferenceFragmentCompat(){
-
     lateinit var prefs : SharedPreferences
     private var mPref: SharedPreferences? = null
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+
         setPreferencesFromResource(R.xml.settings_preference, rootKey)
         mPref = PreferenceManager.getDefaultSharedPreferences(context)
         mPref?.registerOnSharedPreferenceChangeListener(mPrefChangeListener)
@@ -27,7 +27,7 @@ class SettingFragment : PreferenceFragmentCompat(){
         val timePre : Preference? = findPreference("timeSettingPref")
         val subjectPre : Preference? = findPreference("subject")
         val userNamePre : EditTextPreference? = findPreference("userName")
-        
+
         difPre?.setSummary(mPref?.getString("difficulty","난이도를 선택해주세요"))
         gradePre?.setSummary(mPref?.getString("userGradeSetting","학년을 선택해주세요"))
         timePre?.setSummary(mPref?.getInt("hour",0).toString()+"시간  "+mPref?.getInt("minute",0).toString()+"분")
@@ -42,6 +42,19 @@ class SettingFragment : PreferenceFragmentCompat(){
                 val maxLength = 10
                 editText.filters =
                     arrayOf<InputFilter>(LengthFilter(maxLength))
+            }
+        })
+
+        val button: Preference? = findPreference(getString(R.string.log_out_key))
+        button?.setOnPreferenceClickListener(object : Preference.OnPreferenceClickListener {
+            override fun onPreferenceClick(preference: Preference?): Boolean {
+                println("실행!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                val pref : SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+                pref.edit().run {
+                    putBoolean("isFirst",true)
+                }.apply()
+                startActivity(Intent(context, BasicScreen::class.java))
+                return true
             }
         })
     }

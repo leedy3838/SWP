@@ -48,4 +48,3 @@ class SettingScreen : AppCompatActivity(), PreferenceFragmentCompat.OnPreference
 
 
 
-

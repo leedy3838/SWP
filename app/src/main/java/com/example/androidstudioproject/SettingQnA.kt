@@ -44,5 +44,5 @@ class SettingQnA : AppCompatActivity() {
         println(mPref?.getString("qnaAnswer","???"))
         startActivity(Intent(this, BasicScreen::class.java))
     }
-}
 
+}

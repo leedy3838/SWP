@@ -2,6 +2,7 @@ package com.example.androidstudioproject
 
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -20,34 +21,33 @@ import androidx.appcompat.app.AlertDialog
 
 
 class BasicScreen : AppCompatActivity() {
-    lateinit var user: String
-    lateinit var grade: String
-    lateinit var subject: String
-    lateinit var difficulty: String
-    lateinit var selectSubject: String
-    var answerRate: Long = 0
+    private lateinit var user : String
+    private lateinit var grade : String
+    private lateinit var subject : String
+    private lateinit var difficulty : String
+    private lateinit var selectSubject : String
+    private lateinit var qnaAnswer : String
+    private lateinit var qnaQuestion : String
+    private var password : String? = null
+    private var answerRate : Long = 0
+
+    private lateinit var sharedPref : SharedPreferences
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val pref: SharedPreferences = getSharedPreferences("isFirst", Activity.MODE_PRIVATE)
+        sharedPref = getSharedPreferences("appLock", Context.MODE_PRIVATE)
+        val pref : SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
-/*
-        // 처음 설정을 두번째 실행 이후에도 실행시키고 싶다면 이 코드 활성화시키고
-        // run을 한번한 후에 다시 주석 처리 후 run하면 된다.
-        val editor: SharedPreferences.Editor = pref.edit()
-        editor.putBoolean("isFirst", true)
-        editor.commit()
-*/
+        val first: Boolean = pref.getBoolean("isFirst", true)
 
-        var first: Boolean = pref.getBoolean("isFirst", true)
+        println("isFirst = $first")
 
-        println("isFirst = " + first)
-
-        if (first == true) {
+        if (first) {
             setContentView(R.layout.activity_app_lock_password)
-            startActivity(Intent(this, SettingUser::class.java))
-            //앱 최초 실행시 사용자 이름 설정 액티비티로 이동
+            startActivity(Intent(this, LogInScreen::class.java))
+            //앱 최초 실행시 기존 사용자 로그인 액티비티로 이동 ( 기존 사용자 아닐 경우 회원가입으로도 이동 가능 )
 
         } else {
             setContentView(R.layout.basic_screen)
@@ -55,7 +55,6 @@ class BasicScreen : AppCompatActivity() {
 
 
             val db = FirebaseFirestore.getInstance()
-            var st = ""
 
             val docRef = db.collection("user")
             var exist = false
@@ -69,16 +68,30 @@ class BasicScreen : AppCompatActivity() {
             difficulty = sharedPreferences.getString("difficulty", "Easy").toString()
             selectSubject = sharedPreferences.getString("detailSubject", "없음").toString()
 
+            //user 정보들
+            qnaQuestion = sharedPreferences.getString("qnaQuestion","??").toString()
+            qnaAnswer = sharedPreferences.getString("qnaAnswer","??").toString()
+            password = sharedPref.getString("applock","")
+
             docRef
                 .get()
                 .addOnSuccessListener { result ->
                     for (document in result) {
                         if (document.id == user)
-                            exist = true;
+                            exist = true
                     }
                     if (!exist) {
                         val data = hashMapOf("user" to user)
                         docRef.document(user).set(data)
+
+                        // user에게 비밀번호 설정
+                        val pwData = hashMapOf(
+                            "password" to password,
+                            "QnA_Answer" to qnaAnswer,
+                            "QnA_Question" to qnaQuestion,
+                            "grade" to grade
+                        )
+                        docRef.document(user).set(pwData)
 
                         val base = hashMapOf("base" to "yes")
 
@@ -114,7 +127,7 @@ class BasicScreen : AppCompatActivity() {
 
         var sharedPreferences: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(this@BasicScreen)
-
+/*
         var hour = sharedPreferences.getInt("hour", 0).toString()
         var minute = sharedPreferences.getInt("minute", 0).toString()
         var second = sharedPreferences.getInt("second", 0).toString()
@@ -123,6 +136,8 @@ class BasicScreen : AppCompatActivity() {
         if (second.length == 1) second = "0" + second
         var conversionTime = hour + minute + second
         countDown(conversionTime)
+
+
 
         var userInfo = findViewById<TextView>(R.id.userInfo)
         val userName = sharedPreferences.getString("userName", "?")
@@ -135,7 +150,11 @@ class BasicScreen : AppCompatActivity() {
         val difficulty = sharedPreferences.getString("difficulty", "?")
         userInfo2.bringToFront()
         userInfo2.setText(detailSubject + " / " + difficulty)
+
+ */
     }
+
+
 
     fun countDown(time: String) {
         var leftTime = findViewById<TextView>(R.id.leftTime)
@@ -212,6 +231,9 @@ class BasicScreen : AppCompatActivity() {
 
         }.start()
 
+
+
+
     }
 
 
@@ -259,14 +281,15 @@ class BasicScreen : AppCompatActivity() {
         intent.putExtra("문제 정보", "없음")
         intent.putExtra("세부과목", selectSubject) // 세부과목 디폴트값 "없음"
 
-        if (difficulty == "Easy")
-            answerRate = 100L
-        else if (difficulty == "Normal")
-            answerRate = 60L
-        else if (difficulty == "Hard")
-            answerRate = 30L
+        when (difficulty) {
+            "Easy" -> answerRate = 100L
+            "Normal" -> answerRate = 60L
+            "Hard" -> answerRate = 30L
+        }
 
         intent.putExtra("정답률", answerRate) // 초기 정답률
+
+        val builder = AlertDialog.Builder(this)
 
         if (subject == "없음"){
             val builder = AlertDialog.Builder(this)
@@ -278,8 +301,36 @@ class BasicScreen : AppCompatActivity() {
             val window = alertDialog.window
             window?.setGravity(Gravity.CENTER)
             alertDialog.show()
+            return
         }
-        else startActivity(intent)
+        else if (grade == "2학년" && (subject == "과학탐구" || subject == "사회탐구")) {
+            if (selectSubject == "없음") {
+                builder.setMessage("설정에서 세부과목을 선택해주십시오.")
+                    .setPositiveButton("확인") { _, _ ->
+
+                    }
+                val alertDialog = builder.create()
+                val window = alertDialog.window
+                window?.setGravity(Gravity.CENTER)
+                alertDialog.show()
+                return
+            }
+        }
+        else if (grade == "3학년" && (subject == "국어" || subject == "수학" || subject == "과학탐구" || subject == "사회탐구")) {
+            if (selectSubject == "없음") {
+                builder.setMessage("설정에서 세부과목을 선택해주십시오.")
+                    .setPositiveButton("확인") { _, _ ->
+
+                    }
+                val alertDialog = builder.create()
+                val window = alertDialog.window
+                window?.setGravity(Gravity.CENTER)
+                alertDialog.show()
+                return
+            }
+        }
+
+        startActivity(intent)
     }
 
     fun todaySolveClicked(v : View){
