@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.problem_solve.*
+import java.security.AccessController.getContext
 import kotlin.math.roundToLong
 
 
@@ -207,7 +208,9 @@ class ProblemSolveScreen :AppCompatActivity() {
                 Glide.with(this)
                     .load(storageRef)
                     //대기 화면(placeholder)
-                    .placeholder(R.raw.loading)
+                    .thumbnail(Glide.with(this).load(R.raw.loading))
+                    .fitCenter()
+                    //.crossFade()
                     .into(imageViewProblemSolve)
 
                 btn_answerSubmit.setOnClickListener {     // 정답 제출 버튼 클릭 시
