@@ -1,7 +1,5 @@
 package com.example.androidstudioproject
 
-
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -16,21 +14,20 @@ import androidx.preference.PreferenceManager
 import android.content.SharedPreferences
 import android.view.Gravity
 import androidx.appcompat.app.AlertDialog
-import androidx.preference.Preference
 
 
 class BasicScreen : AppCompatActivity() {
-    lateinit var user : String
-    lateinit var grade : String
-    lateinit var subject : String
-    lateinit var difficulty : String
-    lateinit var selectSubject : String
-    lateinit var qnaAnswer : String
-    lateinit var qnaQuestion : String
-    var password : String? = null
-    var answerRate : Long = 0
+    private lateinit var user : String
+    private lateinit var grade : String
+    private lateinit var subject : String
+    private lateinit var difficulty : String
+    private lateinit var selectSubject : String
+    private lateinit var qnaAnswer : String
+    private lateinit var qnaQuestion : String
+    private var password : String? = null
+    private var answerRate : Long = 0
 
-    lateinit var sharedPref : SharedPreferences
+    private lateinit var sharedPref : SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +35,11 @@ class BasicScreen : AppCompatActivity() {
         sharedPref = getSharedPreferences("appLock", Context.MODE_PRIVATE)
         val pref : SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
-        var first: Boolean = pref.getBoolean("isFirst", true)
+        val first: Boolean = pref.getBoolean("isFirst", true)
 
-        println("isFirst = " + first)
+        println("isFirst = $first")
 
-        if (first == true) {
+        if (first) {
             setContentView(R.layout.activity_app_lock_password)
             startActivity(Intent(this, LogInScreen::class.java))
             //앱 최초 실행시 기존 사용자 로그인 액티비티로 이동 ( 기존 사용자 아닐 경우 회원가입으로도 이동 가능 )
@@ -51,9 +48,7 @@ class BasicScreen : AppCompatActivity() {
             setContentView(R.layout.basic_screen)
             Log.d("Is first Time?", "not first")
 
-
             val db = FirebaseFirestore.getInstance()
-            var st = ""
 
             val docRef = db.collection("user")
             var exist = false
@@ -76,7 +71,7 @@ class BasicScreen : AppCompatActivity() {
                 .addOnSuccessListener { result ->
                     for (document in result) {
                         if (document.id == user)
-                            exist = true;
+                            exist = true
                     }
                     if (!exist) {
                         val data = hashMapOf("user" to user)
@@ -168,12 +163,11 @@ class BasicScreen : AppCompatActivity() {
         intent.putExtra("문제 정보", "없음")
         intent.putExtra("세부과목", selectSubject) // 세부과목 디폴트값 "없음"
 
-        if (difficulty == "Easy")
-            answerRate = 100L
-        else if (difficulty == "Normal")
-            answerRate = 60L
-        else if (difficulty == "Hard")
-            answerRate = 30L
+        when (difficulty) {
+            "Easy" -> answerRate = 100L
+            "Normal" -> answerRate = 60L
+            "Hard" -> answerRate = 30L
+        }
 
         intent.putExtra("정답률", answerRate) // 초기 정답률
 

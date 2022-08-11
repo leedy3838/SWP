@@ -2,19 +2,19 @@ package com.example.androidstudioproject
 
 
 import android.app.Activity
-import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.androidstudioproject.databinding.ActivityAppLockPasswordBinding
 
 class AppPassWordActivity : AppCompatActivity(){
     private var oldPwd =""
     private var changePwdUnlock = false
-    lateinit var binding : ActivityAppLockPasswordBinding
+    private lateinit var binding : ActivityAppLockPasswordBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -141,6 +141,10 @@ class AppPassWordActivity : AppCompatActivity(){
                         onClear()
                         oldPwd = ""
                         binding.etInputInfo.text = "비밀번호 입력"
+
+                        val toast = Toast.makeText(this, "처음 입력하신 비밀번호와 다릅니다.\n다시 비밀번호를 입력해주십시오.", Toast.LENGTH_SHORT)
+                        toast.setGravity(Gravity.BOTTOM, 0, 200)
+                        toast.show()
                     }
                 }
             }
