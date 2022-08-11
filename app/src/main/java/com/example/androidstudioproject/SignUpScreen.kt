@@ -1,5 +1,6 @@
 package com.example.androidstudioproject
 
+import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -57,6 +58,16 @@ class SignUpScreen : AppCompatActivity() {
             apply()
         }
         Toast.makeText(this, "ID 설정됨", Toast.LENGTH_SHORT).show()
+
+        val pref : SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        pref.edit().run {
+            putBoolean("isFirst",true)
+        }.apply()
+
         startActivity(Intent(this, SettingPassword::class.java))
+    }
+
+    override fun onBackPressed() {
+        startActivity(Intent(this, LogInScreen::class.java))
     }
 }
