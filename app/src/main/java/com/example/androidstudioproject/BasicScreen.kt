@@ -132,7 +132,7 @@ class BasicScreen : AppCompatActivity() {
         var userInfo2 = findViewById<TextView>(R.id.userInfo2)
         val subject = sharedPreferences.getString("subject", "?")
         val detailSubject = sharedPreferences.getString("detailSubject", subject)
-        val difficulty = sharedPreferences.getString("userGradeSetting", "?")
+        val difficulty = sharedPreferences.getString("difficulty", "?")
         userInfo2.bringToFront()
         userInfo2.setText(detailSubject + " / " + difficulty)
     }

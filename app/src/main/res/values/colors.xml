@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background">#66ccff</color>
     <color name="Transparency">#00000000</color>
+    <color name="password">#04ABFF</color>
 
 </resources>
