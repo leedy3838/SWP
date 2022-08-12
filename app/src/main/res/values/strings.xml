@@ -3,9 +3,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="list">
-        <item>list01</item>
-        <item>list02</item>
-        <item>list03</item>
+        <item>고향이 어디신가요?</item>
+        <item>나온 고등학교의 이름은?</item>
+        <item>현재 살고 있는 지역은?</item>
     </string-array>
 
     <string name="log_out_key">logOutKey</string>

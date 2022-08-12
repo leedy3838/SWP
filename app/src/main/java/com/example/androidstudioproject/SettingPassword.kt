@@ -193,7 +193,13 @@ class SettingPassword : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        startActivity(Intent(this, SignUpScreen::class.java))
+        val pref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val first: Boolean = pref.getBoolean("isFirst", true)
+
+        if(first)
+            startActivity(Intent(this, SignUpScreen::class.java))
+        else
+            startActivity(Intent(this, SettingScreen::class.java))
     }
 
     // 액티비티가 onResume인 경우
