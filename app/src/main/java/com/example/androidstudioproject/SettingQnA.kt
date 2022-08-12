@@ -1,5 +1,6 @@
 package com.example.androidstudioproject
 
+import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -38,11 +39,19 @@ class SettingQnA : AppCompatActivity() {
 
     fun qnaSaveClicked(v : View){
         mPref?.edit()?.run {
+            putBoolean("isFirst",false)
+            apply()
+        }
+
+        mPref?.edit()?.run {
             putString("qnaAnswer", qnaAnswer.getText().toString())
             apply()
         }
+
         println(mPref?.getString("qnaAnswer","???"))
         startActivity(Intent(this, BasicScreen::class.java))
     }
-
+    override fun onBackPressed() {
+        startActivity(Intent(this, SignUpScreen::class.java))
+    }
 }
