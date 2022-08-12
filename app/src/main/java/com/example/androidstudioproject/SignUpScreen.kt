@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +29,13 @@ class SignUpScreen : AppCompatActivity() {
     fun duplicateCheckClicked(v: View){
         val db = FirebaseFirestore.getInstance()
         var idFlag = true
+
+        if(sign_up_id.getText().toString() == ""){
+            val toast = Toast.makeText(this, "아이디를 입력해주십시오.", Toast.LENGTH_SHORT)
+            toast.setGravity(Gravity.BOTTOM, 0, 200)
+            toast.show()
+            return
+        }
 
         db.collection("user")
             .get()
