@@ -37,10 +37,9 @@ class SettingQnA : AppCompatActivity() {
         }
 
     }
-
     fun qnaSaveClicked(v : View){
         if(qnaAnswer.getText().toString() == ""){
-            val toast = Toast.makeText(this, "아이디를 입력해주십시오.", Toast.LENGTH_SHORT)
+            val toast = Toast.makeText(this, "답을 설정해주십시오.", Toast.LENGTH_SHORT)
             toast.setGravity(Gravity.BOTTOM, 0, 200)
             toast.show()
             return
