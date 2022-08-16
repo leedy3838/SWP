@@ -65,7 +65,7 @@ class TodaySolvedNextScreen :AppCompatActivity() {
                 setintent.putExtra("세부과목",detailSubject)
                 setintent.putExtra("문제 정보", problem)
                 setintent.putExtra("이전 화면", "오늘 푼 문제")
-           }
+            }
 
         backintent = Intent(this, TodaySolveScreen::class.java)
         backintent.putExtra("user", user)

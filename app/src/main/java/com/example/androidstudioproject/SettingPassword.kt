@@ -1,6 +1,7 @@
 package com.example.androidstudioproject
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -10,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.example.androidstudioproject.databinding.SettingPasswordBinding
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class SettingPassword : AppCompatActivity() {
@@ -18,6 +20,8 @@ class SettingPassword : AppCompatActivity() {
     private lateinit var getResult: ActivityResultLauncher<Intent>
     private lateinit var getResultForQnA: ActivityResultLauncher<Intent>
     private var mPref: SharedPreferences? = null
+    private var sharedPref : SharedPreferences? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,9 +29,17 @@ class SettingPassword : AppCompatActivity() {
         mPref = PreferenceManager.getDefaultSharedPreferences(this)
         // 공용 공유프리퍼런스 활용
 
+        sharedPref = getSharedPreferences("appLock", Context.MODE_PRIVATE)
+        // 비밀번호용 공유 프리퍼런스
+
+        val db = FirebaseFirestore.getInstance()
+        val docRef = db.collection("user")
+        lateinit var user : String
+
+
         binding = SettingPasswordBinding.inflate(layoutInflater)
         // 첫 접속 구분하기 위한 SharedPreference 활용
-        val pref: SharedPreferences = getSharedPreferences("isFirst", Activity.MODE_PRIVATE)
+        val pref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         var first: Boolean = pref.getBoolean("isFirst", true)
 
         // 다른 액티비티를 실행 후 콜백 함수까지 실행하기 위한 registerForActivityResult 선언
@@ -46,8 +58,8 @@ class SettingPassword : AppCompatActivity() {
                     println("check1-1")
                     if (result.resultCode == Activity.RESULT_OK) {
                         Toast.makeText(this, "암호 설정 됨", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, SettingQnA::class.java))
-                        // 질문 / 답 설정 액티비티로 넘어감
+                        startActivity(Intent(this, SettingGrade::class.java))
+                        // 학년 설정 액티비티로 넘어감
                     }
                 }
 
@@ -55,6 +67,15 @@ class SettingPassword : AppCompatActivity() {
                 AppLockConst.ENABLE_PASSLOCK -> {
                     println("check1-2")
                     if (result.resultCode == Activity.RESULT_OK) {
+                        var password : String? = sharedPref?.getString("applock","")
+                        user = mPref?.getString("userName","default").toString()
+                        docRef
+                            .get()
+                            .addOnSuccessListener { result ->
+                                for (document in result) {
+                                    docRef.document(user).update("password", password)
+                                }
+                            }
                         Toast.makeText(this, "암호 초기화 됨", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -62,6 +83,15 @@ class SettingPassword : AppCompatActivity() {
                 AppLockConst.CHANGE_PASSWORD -> {
                     println("check1-3")
                     if (result.resultCode == Activity.RESULT_OK) {
+                        var password : String? = sharedPref?.getString("applock","")
+                        user = mPref?.getString("userName","default").toString()
+                        docRef
+                            .get()
+                            .addOnSuccessListener { result ->
+                                for (document in result) {
+                                    docRef.document(user).update("password", password)
+                                }
+                            }
                         Toast.makeText(this, "암호 변경 됨", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -110,6 +140,8 @@ class SettingPassword : AppCompatActivity() {
         }
 
 
+
+
         // 첫 접속 시 초기화
         if (first == true) {
             println("first access")
@@ -118,10 +150,6 @@ class SettingPassword : AppCompatActivity() {
             }
             setContentView(binding.root)
             getResult.launch(intent)
-            val editor: SharedPreferences.Editor = pref.edit()
-            editor.putBoolean("isFirst", false)
-            editor.commit()
-
         } else {
             println("not first access")
             // 첫 접속이 아니면 실행
@@ -164,6 +192,16 @@ class SettingPassword : AppCompatActivity() {
 //        }
     }
 
+    override fun onBackPressed() {
+        val pref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val first: Boolean = pref.getBoolean("isFirst", true)
+
+        if(first)
+            startActivity(Intent(this, SignUpScreen::class.java))
+        else
+            startActivity(Intent(this, SettingScreen::class.java))
+    }
+
     // 액티비티가 onResume인 경우
     // onStart로 할 경우 AppPasswordActivity의 finish() 이후에
     // onStart가 실행되어 액티비티가 종료 되지않고 무한반복되는 현상 발생 이유는 아직 찾지 못함
@@ -176,4 +214,5 @@ class SettingPassword : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
     }
+
 }

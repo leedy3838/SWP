@@ -1,8 +1,10 @@
 package com.example.androidstudioproject
 
+import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -35,14 +37,28 @@ class SettingQnA : AppCompatActivity() {
         }
 
     }
-
     fun qnaSaveClicked(v : View){
+        if(qnaAnswer.getText().toString() == ""){
+            val toast = Toast.makeText(this, "답을 설정해주십시오.", Toast.LENGTH_SHORT)
+            toast.setGravity(Gravity.BOTTOM, 0, 200)
+            toast.show()
+            return
+        }
+
+        mPref?.edit()?.run {
+            putBoolean("isFirst",false)
+            apply()
+        }
+
         mPref?.edit()?.run {
             putString("qnaAnswer", qnaAnswer.getText().toString())
             apply()
         }
+
         println(mPref?.getString("qnaAnswer","???"))
         startActivity(Intent(this, BasicScreen::class.java))
     }
+    override fun onBackPressed() {
+        startActivity(Intent(this, SignUpScreen::class.java))
+    }
 }
-

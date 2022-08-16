@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SettingTime"
+    android:layout_gravity="center"
     android:padding="20dp">
 
     <TimePicker
@@ -17,18 +18,28 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:fontFamily="@font/basic_font"
         android:text="시간을 설정하세요"
         android:gravity="center"
         android:textSize="20sp"/>
+
     <Button
         android:id="@+id/saveTimePickerButton"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:gravity="center"
         android:layout_gravity="right"
-        android:layout_marginEnd="70dp"
+        android:layout_margin="30dp"
         android:layout_marginTop="50dp"
+        android:layout_marginEnd="70dp"
+        android:background="@drawable/blue_bar_right2"
+        android:elevation="10dp"
+        android:fontFamily="@font/basic_font"
+        android:gravity="center"
+        android:stateListAnimator="@null"
         android:text="저장"
-
-        />
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:translationZ="0dp" />
 </androidx.appcompat.widget.LinearLayoutCompat>

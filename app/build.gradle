@@ -86,4 +86,8 @@ dependencies {
 
     //setting fragment
     implementation 'androidx.fragment:fragment-ktx:1.5.0'
+
+    //GIF
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }

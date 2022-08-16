@@ -26,9 +26,20 @@
         android:gravity="center"
         android:layout_gravity="bottom"
         android:layout_marginBottom="20dp"
-        android:fontFamily="@font/maruburi_bold"
-        android:text="study with phone\n\n\n숭오공"
+        android:fontFamily="@font/basic_font"
+        android:text="STUDY WITH PHONE\n\n\n"
+        android:textStyle="bold"
         android:textColor="@color/white"
-        android:textSize="40sp" />
+        android:textSize="35sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal|bottom"
+        android:fontFamily="@font/basic_font"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="25sp"/>
 
 </FrameLayout>
