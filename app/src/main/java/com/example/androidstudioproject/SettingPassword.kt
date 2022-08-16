@@ -150,10 +150,6 @@ class SettingPassword : AppCompatActivity() {
             }
             setContentView(binding.root)
             getResult.launch(intent)
-            val editor: SharedPreferences.Editor = pref.edit()
-            editor.putBoolean("isFirst", false)
-            editor.commit()
-
         } else {
             println("not first access")
             // 첫 접속이 아니면 실행
@@ -197,11 +193,13 @@ class SettingPassword : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val pref: SharedPreferences = getSharedPreferences("isFirst", Activity.MODE_PRIVATE)
-        val editor: SharedPreferences.Editor = pref.edit()
-        editor.putBoolean("isFirst", true)
-        editor.commit()
-        startActivity(Intent(this, SignUpScreen::class.java))
+        val pref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val first: Boolean = pref.getBoolean("isFirst", true)
+
+        if(first)
+            startActivity(Intent(this, SignUpScreen::class.java))
+        else
+            startActivity(Intent(this, SettingScreen::class.java))
     }
 
     // 액티비티가 onResume인 경우

@@ -220,11 +220,6 @@ class AppPassWordActivity : AppCompatActivity(){
     }
 
     override fun onBackPressed() {
-        val pref : SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        pref.edit().run {
-            putBoolean("isFirst",true)
-        }.apply()
-
         startActivity(Intent(this, SignUpScreen::class.java))
     }
 }
